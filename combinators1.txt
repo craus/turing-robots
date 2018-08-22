@@ -1,0 +1,45 @@
+k
+k x y = x
+skip_2 = k
+
+s
+s x y z = x z (y z)
+
+k k
+k k x y z = k y z = y
+skip_1_3 = k k
+
+k s
+k s a b c d = s b c d = b d (c d)
+
+s k
+s k a b = k b (a b) = b
+skip_1 = s k
+
+s s
+s s a b c d = s b (a b) c d = b c (a b c) d
+
+k k k
+k k k = k
+
+k (k k)
+k (k k) a b c d = k k b c d = k c d = c
+skip_1_2_4 = k (k k)
+
+s k k a = k a (k a) = a
+i = s k k
+
+s (k k) a b c d = k k b (a b) c d = k (a b) c d = a b d
+skip_3 = s (k k)
+
+s (k s) a b c d = k s b (a b) c d = s (a b) c d = a b d (c d)
+
+s s k a b c d = a b (k a b) c d = a b a c d
+insert_1_3 = s s k
+
+s (s k) a b c d = s k b (a b) c d = k (a b) b (a b) c d = a b (a b) c d
+
+s s s a b c d = s a (s a) b c d = a b (s a b) c d
+
+s (s s) a b c d = s s b (a b) c d = s a b (b (a b)) c d = a (b (a b)) (b (b (a b))) c d
+

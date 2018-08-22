@@ -1,0 +1,45 @@
+k x y = y
+s x y z = x z (y z)
+
+i = s k k
+
+if = i
+
+true = k
+
+false x y = y
+false = s k
+s k x y = k y (x y) = y
+
+pair x y z = if z x y = z x y
+
+first p = p true
+second p = p false
+first = give true
+second = give false
+
+s i y z = z (y z)
+s k y z = k z (y z) = z
+k k x y z = k y z = y
+k k a b c d = k b c d = b d
+
+s s x y z = s y (x y) z = y z (x y z)
+s s k y z = y z y
+s (k k) a b c = k k b (a b) c = k (a b) c = a b
+
+s (k k) = \x \y \z x z
+
+give x y = y x = \x \y y x
+s a b x y = a x (b x) y
+give x y z = y x z
+
+ss x y z = x z
+k x y z = x z
+k (k k) a b c d = k k b c d = k c d = c
+select_3_4 = k (k k)
+
+
+
+
+
+

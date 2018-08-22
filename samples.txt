@@ -1,0 +1,76 @@
+KEYWORDS:
+nil
+pair [x] [y]
+first [p]
+second [p]
+if [cond] [when_true] [when_false]
+is
+main 
+undef [function]
+
+COMMON FUNCTIONS:
+0 is nil
+1 is pair 0 0
+2 is pair 0 1
+3 is pair 1 0
+4 is pair 1 1
+5 is pair 1 2
+6 is pair 2 1
+7 is pair 2 2
+8 is pair 2 3
+9 is pair 3 2
+true is 1
+false is 0
+both x y is if x y false
+either x y is if x x y
+not x is if x false true
+neither x y is both not x not y
+then x is x
+else x is x
+swap p is pair second p first p
+eq x y is 
+	if x then 
+		both y 
+		both eq first x first y 
+		eq second x second y
+	else not y
+> is pair 1 0
+< is pair 0 1
+= is 0
+cmp x y is 
+	if x then
+		if y then either
+			cmp first x first y 
+			cmp second x second y
+		else >
+	else if y then <
+		else =
+
+TASK 1: 
+create functions:
+vector3 [x] [y] [z]
+v3x [v3]
+v3y [v3]
+v3z [v3]
+so that
+v3x vector3 A B C = A
+v3y vector3 A B C = B
+v3z vector3 A B C = C
+SOLUTION:
+vector3 x y z is pair x pair y z
+v3x v3 is first v3
+v3y v3 is first second v3
+v3z v3 is second second v3
+
+TASK 2:
+create functions:
+zero
+inc [x]
+sum [x] [y]
+diff [x] [y]
+less [x] [y]
+greater [x] [y]
+SOLUTION:
+zero is nil
+inc x is pair nil x
+sum x y is 
