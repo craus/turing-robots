@@ -22,6 +22,12 @@ public class Link : MonoBehaviour {
 	public Vector2 temporalTo;
 	public float temporalToRadius;
 
+	public Color baseColor;
+	public Color paleColor;
+
+	float baseZ = -10;
+	float paleZ = 0;
+
 	public bool UseTemporalTo {
 		get {
 			if (Extensions.Editor()) {
@@ -43,11 +49,35 @@ public class Link : MonoBehaviour {
 		}
 	}
 
+	bool Highlighted {
+		get {
+			return
+				GraphEditor.instance.left == this
+				|| GraphEditor.instance.right == this
+				|| GraphEditor.instance.hovered == this.from
+				|| GraphEditor.instance.hovered == this.to && this.from.immutable;
+		}
+	}
+
+	Color LineColor {
+		get {
+			return Highlighted ? baseColor : paleColor;
+		}
+	}
+
+	float LineZ {
+		get {
+			return Highlighted ? baseZ : paleZ;
+		}
+	}
+
 	public void Update() {
 		if (to == null) {
 			to = from;
 		}
 		if (!Extensions.Editor()) {
+			line.startColor = line.endColor = LineColor;
+
 			useTemporalTo = UseTemporalTo;
 			temporalTo = TemporalTo;
 			temporalToRadius = TemporalToRadius;
@@ -62,9 +92,10 @@ public class Link : MonoBehaviour {
 		Vector2 d = e - dir * arrowLength;
 		Vector2 c = d - dir * arrowBarrierLength;
 		float len = Vector2.Distance(b, e);
+		float z = LineZ;
 		if (len > arrowLength + arrowBarrierLength) {
 			line.positionCount = 4;
-			line.SetPositions(new Vector3[] { b, c, d, e });
+			line.SetPositions(new Vector3[] { b.WithZ(z), c.WithZ(z), d.WithZ(z), e.WithZ(z) });
 			line.widthCurve = new AnimationCurve(
 				new Keyframe(0.0f, 0.4f),
 				new Keyframe(0.999f - arrowLength / len, 0.4f),
@@ -73,7 +104,7 @@ public class Link : MonoBehaviour {
 			);
 		} else {
 			line.positionCount = 2;
-			line.SetPositions(new Vector3[] { b, e });
+			line.SetPositions(new Vector3[] { b.WithZ(z), e.WithZ(z) });
 			line.widthCurve = new AnimationCurve(
 				new Keyframe(0.0f, 1f),
 				new Keyframe(1, 0f)
@@ -84,6 +115,11 @@ public class Link : MonoBehaviour {
 	public void Start() {
 		if (!Extensions.Editor()) {
 			links.Add(this);
+
+			baseColor = line.startColor;
+			paleColor = baseColor;
+			paleColor.a = 0.5f;
+
 			Update();
 		}
 	}

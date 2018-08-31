@@ -5,13 +5,14 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
-public class GraphEditor : MonoBehaviour {
+public abstract class GraphEditor : MonoBehaviour {
 	const string graphFile = "graph.dat";
 
-	public static GraphEditor instance;
-
 	public Node nodeSample;
-	public Link linkSample;
+
+	[Space]
+
+	public static GraphEditor instance;
 
 	public Node hovered;
 	public Vector2 dragRelativePosition;
@@ -54,21 +55,21 @@ public class GraphEditor : MonoBehaviour {
 		hovered = collider.GetComponent<Node>();
 	}
 
-	void Zoom(float times) {
+	protected void Zoom(float times) {
 		var oldMouse = Mouse;
 		Camera.main.orthographicSize /= times;
 		Camera.main.transform.localScale /= times;
 		Camera.main.transform.position += (oldMouse - Mouse).WithZ(0);
 	}
 
-	void Zoom() {
+	protected void Zoom() {
 		Zoom(Mathf.Pow(2f, Input.GetAxis("Mouse ScrollWheel")));
 		if (Input.GetAxis("Mouse ScrollWheel") != 0) {
 			UpdateAllLinks();
 		}
 	}
 
-	void Drag() {
+	protected void Drag() {
 		if (mutableHovered == null) {
 			return;
 		}
@@ -88,11 +89,11 @@ public class GraphEditor : MonoBehaviour {
 		}
 	}
 
-	void UpdateAllLinks() {
+	protected void UpdateAllLinks() {
 		Link.links.ForEach(l => l.Update());
 	}
 
-	void Pan() {
+	protected void Pan() {
 		if (Input.GetButtonDown("Pan") && hovered == null && left == null && right == null) {
 			cameraDragRelativePosition = Mouse;
 			panned = false;
@@ -110,18 +111,23 @@ public class GraphEditor : MonoBehaviour {
 		}
 	}
 
-	void CreateNode() {
+	protected virtual Node CreateNode(Node sample) {
+		var newNode = Instantiate(sample);
+		newNode.transform.position = Mouse;
+		return newNode;
+	}
+
+	protected virtual void CreateNode() {
 		if (Input.GetButtonUp("Create Node") && hovered == null && !panned) {
-			var newNode = Instantiate(nodeSample);
-			newNode.transform.position = Mouse;
+			CreateNode(nodeSample);
 		}
 	}
 
-	void Delete(Link link) {
+	protected void Delete(Link link) {
 		Destroy(link.gameObject);
 	}
 
-	void Delete(Node node) {
+	public void Delete(Node node) {
 		Link.links.ForEach(l => {
 			if (l.from == node) {
 				Delete(l);
@@ -132,13 +138,13 @@ public class GraphEditor : MonoBehaviour {
 		Destroy(node.gameObject);
 	}
 
-	void DeleteNode() {
+	protected void DeleteNode() {
 		if (Input.GetButtonUp("Delete Node") && mutableHovered != null && !dragged) {
 			Delete(mutableHovered);
 		}
 	}
 
-	void Connect() {
+	protected void Connect() {
 		if (hovered != null) {
 			if (Input.GetButtonDown("Link Left")) {
 				Debug.LogFormat("Link Left");
@@ -162,19 +168,19 @@ public class GraphEditor : MonoBehaviour {
 		}
 	}
 
-	void QuickSave() {
+	protected void QuickSave() {
 		if (Input.GetButtonDown("Quick Save")) {
 			Save();
 		}
 	}
 
-	void QuickLoad() {
+	protected void QuickLoad() {
 		if (Input.GetButtonDown("Quick Load")) {
 			Load();
 		}
 	}
 
-	public void Update() {
+	public virtual void Update() {
 		CreateNode();
 		DeleteNode();
 		Drag();
@@ -186,19 +192,31 @@ public class GraphEditor : MonoBehaviour {
 		QuickLoad();
 	}
 
-	public GraphModel BuildGraphModel() {
+	public virtual GraphModel BuildGraphModel() {
 		var result = new GraphModel();
 		result.camera.position = Camera.main.transform.position;
 		result.camera.zoom = Camera.main.orthographicSize;
 
 		FindObjectsOfType<Node>().ForEach(node => {
-			result.nodes.Add(new NodeModel(node.id, node.transform.position, node.left.to.id, node.right.to.id));
+			result.nodes.Add(new NodeModel(node.id, node.type, node.transform.position, node.left.to.id, node.right.to.id));
 		});
+
+		result.lastNodeID = Node.lastID;
 
 		return result;
 	}
 
-	public void RestoreGraphModel(GraphModel graph) {
+	public virtual bool SatisfyModel(Node node, NodeModel model) {
+		return true;
+	}
+
+	public virtual Node CreateNodeForModel(NodeModel model) {
+		var node = Instantiate(nodeSample);
+		node.SetID(model.id);
+		return node;
+	}
+
+	public virtual void RestoreGraphModel(GraphModel graph) {
 		Zoom(Camera.main.orthographicSize / graph.camera.zoom);
 		Camera.main.transform.position = graph.camera.position.WithZ(Camera.main.transform.position.z);
 
@@ -207,12 +225,16 @@ public class GraphEditor : MonoBehaviour {
 		});
 
 		graph.nodes.ForEach(nodeModel => {
-			Node node;
+			Node node = null;
 			if (Node.nodesByID.ContainsKey(nodeModel.id)) {
 				node = Node.nodesByID[nodeModel.id];
-			} else {
-				node = Instantiate(nodeSample);
-				node.SetID(nodeModel.id);
+				if (!SatisfyModel(node, nodeModel)) {
+					Destroy(node.gameObject);
+					node = null;
+				}
+			} 
+			if (node == null) {
+				node = CreateNodeForModel(nodeModel);
 			}
 			node.transform.position = nodeModel.position.WithZ(node.transform.position.z);
 			node.model = nodeModel;
@@ -226,6 +248,8 @@ public class GraphEditor : MonoBehaviour {
 				n.right.to = Node.nodesByID[n.model.right];
 			}
 		});
+
+		Node.lastID = graph.lastNodeID;
 	}
 
 	public void Save() {

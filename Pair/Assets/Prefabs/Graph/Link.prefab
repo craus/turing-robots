@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4031819935350014}
   - component: {fileID: 120655172073379122}
   - component: {fileID: 114734701064890690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,11 @@ MonoBehaviour:
   line: {fileID: 120655172073379122}
   from: {fileID: 0}
   to: {fileID: 0}
+  useTemporalTo: 0
+  temporalTo: {x: 0, y: 0}
+  temporalToRadius: 0
+  baseColor: {r: 0, g: 0, b: 0, a: 0}
+  paleColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!120 &120655172073379122
 LineRenderer:
   m_ObjectHideFlags: 1

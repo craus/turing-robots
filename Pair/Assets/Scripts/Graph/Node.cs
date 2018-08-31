@@ -22,6 +22,8 @@ public class Node : MonoBehaviour {
 
 	public int id = -1;
 
+	public int type = -1;
+
 	public static int lastID = 0;
 
 	public NodeModel model;
