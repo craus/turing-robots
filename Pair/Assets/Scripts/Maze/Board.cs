@@ -22,6 +22,17 @@ public class Board : MonoBehaviour {
 	public int n;
 	public int m;
 
+	public bool Inside(int x, int y) {
+		return 0 <= x && x < cells.GetLength(0) && 0 <= y && y < cells.GetLength(1);
+	}
+
+	public Cell GetCell(int x, int y) {
+		if (!Inside(x, y)) {
+			return null;
+		}
+		return cells[x, y];
+	}
+
 	[ContextMenu("Generate")]
 	public void Generate() {
 		if (Extensions.Editor()) {
@@ -39,6 +50,9 @@ public class Board : MonoBehaviour {
 					(j - (m - 1) * 0.5f) * step,
 					0
 				);
+				cell.x = i;
+				cell.y = j;
+				cell.board = this;
 				cells[i, j] = cell;
 
 				if (Rand.rndEvent(0.3f)) {
@@ -48,8 +62,13 @@ public class Board : MonoBehaviour {
 			}
 		}
 
-		Instantiate(robotPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
+		var robot = Instantiate(robotPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
+		GetComponent<ConstantFigure>().value = robot;
 
 		Instantiate(exitPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
+	}
+
+	public void Start() {
+		Generate();
 	}
 }
