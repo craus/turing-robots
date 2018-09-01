@@ -11,6 +11,7 @@ public class Board : MonoBehaviour {
 	public Figure robotPrefab;
 	public Figure exitPrefab;
 	public Figure startPrefab;
+	public Figure minePrefab;
 
 	public ConstantFigure robot;
 	public ConstantFigure start;
@@ -60,14 +61,15 @@ public class Board : MonoBehaviour {
 				cells[i, j] = cell;
 
 				if (Rand.rndEvent(0.3f)) {
-					var wall = Instantiate(wallPrefab);
-					wall.Place(cell);
+					Instantiate(wallPrefab).Place(cell);
+				} else if (Rand.rndEvent(0.05f)) {
+					Instantiate(minePrefab).Place(cell);
 				}
 			}
 		}
 
-		robot.value = Instantiate(robotPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
-		start.value = Instantiate(startPrefab).Place(robot.Get().position);
+		start.value = Instantiate(startPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
+		Reset();
 
 		Instantiate(exitPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
 
@@ -85,6 +87,9 @@ public class Board : MonoBehaviour {
 	}
 
 	public void Reset() {
-		robot.Get().Place(start.Get().position);
+		if (robot.Get() != null) {
+			Destroy(robot.Get().gameObject);
+		}
+		robot.value = Instantiate(robotPrefab).Place(start.Get().position);
 	}
 }

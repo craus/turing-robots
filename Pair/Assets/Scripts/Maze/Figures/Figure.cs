@@ -11,9 +11,7 @@ public class Figure : MonoBehaviour {
 	public FigureEvent onCollide;
 
 	public Figure Place(Cell cell) {
-		if (this.position != null) {
-			this.position.figures.Remove(this);
-		}
+		Leave();
 		this.position = cell;
 		cell.figures.ForEach(f => {
 			f.Collide(this); 
@@ -31,5 +29,15 @@ public class Figure : MonoBehaviour {
 
 	public void Collide(Figure other) {
 		onCollide.Invoke(other);
+	}
+
+	public void Leave() {
+		if (this.position != null) {
+			this.position.figures.Remove(this);
+		}
+	}
+
+	public void OnDestroy() {
+		Leave();
 	}
 }
