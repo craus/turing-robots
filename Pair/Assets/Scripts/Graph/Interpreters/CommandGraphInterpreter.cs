@@ -67,6 +67,8 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	public void Reset() {
 		FindObjectOfType<Board>().Reset();
 		launched = false;
+		playing = false;
+		current = null;
 	}
 
 	public void Update() {
