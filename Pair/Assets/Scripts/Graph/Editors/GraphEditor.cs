@@ -180,6 +180,17 @@ public abstract class GraphEditor : MonoBehaviour {
 		}
 	}
 
+	void Clear() {
+		Node.nodesByID.Values.ForEach(n => Destroy(n.gameObject));
+		Node.lastID = 0;
+	}
+
+	protected void CheckClear() {
+		if (Input.GetButtonDown("Clear")) {
+			Clear();
+		}
+	}
+
 	public virtual void Update() {
 		CreateNode();
 		DeleteNode();
@@ -190,6 +201,7 @@ public abstract class GraphEditor : MonoBehaviour {
 		Connect();
 		QuickSave();
 		QuickLoad();
+		CheckClear();
 	}
 
 	public virtual GraphModel BuildGraphModel() {
