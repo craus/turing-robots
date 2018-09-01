@@ -10,6 +10,10 @@ public class Board : MonoBehaviour {
 	public Figure wallPrefab;
 	public Figure robotPrefab;
 	public Figure exitPrefab;
+	public Figure startPrefab;
+
+	public ConstantFigure robot;
+	public ConstantFigure start;
 
 	[Space]
 
@@ -62,8 +66,8 @@ public class Board : MonoBehaviour {
 			}
 		}
 
-		var robot = Instantiate(robotPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
-		GetComponent<ConstantFigure>().value = robot;
+		robot.value = Instantiate(robotPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
+		start.value = Instantiate(startPrefab).Place(robot.Get().position);
 
 		Instantiate(exitPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
 
@@ -78,5 +82,9 @@ public class Board : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.R)) {
 			Generate();
 		}
+	}
+
+	public void Reset() {
+		robot.Get().Place(start.Get().position);
 	}
 }

@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
-public interface Provider<T> {
-	T Get();
+public abstract class Provider<T> : MonoBehaviour {
+	public abstract T Get();
+
+	public static implicit operator T(Provider<T> provider) {
+		return provider.Get();
+	}
 }

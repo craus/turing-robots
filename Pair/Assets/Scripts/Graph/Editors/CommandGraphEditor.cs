@@ -32,6 +32,10 @@ public class CommandGraphEditor : GraphEditor {
 		return node;
 	}
 
+	protected override bool Frozen() {
+		return CommandGraphInterpreter.instance.launched;
+	}
+
 	protected override void CreateNode() {
 		if (hovered != null || panned) {
 			return;

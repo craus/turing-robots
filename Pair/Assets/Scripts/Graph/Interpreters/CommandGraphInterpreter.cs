@@ -6,6 +6,8 @@ using System.Linq;
 using System;
 
 public class CommandGraphInterpreter : MonoBehaviour {
+	public static CommandGraphInterpreter instance;
+
 	public Transform pointer;
 
 	public Node current = null;
@@ -13,9 +15,14 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	public bool collided = false;
 
 	public bool playing = false;
+	public bool launched = false;
 
 	public float lastStep = float.NegativeInfinity;
 	public float period = 0.25f;
+
+	public void Awake() {
+		instance = this;
+	}
 
 	string MakeAction() {
 		Command c = current.GetComponent<Command>();
@@ -34,6 +41,8 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	}
 
 	public void Step() {
+		launched = true;
+
 		if (current == null) {
 			current = FindStartNode();
 			Debug.LogFormat("Start node found: {0}", current.id);
@@ -55,6 +64,11 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		playing = false;
 	}
 
+	public void Reset() {
+		FindObjectOfType<Board>().Reset();
+		launched = false;
+	}
+
 	public void Update() {
 		if (Input.GetButtonDown("Step")) {
 			Step();
@@ -64,6 +78,9 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		}
 		if (Input.GetButtonDown("Play")) {
 			Play();
+		}		
+		if (Input.GetButtonDown("Reset")) {
+			Reset();
 		}
 		pointer.gameObject.SetActive(current != null);
 		if (current != null) {

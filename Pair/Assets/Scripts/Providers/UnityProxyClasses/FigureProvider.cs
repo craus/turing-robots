@@ -5,6 +5,5 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
-public abstract class FigureProvider : MonoBehaviour, Provider<Figure> {
-	public abstract Figure Get();
+public abstract class FigureProvider : Provider<Figure> {
 }

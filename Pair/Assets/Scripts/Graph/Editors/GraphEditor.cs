@@ -191,17 +191,24 @@ public abstract class GraphEditor : MonoBehaviour {
 		}
 	}
 
+	protected virtual bool Frozen() {
+		return false;
+	}
+
 	public virtual void Update() {
-		CreateNode();
-		DeleteNode();
-		Drag();
 		Pan();
-		Hover();
 		Zoom();
-		Connect();
+		Hover();
 		QuickSave();
-		QuickLoad();
-		CheckClear();
+
+		if (!Frozen()) {
+			CreateNode();
+			DeleteNode();
+			Drag();
+			Connect();
+			QuickLoad();
+			CheckClear();
+		}
 	}
 
 	public virtual GraphModel BuildGraphModel() {
