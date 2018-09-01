@@ -14,6 +14,9 @@ public class CommandGraphInterpreter : MonoBehaviour {
 
 	public bool playing = false;
 
+	public float lastStep = float.NegativeInfinity;
+	public float period = 0.25f;
+
 	string MakeAction() {
 		Command c = current.GetComponent<Command>();
 		if (c == null) {
@@ -43,20 +46,34 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		Debug.LogFormat("Proceeding to node #{0}", current.id);
 	}
 
+	public void Play() {
+		playing = true;
+		lastStep = float.NegativeInfinity;
+	}
+
+	public void Pause() {
+		playing = false;
+	}
+
 	public void Update() {
 		if (Input.GetButtonDown("Step")) {
 			Step();
 		}
 		if (Input.GetButtonDown("Pause")) {
-			playing = false;
+			Pause();
 		}
 		if (Input.GetButtonDown("Play")) {
-			playing = true;
+			Play();
 		}
 		pointer.gameObject.SetActive(current != null);
 		if (current != null) {
 			pointer.position = current.transform.position.Change(z: pointer.position.z);
 		}
-
+		if (playing) {
+			if (Time.time > lastStep + 0.25f) {
+				Step();
+				lastStep = Time.time;
+			}
+		}
 	}
 }

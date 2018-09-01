@@ -66,6 +66,8 @@ public class Board : MonoBehaviour {
 		GetComponent<ConstantFigure>().value = robot;
 
 		Instantiate(exitPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
+
+		FindObjectOfType<CommandGraphInterpreter>().Pause();
 	}
 
 	public void Start() {
