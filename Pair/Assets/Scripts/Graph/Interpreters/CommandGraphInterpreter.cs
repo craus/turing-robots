@@ -20,6 +20,11 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	public float lastStep = float.NegativeInfinity;
 	public float period = 0.25f;
 
+	public float basePeriod = 0.25f;
+	public float fasterPeriod = 0.05f;
+
+	public int steps = 0;
+
 	public void Awake() {
 		instance = this;
 	}
@@ -42,6 +47,7 @@ public class CommandGraphInterpreter : MonoBehaviour {
 
 	public void Step() {
 		launched = true;
+		++steps;
 
 		if (current == null) {
 			current = FindStartNode();
@@ -57,7 +63,13 @@ public class CommandGraphInterpreter : MonoBehaviour {
 
 	public void Play() {
 		playing = true;
+		period = basePeriod;
 		lastStep = float.NegativeInfinity;
+	}
+
+	public void Faster() {
+		Play();
+		period = fasterPeriod;
 	}
 
 	public void Pause() {
@@ -69,6 +81,7 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		launched = false;
 		playing = false;
 		current = null;
+		steps = 0;
 	}
 
 	public void Update() {
@@ -80,7 +93,10 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		}
 		if (Input.GetButtonDown("Play")) {
 			Play();
-		}		
+		}	
+		if (Input.GetButtonDown("Faster")) {
+			Faster();
+		}	
 		if (Input.GetButtonDown("Reset")) {
 			Reset();
 		}
@@ -89,7 +105,7 @@ public class CommandGraphInterpreter : MonoBehaviour {
 			pointer.position = current.transform.position.Change(z: pointer.position.z);
 		}
 		if (playing) {
-			if (Time.time > lastStep + 0.25f) {
+			if (Time.time > lastStep + period) {
 				Step();
 				lastStep = Time.time;
 			}

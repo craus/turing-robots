@@ -35847,8 +35847,11 @@ MonoBehaviour:
   current: {fileID: 0}
   collided: 0
   playing: 0
+  launched: 0
   lastStep: -Infinity
   period: 0.25
+  basePeriod: 0.25
+  fasterPeriod: 0.05
 --- !u!4 &2088649572
 Transform:
   m_ObjectHideFlags: 0
