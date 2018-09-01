@@ -18,4 +18,8 @@ public class Figure : MonoBehaviour {
 		this.transform.localPosition = Vector3.zero;
 		return this;
 	}
+
+	public GameObject FigureType() {
+		return GetComponent<FigureType>().type;
+	}
 }

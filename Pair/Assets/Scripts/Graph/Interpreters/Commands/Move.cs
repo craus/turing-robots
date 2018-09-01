@@ -15,7 +15,7 @@ public class Move : Command {
 
 	public override string Run() {
 		var location = figure.Get().position.Shifted(dx, dy);
-		if (location == null || location.figures.Any()) {
+		if (location == null || location.figures.Any(f => f.FigureType() == Library.instance.wallType)) {
 			interpreter.collided = true;
 			return "collided";
 		} else {
