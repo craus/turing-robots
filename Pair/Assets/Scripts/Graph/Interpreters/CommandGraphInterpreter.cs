@@ -16,6 +16,7 @@ public class CommandGraphInterpreter : MonoBehaviour {
 
 	public bool playing = false;
 	public bool launched = false;
+	public bool finished = false;
 
 	public float lastStep = float.NegativeInfinity;
 	public float period = 0.25f;
@@ -46,6 +47,10 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	}
 
 	public void Step() {
+		if (finished) {
+			return;
+		}
+
 		launched = true;
 		++steps;
 
@@ -56,6 +61,10 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		}
 		string action = MakeAction();
 		Debug.LogFormat("Action: {0}", action);
+
+		if (current == null) {
+			return; // MakeAction destroyed current vertex (in case of run end)
+		}
 
 		current = collided ? current.right.to : current.left.to;
 		Debug.LogFormat("Proceeding to node #{0}", current.id);
@@ -80,6 +89,7 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		FindObjectOfType<Board>().Reset();
 		launched = false;
 		playing = false;
+		finished = false;
 		current = null;
 		steps = 0;
 	}

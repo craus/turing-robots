@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using UnityEngine.Events;
 
 public class Figure : MonoBehaviour {
 	public Cell position;
 
 	public FigureEvent onCollide;
+	public UnityEvent onDestroy;
 
 	public Figure Place(Cell cell) {
 		Leave();
@@ -38,6 +40,7 @@ public class Figure : MonoBehaviour {
 	}
 
 	public void OnDestroy() {
+		onDestroy.Invoke();
 		Leave();
 	}
 }

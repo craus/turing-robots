@@ -14,6 +14,10 @@ public class Move : Command {
 	public CommandGraphInterpreter interpreter;
 
 	public override string Run() {
+		if (figure.Get() == null) {
+			return "destroyed";
+		}
+
 		var location = figure.Get().position.Shifted(dx, dy);
 		if (location == null || location.figures.Any(f => f.FigureType() == Library.instance.wallType)) {
 			interpreter.collided = true;
