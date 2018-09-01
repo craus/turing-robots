@@ -12,6 +12,8 @@ public class CommandGraphInterpreter : MonoBehaviour {
 
 	public bool collided = false;
 
+	public bool playing = false;
+
 	string MakeAction() {
 		Command c = current.GetComponent<Command>();
 		if (c == null) {
@@ -45,9 +47,16 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		if (Input.GetButtonDown("Step")) {
 			Step();
 		}
+		if (Input.GetButtonDown("Pause")) {
+			playing = false;
+		}
+		if (Input.GetButtonDown("Play")) {
+			playing = true;
+		}
 		pointer.gameObject.SetActive(current != null);
 		if (current != null) {
 			pointer.position = current.transform.position.Change(z: pointer.position.z);
 		}
+
 	}
 }
