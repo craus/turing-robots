@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
-[ExecuteInEditMode]
 public class CommandGraphInterpreter : MonoBehaviour {
+	public Transform pointer;
+
 	public Node current = null;
 
 	public bool collided = false;
@@ -20,7 +21,11 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	}
 
 	public Node FindStartNode() {
-		return Node.nodesByID.Values.FirstOrDefault(n => !Node.nodesByID.Values.Any(n1 => n1.left.to == n || n1.right.to == n));
+		var source = Node.nodesByID.Values.FirstOrDefault(n => !Node.nodesByID.Values.Any(n1 => n1.left.to == n || n1.right.to == n));
+		if (source != null) {
+			return source;
+		}
+		return Node.nodesByID.Values.MinBy(n => n.id);
 	}
 
 	public void Step() {
@@ -39,6 +44,10 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	public void Update() {
 		if (Input.GetButtonDown("Step")) {
 			Step();
+		}
+		pointer.gameObject.SetActive(current != null);
+		if (current != null) {
+			pointer.position = current.transform.position.Change(z: pointer.position.z);
 		}
 	}
 }
