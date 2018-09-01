@@ -71,4 +71,10 @@ public class Board : MonoBehaviour {
 	public void Start() {
 		Generate();
 	}
+
+	public void Update() {
+		if (Input.GetKeyDown(KeyCode.R)) {
+			Generate();
+		}
+	}
 }

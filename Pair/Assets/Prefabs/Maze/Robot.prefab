@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4996826793980526}
   - component: {fileID: 114502292507681918}
+  - component: {fileID: 114194386778862566}
   m_Layer: 9
   m_Name: Robot
   m_TagString: Untagged
@@ -70,6 +71,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114194386778862566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987541492836848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc9c1ed2b6b4f6438ce598749f35db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: {fileID: 1679229559058430, guid: 9bda5bc3876f6f946bf4526edbee1f50, type: 2}
 --- !u!114 &114502292507681918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,6 +95,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {fileID: 0}
+  onCollide:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: FigureEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!212 &212220973264174782
 SpriteRenderer:
   m_ObjectHideFlags: 1

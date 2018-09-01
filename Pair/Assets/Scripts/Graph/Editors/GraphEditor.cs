@@ -180,7 +180,7 @@ public abstract class GraphEditor : MonoBehaviour {
 		}
 	}
 
-	void Clear() {
+	public void Clear() {
 		Node.nodesByID.Values.ForEach(n => Destroy(n.gameObject));
 		Node.lastID = 0;
 	}
