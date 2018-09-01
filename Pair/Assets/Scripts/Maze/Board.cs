@@ -6,6 +6,8 @@ using System.Linq;
 using System;
 
 public class Board : MonoBehaviour {
+	public static Board instance;
+
 	public Cell cellPrefab;
 	public Figure wallPrefab;
 	public Figure robotPrefab;
@@ -73,7 +75,11 @@ public class Board : MonoBehaviour {
 
 		Instantiate(exitPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
 
-		FindObjectOfType<CommandGraphInterpreter>().Pause();
+		FindObjectOfType<CommandGraphInterpreter>().Reset();
+	}
+
+	public void Awake() {
+		instance = this;
 	}
 
 	public void Start() {

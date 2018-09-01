@@ -9,6 +9,5 @@ public class Exit : MonoBehaviour {
 	public void Activate() {
 		FindObjectOfType<Board>().Generate();
 		GraphEditor.instance.Clear();
-		CommandGraphInterpreter.instance.Reset();
 	}
 }

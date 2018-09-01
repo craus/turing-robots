@@ -7,6 +7,7 @@ using System;
 
 public class Lose : MonoBehaviour {
 	public void Activate() {
+		Destroy(Board.instance.robot.Get().gameObject);
 		CommandGraphInterpreter.instance.finished = true;
 	}
 }
