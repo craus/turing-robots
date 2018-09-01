@@ -62,9 +62,9 @@ public class Board : MonoBehaviour {
 				cell.board = this;
 				cells[i, j] = cell;
 
-				if (Rand.rndEvent(0.3f)) {
+				if (Rand.rndEvent(0.12f)) {
 					Instantiate(wallPrefab).Place(cell);
-				} else if (Rand.rndEvent(0.05f)) {
+				} else if (Rand.rndEvent(0.03f)) {
 					Instantiate(minePrefab).Place(cell);
 				}
 			}
