@@ -10,9 +10,8 @@ public class Board : MonoBehaviour {
 
 	public Cell cellPrefab;
 	public Figure wallPrefab;
-	public Figure robotPrefab;
 	public Figure exitPrefab;
-	public Figure startPrefab;
+	public List<Figure> startPrefabs;
 	public Figure minePrefab;
 
 	public List<Figure> robots;
@@ -75,7 +74,7 @@ public class Board : MonoBehaviour {
 		starts.Clear();
 
 		for (int i = 0; i < robotsCount; i++) {
-			starts.Add(Instantiate(startPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0)));
+			starts.Add(Instantiate(startPrefabs[i]).Place(Rand.rnd(cells, c => c.figures.Count == 0)));
 		}
 		Reset();
 
@@ -101,6 +100,6 @@ public class Board : MonoBehaviour {
 	public void Reset() {
 		robots.ForEach(r => Destroy(r.gameObject));
 		robots.Clear();
-		starts.ForEach(s => robots.Add(Instantiate(robotPrefab).Place(s.position)));
+		starts.ForEach(s => robots.Add(s.GetComponent<RobotStart>().Spawn()));
 	}
 }
