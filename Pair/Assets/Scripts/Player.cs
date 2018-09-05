@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Reset() {
-		CommandGraphInterpreter.instance.Reset();
+		CommandMachine.instance.Reset();
 		Board.instance.Reset();
 	}
 

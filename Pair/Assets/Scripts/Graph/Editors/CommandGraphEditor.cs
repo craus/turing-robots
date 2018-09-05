@@ -33,7 +33,7 @@ public class CommandGraphEditor : GraphEditor {
 	}
 
 	protected override bool Frozen() {
-		return CommandGraphInterpreter.instance.launched;
+		return CommandMachine.instance.launched;
 	}
 
 	protected override void CreateNode() {

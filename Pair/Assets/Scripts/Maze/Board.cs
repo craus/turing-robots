@@ -15,8 +15,8 @@ public class Board : MonoBehaviour {
 	public Figure startPrefab;
 	public Figure minePrefab;
 
-	public ConstantFigure robot;
-	public ConstantFigure start;
+	public List<Figure> robots;
+	public List<Figure> starts;
 
 	[Space]
 
@@ -70,12 +70,18 @@ public class Board : MonoBehaviour {
 			}
 		}
 
-		start.value = Instantiate(startPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
+		int robotsCount = 3;
+
+		starts.Clear();
+
+		for (int i = 0; i < robotsCount; i++) {
+			starts.Add(Instantiate(startPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0)));
+		}
 		Reset();
 
 		Instantiate(exitPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
 
-		FindObjectOfType<CommandGraphInterpreter>().Reset();
+		CommandMachine.instance.Reset();
 	}
 
 	public void Awake() {
@@ -93,9 +99,8 @@ public class Board : MonoBehaviour {
 	}
 
 	public void Reset() {
-		if (robot.Get() != null) {
-			Destroy(robot.Get().gameObject);
-		}
-		robot.value = Instantiate(robotPrefab).Place(start.Get().position);
+		robots.ForEach(r => Destroy(r.gameObject));
+		robots.Clear();
+		starts.ForEach(s => robots.Add(Instantiate(robotPrefab).Place(s.position)));
 	}
 }

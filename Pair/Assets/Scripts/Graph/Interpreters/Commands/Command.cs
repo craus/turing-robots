@@ -6,7 +6,7 @@ using System.Linq;
 using System;
 
 public abstract class Command : MonoBehaviour {
-	public virtual string Run() {
+	public virtual string Run(CommandGraphInterpreter interpreter) {
 		return "does nothing";
 	}
 }

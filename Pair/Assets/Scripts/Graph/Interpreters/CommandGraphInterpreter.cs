@@ -6,36 +6,20 @@ using System.Linq;
 using System;
 
 public class CommandGraphInterpreter : MonoBehaviour {
-	public static CommandGraphInterpreter instance;
-
 	public Transform pointer;
 
 	public Node current = null;
 
 	public bool collided = false;
 
-	public bool playing = false;
-	public bool launched = false;
-	public bool finished = false;
-
-	public float lastStep = float.NegativeInfinity;
-	public float period = 0.25f;
-
-	public float basePeriod = 0.25f;
-	public float fasterPeriod = 0.05f;
-
-	public int steps = 0;
-
-	public void Awake() {
-		instance = this;
-	}
+	public Figure robot;
 
 	string MakeAction() {
 		Command c = current.GetComponent<Command>();
 		if (c == null) {
 			return "no command attached: #{0}".i(current.id);
 		}
-		return c.Run();
+		return c.Run(this);
 	}
 
 	public Node FindStartNode() {
@@ -47,13 +31,6 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	}
 
 	public void Step() {
-		if (finished) {
-			return;
-		}
-
-		launched = true;
-		++steps;
-
 		if (current == null) {
 			current = FindStartNode();
 			Debug.LogFormat("Start node found: {0}", current.id);
@@ -70,51 +47,23 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		Debug.LogFormat("Proceeding to node #{0}", current.id);
 	}
 
-	public void Play() {
-		playing = true;
-		period = basePeriod;
-		lastStep = float.NegativeInfinity;
-	}
-
-	public void Faster() {
-		Play();
-		period = fasterPeriod;
-	}
-
-	public void Pause() {
-		playing = false;
-	}
-
-	public void Reset() {
-		launched = false;
-		playing = false;
-		finished = false;
-		current = null;
-		steps = 0;
-	}
-
 	public void Update() {
-		if (Input.GetButtonDown("Step")) {
-			Step();
-		}
-		if (Input.GetButtonDown("Pause")) {
-			Pause();
-		}
-		if (Input.GetButtonDown("Play")) {
-			Play();
-		}	
-		if (Input.GetButtonDown("Faster")) {
-			Faster();
-		}	
 		pointer.gameObject.SetActive(current != null);
 		if (current != null) {
-			pointer.position = current.transform.position.Change(z: pointer.position.z);
+			pointer.transform.SetParent(current.transform, worldPositionStays: false);
 		}
-		if (playing) {
-			if (Time.time > lastStep + period) {
-				Step();
-				lastStep = Time.time;
-			}
+	}
+
+	public void Start() {
+		CommandMachine.instance.interpreters.Add(this);
+	}
+
+	public void OnDestroy() {
+		if (pointer != null) {
+			Destroy(pointer.gameObject);
+		}
+		if (CommandMachine.instance != null) {
+			CommandMachine.instance.interpreters.Remove(this);
 		}
 	}
 }
