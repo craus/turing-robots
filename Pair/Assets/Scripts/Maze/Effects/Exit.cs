@@ -7,7 +7,6 @@ using System;
 
 public class Exit : MonoBehaviour {
 	public void Activate() {
-		FindObjectOfType<Board>().Generate();
-		GraphEditor.instance.Clear();
+		Player.instance.Win();
 	}
 }

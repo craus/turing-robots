@@ -86,7 +86,6 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	}
 
 	public void Reset() {
-		FindObjectOfType<Board>().Reset();
 		launched = false;
 		playing = false;
 		finished = false;
@@ -107,9 +106,6 @@ public class CommandGraphInterpreter : MonoBehaviour {
 		if (Input.GetButtonDown("Faster")) {
 			Faster();
 		}	
-		if (Input.GetButtonDown("Reset")) {
-			Reset();
-		}
 		pointer.gameObject.SetActive(current != null);
 		if (current != null) {
 			pointer.position = current.transform.position.Change(z: pointer.position.z);
