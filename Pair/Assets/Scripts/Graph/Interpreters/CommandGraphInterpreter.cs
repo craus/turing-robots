@@ -12,6 +12,8 @@ public class CommandGraphInterpreter : MonoBehaviour {
 
 	public bool collided = false;
 
+	public bool finished = false;
+
 	public Figure robot;
 
 	string MakeAction() {
@@ -31,6 +33,11 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	}
 
 	public void Step() {
+		if (finished) {
+			current = null;
+			return;
+		}
+
 		if (current == null) {
 			current = FindStartNode();
 			Debug.LogFormat("Start node found: {0}", current.id);
