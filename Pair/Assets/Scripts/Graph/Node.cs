@@ -13,6 +13,7 @@ public class Node : MonoBehaviour {
 	public Link right;
 
 	public SpriteRenderer circle;
+	public SpriteRenderer startNodeMark;
 	public TextMeshPro text;
 
 	public Color hovered = Color.gray;
@@ -52,6 +53,7 @@ public class Node : MonoBehaviour {
 			}
 		} else {
 			circle.color = Hovered ? hovered : basic;
+			startNodeMark.enabled = this == GraphEditor.instance.startNode;
 		}
 	}
 

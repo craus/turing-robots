@@ -24,6 +24,8 @@ public abstract class GraphEditor : MonoBehaviour {
 	public bool dragged = false;
 	public bool panned  = false;
 
+	public Node startNode;
+
 	public void Awake() {
 		instance = this;
 	}
@@ -114,6 +116,9 @@ public abstract class GraphEditor : MonoBehaviour {
 	protected virtual Node CreateNode(Node sample) {
 		var newNode = Instantiate(sample);
 		newNode.transform.position = Mouse;
+		if (startNode == null) {
+			startNode = newNode;
+		}
 		return newNode;
 	}
 
@@ -195,6 +200,18 @@ public abstract class GraphEditor : MonoBehaviour {
 		return false;
 	}
 
+	public void MarkStart() {
+		if (hovered != null) {
+			startNode = hovered;
+		}
+	}
+
+	protected void CheckMarkStart() {
+		if (Input.GetButtonDown("Make Start")) {
+			MarkStart();
+		}
+	}
+
 	public virtual void Update() {
 		Pan();
 		Zoom();
@@ -208,6 +225,7 @@ public abstract class GraphEditor : MonoBehaviour {
 			Connect();
 			QuickLoad();
 			CheckClear();
+			CheckMarkStart();
 		}
 	}
 
@@ -221,6 +239,7 @@ public abstract class GraphEditor : MonoBehaviour {
 		});
 
 		result.lastNodeID = Node.lastID;
+		result.startNodeID = startNode.id;
 
 		return result;
 	}
@@ -269,6 +288,8 @@ public abstract class GraphEditor : MonoBehaviour {
 		});
 
 		Node.lastID = graph.lastNodeID;
+
+		startNode = Node.nodesByID[graph.startNodeID];
 	}
 
 	public void Save() {

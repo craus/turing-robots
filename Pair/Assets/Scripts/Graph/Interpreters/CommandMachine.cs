@@ -47,7 +47,8 @@ public class CommandMachine : MonoBehaviour {
 	public void Play() {
 		playing = true;
 		period = basePeriod;
-		lastStep = float.NegativeInfinity;
+		Step();
+		lastStep = Time.time;
 	}
 
 	public void Faster() {
@@ -80,9 +81,11 @@ public class CommandMachine : MonoBehaviour {
 			Faster();
 		}	
 		if (playing) {
-			if (Time.time > lastStep + period) {
-				Step();
-				lastStep = Time.time;
+			for (int i = 0; i < 100; i++) {
+				if (playing && Time.time > lastStep + period) {
+					Step();
+					lastStep += period;
+				}
 			}
 		}
 	}

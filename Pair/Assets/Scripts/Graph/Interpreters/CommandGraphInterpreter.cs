@@ -25,7 +25,11 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	}
 
 	public Node FindStartNode() {
-		var source = Node.nodesByID.Values.FirstOrDefault(n => !Node.nodesByID.Values.Any(n1 => n1.left.to == n || n1.right.to == n));
+		Node source = GraphEditor.instance.startNode;
+		if (source != null) {
+			return source;
+		}
+		source = Node.nodesByID.Values.FirstOrDefault(n => !Node.nodesByID.Values.Any(n1 => n1.left.to == n || n1.right.to == n));
 		if (source != null) {
 			return source;
 		}
@@ -40,7 +44,9 @@ public class CommandGraphInterpreter : MonoBehaviour {
 
 		if (current == null) {
 			current = FindStartNode();
-			Debug.LogFormat("Start node found: {0}", current.id);
+			if (current != null) {
+				Debug.LogFormat("Start node found: {0}", current.id);
+			}
 			return;
 		}
 		string action = MakeAction();
