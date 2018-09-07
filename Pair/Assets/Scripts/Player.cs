@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 
 	public void Reset() {
 		CommandMachine.instance.Reset();
-		Board.instance.Reset();
+		MazeProblem.instance.Reset();
 	}
 
 	public void NextLevel() {
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 		details -= Node.nodesByID.Values.Count;
 		details += detailsPerLevel;
 
-		FindObjectOfType<Board>().Generate();
+		MazeProblem.instance.Generate();
 		GraphEditor.instance.Clear();
 	}
 

@@ -20,8 +20,6 @@ public class CommandMachine : MonoBehaviour {
 
 	public int steps = 0;
 
-	public List<CommandGraphInterpreter> interpreters;
-
 	public CommandGraphInterpreter currentInterpreter;
 
 	public void Awake() {
@@ -37,11 +35,11 @@ public class CommandMachine : MonoBehaviour {
 		++steps;
 
 		if (currentInterpreter == null) {
-			currentInterpreter = interpreters.First();
+			currentInterpreter = MazeProblem.instance.current.interpreters.First();
 		}
 
 		currentInterpreter.Step();
-		currentInterpreter = interpreters.CyclicNext(currentInterpreter);
+		currentInterpreter = MazeProblem.instance.current.interpreters.CyclicNext(currentInterpreter);
 	}
 
 	public void Play() {

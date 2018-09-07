@@ -10,6 +10,14 @@ using System.Linq;
 
 public static class Extensions
 {
+	public static void Destroy(GameObject go) {
+		if (Editor()) {
+			UnityEngine.GameObject.DestroyImmediate(go);
+		} else {
+			UnityEngine.GameObject.Destroy(go);
+		}
+	}
+
     public static double sqr(double x) {
         return x * x;
     }

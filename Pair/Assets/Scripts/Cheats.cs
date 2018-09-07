@@ -68,7 +68,7 @@ public class Cheats : MonoBehaviour
 
 		if (on) {
 			if (Input.GetKeyDown(KeyCode.R)) {
-				Board.instance.Generate();
+				//Board.instance.Generate();
 			}
 		}
     }

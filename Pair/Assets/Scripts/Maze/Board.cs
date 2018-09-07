@@ -6,16 +6,17 @@ using System.Linq;
 using System;
 
 public class Board : MonoBehaviour {
-	public static Board instance;
-
 	public Cell cellPrefab;
 	public Figure wallPrefab;
 	public Figure exitPrefab;
 	public List<Figure> startPrefabs;
+	public List<CommandGraphInterpreter> interpreters;
 	public Figure minePrefab;
 
 	public List<Figure> robots;
 	public List<Figure> starts;
+
+	public bool completed = false;
 
 	[Space]
 
@@ -79,21 +80,17 @@ public class Board : MonoBehaviour {
 		Reset();
 
 		Instantiate(exitPrefab).Place(Rand.rnd(cells, c => c.figures.Count == 0));
-
-		CommandMachine.instance.Reset();
-	}
-
-	public void Awake() {
-		instance = this;
-	}
-
-	public void Start() {
-		Generate();
 	}
 
 	public void Reset() {
-		robots.ForEach(r => Destroy(r.gameObject));
+		completed = false;
+		robots.ForEach(r => Extensions.Destroy(r.gameObject));
 		robots.Clear();
-		starts.ForEach(s => robots.Add(s.GetComponent<RobotStart>().Spawn()));
+		interpreters.Clear();
+		starts.ForEach(s => {
+			var robot = s.GetComponent<RobotStart>().Spawn();
+			robots.Add(robot);
+			interpreters.Add(robot.GetComponentInChildren<CommandGraphInterpreter>());
+		});
 	}
 }

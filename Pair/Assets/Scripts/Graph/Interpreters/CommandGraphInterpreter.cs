@@ -63,20 +63,13 @@ public class CommandGraphInterpreter : MonoBehaviour {
 	public void Update() {
 		pointer.gameObject.SetActive(current != null);
 		if (current != null) {
-			pointer.transform.SetParent(current.transform, worldPositionStays: false);
+			pointer.transform.position = current.transform.position;
 		}
-	}
-
-	public void Start() {
-		CommandMachine.instance.interpreters.Add(this);
 	}
 
 	public void OnDestroy() {
 		if (pointer != null) {
 			Destroy(pointer.gameObject);
-		}
-		if (CommandMachine.instance != null) {
-			CommandMachine.instance.interpreters.Remove(this);
 		}
 	}
 }
