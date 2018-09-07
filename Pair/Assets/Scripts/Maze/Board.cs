@@ -91,12 +91,6 @@ public class Board : MonoBehaviour {
 		Generate();
 	}
 
-	public void Update() {
-		if (Input.GetKeyDown(KeyCode.R)) {
-			Generate();
-		}
-	}
-
 	public void Reset() {
 		robots.ForEach(r => Destroy(r.gameObject));
 		robots.Clear();

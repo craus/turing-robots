@@ -239,7 +239,7 @@ public abstract class GraphEditor : MonoBehaviour {
 		});
 
 		result.lastNodeID = Node.lastID;
-		result.startNodeID = startNode.id;
+		result.startNodeID = startNode != null ? startNode.id : -1;
 
 		return result;
 	}
