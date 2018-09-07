@@ -90,7 +90,9 @@ public class Board : MonoBehaviour {
 		starts.ForEach(s => {
 			var robot = s.GetComponent<RobotStart>().Spawn();
 			robots.Add(robot);
-			interpreters.Add(robot.GetComponentInChildren<CommandGraphInterpreter>());
+			var interpreter = robot.GetComponentInChildren<CommandGraphInterpreter>();
+			interpreter.Update();
+			interpreters.Add(interpreter);
 		});
 	}
 }
