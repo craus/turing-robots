@@ -18,6 +18,8 @@ public abstract class GraphEditor : MonoBehaviour {
 	public Vector2 dragRelativePosition;
 	public Vector2 cameraDragRelativePosition;
 
+	public Camera graphCamera;
+
 	public Link left;
 	public Link right;
 
@@ -32,7 +34,7 @@ public abstract class GraphEditor : MonoBehaviour {
 
 	public Vector2 Mouse {
 		get {
-			return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			return graphCamera.ScreenToWorldPoint(Input.mousePosition);
 		}
 	}
 
@@ -59,9 +61,9 @@ public abstract class GraphEditor : MonoBehaviour {
 
 	protected void Zoom(float times) {
 		var oldMouse = Mouse;
-		Camera.main.orthographicSize /= times;
-		Camera.main.transform.localScale /= times;
-		Camera.main.transform.position += (oldMouse - Mouse).WithZ(0);
+		graphCamera.orthographicSize /= times;
+		graphCamera.transform.localScale /= times;
+		graphCamera.transform.position += (oldMouse - Mouse).WithZ(0);
 	}
 
 	protected void Zoom() {
@@ -102,7 +104,7 @@ public abstract class GraphEditor : MonoBehaviour {
 		}
 		if (Input.GetButton("Pan") && hovered == null && left == null && right == null) {
 			var delta = (cameraDragRelativePosition - Mouse).WithZ(0);
-			Camera.main.transform.position += delta;
+			graphCamera.transform.position += delta;
 			if (delta != Vector3.zero) {
 				panned = true;
 				UpdateAllLinks();
@@ -213,6 +215,10 @@ public abstract class GraphEditor : MonoBehaviour {
 	}
 
 	public virtual void Update() {
+		if (UI.instance.mode != UI.Mode.Graph) {
+			return;
+		}
+
 		Pan();
 		Zoom();
 		Hover();
@@ -231,8 +237,8 @@ public abstract class GraphEditor : MonoBehaviour {
 
 	public virtual GraphModel BuildGraphModel() {
 		var result = new GraphModel();
-		result.camera.position = Camera.main.transform.position;
-		result.camera.zoom = Camera.main.orthographicSize;
+		result.camera.position = graphCamera.transform.position;
+		result.camera.zoom = graphCamera.orthographicSize;
 
 		FindObjectsOfType<Node>().ForEach(node => {
 			result.nodes.Add(new NodeModel(node.id, node.type, node.transform.position, node.left.to.id, node.right.to.id));
@@ -255,8 +261,8 @@ public abstract class GraphEditor : MonoBehaviour {
 	}
 
 	public virtual void RestoreGraphModel(GraphModel graph) {
-		Zoom(Camera.main.orthographicSize / graph.camera.zoom);
-		Camera.main.transform.position = graph.camera.position.WithZ(Camera.main.transform.position.z);
+		Zoom(graphCamera.orthographicSize / graph.camera.zoom);
+		graphCamera.transform.position = graph.camera.position.WithZ(graphCamera.transform.position.z);
 
 		Node.nodesByID.Values.ForEach(node => {
 			node.model = null;
