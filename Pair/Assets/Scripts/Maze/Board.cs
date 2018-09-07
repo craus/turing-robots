@@ -70,7 +70,7 @@ public class Board : MonoBehaviour {
 			}
 		}
 
-		int robotsCount = 3;
+		int robotsCount = 1;
 
 		starts.Clear();
 

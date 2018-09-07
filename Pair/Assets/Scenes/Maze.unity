@@ -89156,7 +89156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   details: 20
-  level: 0
+  level: 1
   detailsPerLevel: 7
   won: 0
   text: {fileID: 755725210}

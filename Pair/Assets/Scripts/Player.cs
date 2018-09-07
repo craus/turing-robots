@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 	public static Player instance;
 
 	public int details = 20;
-	public int level = 0;
+	public int level = 1;
 
 	public int detailsPerLevel = 5;
 
