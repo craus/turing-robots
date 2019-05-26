@@ -1,0 +1,10 @@
+// version with no side effects
+
+nil
+pair x y
+first p
+second p
+if x y z
+[name] is [definition]
+
+main

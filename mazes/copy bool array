@@ -1,0 +1,81 @@
+XX
+.E
+.X
+S#
+
+EX
+.X
+.X
+R#
+
+XXX
+..E
+.XX
+S.#
+
+XEX
+..X
+.XX
+.XX
+Rr#
+
+XXX
+..E
+.XX
+.XX
+R.#
+
+XEX
+..X
+.XX
+Sr#
+
+XXXXXXX
+XXXX..E
+XXX..XX
+XX..XXX
+...XXXX
+.XXXXXX
+.XXXXXX
+R.rrr.#
+
+XXXXXXXXXEX
+XXXXXXXX..X
+XXXXXXX..XX
+XXXXX...XXX
+XXXX..XXXXX
+X....XXXXXX
+..XXXXXXXXX
+.XXXXXXXXXX
+Sr..rr.rrr#
+
+push list element is
+	if not list
+		pair element nil
+	else
+		pair first list push second list element
+
+main state color is
+	if eq first state 0
+		if not eq color blue
+			paint blue pair 1 push second state color
+		else
+			paint white pair 2 second state	
+	if eq first state 1
+		move right pair 0 second state
+	if eq first state 2
+		if not eq color blue
+			paint blue pair 3 second state
+		else
+			move up pair 4 second state
+	if eq first state 3
+		move left pair 2 second state
+	if eq first state 4
+		move up pair 5 second state
+	if eq first state 5
+		if eq first second state red
+			move up pair 6 second second state
+		else
+			move right pair 5 second second state
+	else
+		move right pair 5 second state

@@ -1,0 +1,25 @@
+.XE.
+X.rX
+S.X.
+
+.XX.
+X..E
+S.X.
+
+main state color is
+	if eq state 0 move right inc state
+	if eq state 1 move up inc state
+	if eq state 2 move right inc state
+	if eq color red move up nil
+	move right nil
+
+walk direction state line next is
+	if eq state line move direction inc state
+	next
+
+main state color is
+	walk right state 0 
+	walk up state 1
+	walk right state 2
+	if eq color red move up nil
+	move right nil

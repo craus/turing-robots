@@ -1,0 +1,66 @@
+// version via side effects
+
+first p
+second p
+bin
+bout x
+if x y z
+nil
+[name] is [definition]
+drop [name]
+
+true is pair nil nil
+false is nil
+1 is true
+0 is false
+else x is x
+then x is x
+main is if bin then bout 1 else bout 0
+
+bin2 is pair bin bin
+bin4 is pair bin2 bin2
+cin is pair bin4 bin4
+
+both x y is if x y false
+either x y is if x true y
+
+bout2 x is both bout first x bout second x
+bout4 x is both bout2 first x bout2 second x
+cout x is both cout first x cout second x
+
+echo1 is cout cin
+main is echo1
+
+not x is if x false true
+eq x y is if x y not y
+neq x y is not eq x y
+
+oeq x y is 
+	if x 
+	then both y both oeq first x first y oeq second x second y
+	else not y
+
+char8 b0 b1 b2 b3 b4 b5 b6 b7 is
+	pair
+		pair
+			pair b0 b1
+			pair b2 b3
+		pair
+			pair b4 b5
+			pair b6 b7
+
+#0 is char8 0 0 0 0 0 0 0 0
+
+f x is if eq x #0 then nil else both cout x echo_until_#0
+echo_until_#0 is f cin
+
+drop f
+
+space is char8 0 0 1 0 0 0 0 0
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+use binaryNode
+
+triangle a b c is
+	node a triangle b c a triangle c a b
+
+use numbers
+
+sampleTriangle is triangle 3 5 7
+
+assert eq root sampleTriangle 3
+assert eq root left sampleTriangle 5
+assert eq root right sampleTriangle 7
+assert eq root left left left sampleTriangle 3
+assert eq root right right right sampleTriangle 3
+assert eq root left right left left sampleTriangle 7
+

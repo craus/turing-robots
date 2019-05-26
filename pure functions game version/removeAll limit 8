@@ -1,0 +1,39 @@
+removeAll list element is
+	if list
+		if eq head list element
+			removeAll tail list element
+		else
+			add head list removeAll tail list element
+	else 
+		nil
+
+removeAll list element is
+	both list
+		if eq head list element
+			removeAll tail list element
+			add head list removeAll tail list element
+
+// limit 8
+
+removeAll list element is removeAllP pair list element
+// or: removeAll is splitVersion removeAllP
+
+removeAllP p is
+	both first p removeAllNonEmptyP p
+
+removeAllNonEmptyP p is
+	removeAllTailP removeHeadP p
+
+removeHeadP p is
+	editOnCondition removeHeadF eqFfS
+
+removeHeadF p is
+	pair fs p second p
+
+eqFfS p is
+	eq ff p second p
+
+removeAllTailP p is 
+	
+
+	

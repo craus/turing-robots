@@ -1,0 +1,42 @@
+use bool
+
+0 is nil
+inc x is pair x nil
+dec x is first x
+1 is inc 0
+2 is inc 1
+3 is inc 2
+4 is inc 3
+5 is inc 4
+6 is inc 5
+7 is inc 6
+8 is inc 7
+9 is inc 8
+
+eq x y is 
+	if x 
+		if y
+			both 
+				eq first x first y
+				eq second x second y
+		else
+			false
+	else
+		not y
+
+greater x y is
+	if x
+		if y
+			either
+				greater first x first y
+				both 
+					eq first x first y
+					greater second x second y
+		else
+			true
+	else
+		false
+
+less x y is 
+	greater y x
+

@@ -1,0 +1,32 @@
+use binaryTree
+
+less x y is function
+
+insert tree key is
+	if tree
+		if less key root tree
+			pair insert left tree key right tree
+		else
+			pair left tree insert right tree key
+	else node key nil nil
+
+contains tree key is
+	both tree
+	if less key root tree
+		contains left tree key
+	else
+		contains right tree key
+
+sortedKeysList tree is
+	addTreeKeysToSortedList tree emptyList
+
+addTreeKeysToSortedList tree list is
+	if tree
+		addTreeKeysToSortedList left tree
+			add root tree
+				addTreeKeysToSortedList right tree
+					list
+	else list
+
+listToBalancedTree list is
+	

@@ -1,0 +1,33 @@
+vertex key edges is pair key edges
+
+key vertex is first vertex
+edges vertex is second vertex
+
+connect u v is
+	vertex key u pair v edges u
+
+biconnect u v is 
+	vertex key u pair biconnect v edges u
+
+triangle a b c is
+	connect 
+		connect 
+			a 
+			triangle b c a 
+		triangle c a b
+
+chain keys is
+	if tail keys
+		connect vertex head keys chain tail keys
+	else vertex head keys
+
+forward vertex is
+	head edges vertex
+
+use numbers
+
+chain1 is chain pair 3 pair 2 pair 9 pair 7 nil
+
+D is forward forward forward chain1
+
+D2 is connect D chain1

@@ -1,0 +1,30 @@
+
+box x is pair x nil
+unbox x is first x
+
+editIfCondition is editIfCondition edit condition generic 
+	edit x is function 	
+	condition x is function
+
+	editBoxed x is box edit unbox x
+	conditionBoxed x is condition unbox x
+
+	editIfCondition x is editIfConditionBoxed box x
+
+	editIfConditionBoxed x is 
+		either nullifyIfConditionBoxed x editBoxed x 
+	nullifyIfConditionBoxed x is 
+		if conditionBoxed x nil x
+
+
+// remove first element from list iff there are more elements
+removeFirstOnMultiple is editIfCondition tail tail
+
+// populate list with nil element iff it is empty
+addNil list is pair nil list
+addNilOnEmpty is editIfCondition addNil not
+
+// populate list with the given element iff it is empty
+addOnEmply list element is removeFirstOnSingle pair element list
+removeFirstOnSingle is editIfCondition tail single
+single list is not tail list

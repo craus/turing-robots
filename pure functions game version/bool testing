@@ -1,0 +1,124 @@
+TASK: true
+
+true
+if true pair nil nil nil
+if first true nil pair nil nil
+if second true nil pair nil nil
+
+ANSWER:
+
+true is pair nil nil
+
+TESTING:
+
+true					// true is pair nil nil
+pair nil nil
+
+if true pair nil nil nil						// true is pair nil nil
+if pair nil nil pair nil nil nil		// if pair a b c d is c
+pair nil nil
+
+if first true nil pair nil nil					// true is pair nil nil
+if first pair nil nil nil pair nil nil	// first pair a b is a 
+if nil nil pair nil nil 								// if nil a b is b
+pair nil nil
+
+if second true nil pair nil nil					// true is pair nil nil
+if second pair nil nil nil pair nil nil	// second pair a b is b 
+if nil nil pair nil nil 								// if nil a b is b
+pair nil nil
+
+
+
+TASK: not x
+
+not false
+if not true false true
+not first not false
+not second not false
+if not pair 0 1 false true
+
+ANSWER: 
+
+not x is if x false true
+
+TESTING
+
+not false // false is nil
+not nil // not x is if x false true
+if nil false true // if nil a b is b
+true // true is pair nil nil
+pair nil nil
+
+if not true false true // not x is if x false true
+if if true false true false true // true is pair nil nil
+if if pair nil nil false true false true // if pair a b c d is c
+if false false true // false is nil
+if nil false true // if nil a b is b
+true // true is pair nil nil
+pair nil nil
+
+not first not false // not x is if x false true
+if first not false false true // not is if x false true
+if first if false false true false true // false is nil
+if first if nil false true false true // if nil a b is b
+if first true false true // true is pair nil nil
+if first pair nil nil false true // first pair a b is a
+if nil false true // if nil a b is b
+true // true is pair nil nil
+pair nil nil
+
+if not pair 0 1 false true // not x is if x false true
+if if pair 0 1 false true false true // if pair a b c d is c
+if false false true // false is nil
+if nil false true // if nil a b is b
+true // true is pair nil nil
+pair nil nil
+
+
+TASK: eq x y
+
+TESTS:
+
+eq nil nil
+eq true true
+eq pair true nil pair true nil
+eq pair nil true pair nil true
+eq pair true true pair true true
+not eq nil true
+not eq true nil
+not eq nil pair true nil
+
+ANSWER:
+
+eq x y is 
+	if x
+		if y 
+			both 
+				eq first x first y
+				eq second x second y
+		else
+			false
+	else
+		not y
+
+TESTING
+
+eq nil nil // eq x y is if x if y both eq first x first y eq second x second y else false else not y
+if nil if nil both eq first nil first nil eq second nil second nil else false else not nil // if nil a b is b
+else not nil // else x is exactly x
+exactly not nil // exactly x is x
+not nil // not x is if x false true
+if nil false true // if nil a b is b
+true 
+
+eq true true
+if true if true both eq first true first true eq second true second true else false else not true
+if pair nil nil if true both eq first true first true eq second true second true else false else not true
+if true both eq first true first true eq second true second true else false
+if pair nil nil both eq first true first true eq second true second true else false
+both eq first true first true eq second true second true
+if eq first true first true eq second true second true false
+
+eq first true first true 
+if first true if first true both eq first first true first first true eq second first true second first true else false else not y

@@ -1,0 +1,11 @@
+last list is if tail list last tail list head list
+
+// limit 8 version
+
+use editIfCondition
+
+last list is head collapse list
+
+collapse is editIfCondition multiple collapseMultiple
+collapseMultiple list is collapse tail list
+multiple list is tail list

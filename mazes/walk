@@ -1,0 +1,11 @@
+X.E
+S.X
+
+main state color is
+	either state
+	move right
+	move up
+	move right
+	nil
+
+	

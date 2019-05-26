@@ -1,0 +1,23 @@
+0 is nil
+1 is pair 0 0
+2 is pair 0 1
+3 is pair 1 1
+4 is pair 0 2
+5 is pair 1 2
+6 is pair 0 3
+7 is pair 1 3
+8 is pair 0 4
+9 is pair 1 4
+10 is pair 0 5
+11 is pair 1 5
+12 is pair 0 6
+
+twice x is pair 0 x
+
+inc x is 
+	if x
+		if first x 
+			pair 0 inc second x
+		else
+			pair 1 second x
+	else 1

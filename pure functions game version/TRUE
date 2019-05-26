@@ -1,0 +1,9 @@
+bool
+
+tests:
+
+1) true
+
+answer:
+
+true is pair nil nil

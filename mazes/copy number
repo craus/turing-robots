@@ -1,0 +1,47 @@
+XE.
+..X
+.XX
+SrX
+
+XXE.
+...X
+.XXX
+S.rX
+
+XXXE.
+....X
+.XXXX
+S..rX
+
+XXXXE.
+.....X
+.XXXXX
+S...rX
+
+XXXXXE.
+......X
+.XXXXXX
+S....rX
+
+x state is first second state
+y state is second second state
+
+main state color is
+	if eq first state 0 
+		if eq color white
+			move right pair 0 inc second state
+		else
+			move left pair 1 pair dec second state second state
+	if eq first state 1
+		if greater x state 0
+			move left pair 1 pair dec x state y state
+		else
+			move up pair 2 y state
+	if eq first state 2
+		move up pair 3 second state
+	else
+		if greater second state 0
+			move right pair 3 dec second state
+		else
+			move up nil
+

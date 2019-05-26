@@ -1,0 +1,16 @@
+use merge
+use bisect
+
+less x y is function
+
+mergeSort list is
+	if tail list 
+		mergeSortPair bisect list
+	else list
+
+mergeSortPair p is
+	merge 
+		mergeSort first p
+		mergeSort second p
+
+mergeSort is mergeSortByComparer less generic
