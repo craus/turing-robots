@@ -35,11 +35,11 @@ public class CommandMachine : MonoBehaviour {
 		++steps;
 
 		if (currentInterpreter == null) {
-			currentInterpreter = MazeProblem.instance.current.interpreters.First();
+			currentInterpreter = MazeProblemManager.instance.current.interpreters.First();
 		}
 
 		currentInterpreter.Step();
-		currentInterpreter = MazeProblem.instance.current.interpreters.CyclicNext(currentInterpreter);
+		currentInterpreter = MazeProblemManager.instance.current.interpreters.CyclicNext(currentInterpreter);
 	}
 
 	public void Play() {

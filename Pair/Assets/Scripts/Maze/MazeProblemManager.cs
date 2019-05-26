@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 
-public class MazeProblem : MonoBehaviour {
-	public static MazeProblem instance;
+public class MazeProblemManager : MonoBehaviour {
+	public static MazeProblemManager instance;
 
 	public TMPro.TextMeshProUGUI text;
 

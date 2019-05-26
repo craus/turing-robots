@@ -1,0 +1,36 @@
+// how to track eof?
+
+#terminate at once
+main state bit is quit
+
+#output zero bit
+main state bit is
+	if state
+		quit
+		bout nil pair nil nil
+		
+#output one bit
+main state bit is
+	if state
+		quit
+		bout pair nil nil pair nil nil
+
+#get bit, output it
+main state bit is 
+	if state
+		if first state
+			quit
+			bout bit pair pair nil nil nil
+		bin pair nil nil
+		
+#get bit, output opposite
+1 is pair nil nil
+main state bit is
+	if state
+		if first state
+			quit
+			bout if bit nil 1 pair 1 nil
+		bin 1
+		
+#get sequence of one bits termi
+	

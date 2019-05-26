@@ -40,13 +40,15 @@ public class Board : MonoBehaviour {
 		return cells[x, y];
 	}
 
-	[ContextMenu("Generate")]
-	public void Generate() {
+	public void Clear() {
 		if (Extensions.Editor()) {
 			cellParent.transform.Children().ForEach(c => DestroyImmediate(c.gameObject));
 		} else {
 			cellParent.transform.Children().ForEach(c => Destroy(c.gameObject));
 		}
+	}
+
+	public void CreateBlank(int n, int m) {
 		cells = new Cell[n, m];
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
@@ -56,16 +58,26 @@ public class Board : MonoBehaviour {
 					(i - (n - 1) * 0.5f) * step,
 					(j - (m - 1) * 0.5f) * step,
 					0
-				);
+				);			
 				cell.x = i;
 				cell.y = j;
 				cell.board = this;
 				cells[i, j] = cell;
+			}
+		}
+	}
 
+	[ContextMenu("Generate")]
+	public void Generate() {
+		Clear();
+		CreateBlank(n,m);
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
 				if (Rand.rndEvent(0.12f)) {
-					Instantiate(wallPrefab).Place(cell);
+					Instantiate(wallPrefab).Place(cells[i,j]);
 				} else if (Rand.rndEvent(0.03f)) {
-					Instantiate(minePrefab).Place(cell);
+					Instantiate(minePrefab).Place(cells[i,j]);
 				}
 			}
 		}

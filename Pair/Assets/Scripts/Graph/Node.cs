@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class Node : MonoBehaviour {
@@ -46,7 +48,9 @@ public class Node : MonoBehaviour {
 	public void Update() {
 		if (Extensions.Editor()) {
 			if (immutable) {
+				#if UNITY_EDITOR
 				Undo.RecordObject(text, "text changed");
+				#endif
 				text.text = name;
 				left.to = null;
 				right.to = null;

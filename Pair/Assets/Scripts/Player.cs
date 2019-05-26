@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
 
 	public void Reset() {
 		CommandMachine.instance.Reset();
-		MazeProblem.instance.Reset();
+		MazeProblemManager.instance.Reset();
 	}
 
 	public void NextLevel() {
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 		details -= Node.nodesByID.Values.Count;
 		details += detailsPerLevel;
 
-		MazeProblem.instance.Generate();
+		MazeProblemManager.instance.Generate();
 		GraphEditor.instance.Clear();
 	}
 

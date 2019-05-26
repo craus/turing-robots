@@ -16,14 +16,18 @@ left is pair 0 2
 right is pair 0 4
 up is pair 0 3
 down is pair 0 1
-move direction state is pair 1 pair direction state
+move direction state is pair pair 0 direction state
 white is pair 1 7
 black is pair 1 0
 red is pair 1 1
 green is pair 1 2
 blue is pair 1 4
-paint color state is pair 2 pair color state
+paint color state is pair pair 1 color state
 command (=main)
+
+SE
+
+main state color is move right 0
 
 #.E
 S.#
@@ -37,6 +41,19 @@ command now is
 	instate now 0 
 		move right and up and right end
 	goon
+	
+walk plan is 
+	move first plan walk second plan
+	
+		
+	
+main state color is
+	either 
+		state
+		move right
+		move up
+		move right
+		end
 	
 XRE
 

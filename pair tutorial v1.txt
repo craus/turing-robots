@@ -1,0 +1,15 @@
+task
+
+task is pair nil nil
+
+first task
+
+task is pair pair nil nil nil
+
+second task
+
+task is pair nil pair nil nil
+
+task pair 
+
+task x y is pair first x second y

@@ -21,6 +21,14 @@ public class PairObject
 		return "#" + id.ToString();
 	}
 
+	public string Structure() {
+		return string.Format("pair({0}, {1})", Structure(first), Structure(second));
+	}
+
+	public static string Structure(PairObject p) {
+		return p != null ? p.Structure() : "nil";
+	}
+
 	public static string ToString(PairObject p) {
 		return p != null ? p.ToString() : "#0";
 	}

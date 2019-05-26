@@ -10,8 +10,8 @@ public class Exit : MonoBehaviour {
 		var interpreter = figure.GetComponentInChildren<CommandGraphInterpreter>();
 		if (interpreter != null) {
 			interpreter.finished = true;
-			if (MazeProblem.instance.current.interpreters.All(i => i.finished)) {
-				MazeProblem.instance.CompleteTest();
+			if (MazeProblemManager.instance.current.interpreters.All(i => i.finished)) {
+				MazeProblemManager.instance.CompleteTest();
 			}
 		}
 	}

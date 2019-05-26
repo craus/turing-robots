@@ -11,6 +11,6 @@ public class FunctionCall : Expression
 	}
 
 	public override string ToString() {
-		return "{0}{1}".i(function.name, arguments.ExtToString(format: "({0})"));
+		return "{0}{1}".i(function.name, arguments.Count > 1 ? arguments.ExtToString(format: "({0})") : "");
 	}
 }

@@ -1,0 +1,17 @@
+0 is nil
+1 is pair 0 0
+2 is pair 0 1
+3 is pair 1 0
+4 is pair 1 1
+5 is pair 1 2
+6 is pair 2 1
+7 is pair 2 2
+8 is pair 2 3
+9 is pair 3 2
+true is 1
+false is 0
+both x y is if x y false
+either x y is if x x y
+not x is if x false true
+neither x y is both not x not y
+main is both 7 9

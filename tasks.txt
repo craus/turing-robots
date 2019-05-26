@@ -1,0 +1,19 @@
+p is pair nil nil
+left is pair p nil
+right is pair nil p
+up is p
+
+# is p
+. is nil
+S is pair p p
+E is pair S S
+maze is
+	pair pair # pair . pair . pair E nil
+	pair pair . pair . pair # pair # nil
+	pair pair # pair . pair . pair . nil
+	pair pair . pair . pair # pair S nil
+	nil
+	
+assert eq walkthrough maze 
+	pair up pair left pair left pair up pair up pair right pair right nil
+	

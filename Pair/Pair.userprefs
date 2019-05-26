@@ -1,17 +1,23 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Graph\Editors\GraphEditor.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PostProcessing\Editor\Monitors\HistogramMonitor.cs">
     <Files>
-      <File FileName="Assets\Scripts\Maze\Board.cs" Line="94" Column="25" />
-      <File FileName="Assets\Scripts\Cheats.cs" Line="71" Column="7" />
-      <File FileName="Assets\Scripts\Graph\Editors\GraphEditor.cs" Line="101" Column="33" />
-      <File FileName="Assets\Scripts\Player.cs" Line="34" Column="25" />
-      <File FileName="Assets\Scripts\Maze\MazeProblem.cs" Line="79" Column="3" />
-      <File FileName="Assets\Scripts\Graph\Editors\CommandGraphEditor.cs" Line="25" Column="29" />
-      <File FileName="Assets\Scripts\Maze\Figures\RobotStart.cs" Line="11" Column="2" />
-      <File FileName="Assets\Scripts\Graph\Interpreters\CommandMachine.cs" Line="61" Column="19" />
-      <File FileName="Assets\Scripts\Graph\Interpreters\CommandGraphInterpreter.cs" Line="63" Column="24" />
-      <File FileName="Assets\Scripts\Maze\Effects\Exit.cs" Line="14" Column="41" />
+      <File FileName="Assets\Scripts\Maze\Board.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Cheats.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graph\Editors\GraphEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graph\Editors\CommandGraphEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Maze\Figures\RobotStart.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graph\Interpreters\CommandMachine.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graph\Interpreters\CommandGraphInterpreter.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Maze\Effects\Exit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graph\Editors\Viewer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Graph\Editors\ModeRestricted.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Maze\MazeProblems\MazeProblem.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Maze\MazeProblemManager.cs" Line="48" Column="11" />
+      <File FileName="Assets\PostProcessing\Editor\Monitors\HistogramMonitor.cs" Line="7" Column="49" />
+      <File FileName="Assets\Scripts\Graph\Node.cs" Line="53" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

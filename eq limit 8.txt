@@ -1,0 +1,17 @@
+eq x y is eqp pair x y
+eqp p is either nils p areEqPairs p
+nils p is none first p second p
+none x y is not either x y
+either x y is if x x y
+not x is if x false true
+false is nil
+true is pair nil nil
+areEqPairs p is both pairs p eqPairs p
+pairs p is both first p second p
+eqPairs p is both eqFirsts p eqSeconds p
+eqFirsts p is eq firsts p
+firsts p is firstFirst firstSecond p
+firstFirst p is pairFirstFirst first p second p
+pairFirstFirst x y is pair first x y
+firstSecond p is pairFirstSecond first p second p
+pairFirstSecond x y is pair x first y

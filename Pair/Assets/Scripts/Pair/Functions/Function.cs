@@ -14,8 +14,7 @@ public abstract class Function
 		var result = CallInternal(arguments);
 		return result;
 	}
-
 	public override string ToString() {
-		return "{0}{1}".i(name, arguments.ExtToString(format: "({0})"));
+		return "{0}{1}".i(name, arguments.Count > 1 ? arguments.ExtToString(format: "({0})") : "");
 	}
 }

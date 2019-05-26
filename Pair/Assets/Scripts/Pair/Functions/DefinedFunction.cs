@@ -14,4 +14,8 @@ public class DefinedFunction : Function
 		Debug.LogFormat("{0}{1} = {2}", name, this.arguments.Count > 0 ? args : "", PairObject.ToString(result));
 		return result;
 	}
+
+	public override string ToString() {
+		return string.Format("{0} = {1}", base.ToString(), body);
+	}
 }
