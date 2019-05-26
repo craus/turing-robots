@@ -1,5 +1,6 @@
 Pair/Temp/
 Pair/Library/
 Pair/obj/
-*.csproj
 Pair/Build/
+Pair/Assembly-CSharp.csproj
+Pair/Assembly-CSharp-Editor.csproj
