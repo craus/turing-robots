@@ -1,0 +1,13 @@
+less x y is function
+
+merge list1 list2 is 
+	if list1
+		if list2
+			if less head list1 head list2
+				pair head list1 merge tail list1 list2
+			else
+				pair head list2 merge list1 tail list2
+		else list1
+	else list2
+
+merge is mergeByComparer less generic	

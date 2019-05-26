@@ -1,0 +1,9 @@
+criteria x data is function
+
+filter list data is 
+	both list
+	if criteria head list data
+		pair head list filter tail list
+	else filter tail list
+
+filter is filterWithData criteria generic

@@ -1,0 +1,195 @@
+true is pair nil nil
+false is nil
+exactly x is x
+then x is exactly x
+else x is exactly x
+unless x y z is if x z y
+not x is if x false true
+both x y is if x y false
+either x y is if x x y
+none x y is if x false not y
+same x y is both implies x y implies y x
+xor x y is if x not y y
+implies x y is either not x y
+
+eq x y is 
+	either 
+		none x y 
+		both 
+			eq first x first y 
+			eq second x second y
+
+zero x is not x 
+one x is both x none first x second x
+
+empty is nil
+
+add head tail is pair head tail
+head list is first list
+tail list is second list
+
+push list element is 
+	if list
+		pair head list push tail list element
+	else
+		pair element nil
+
+reverse list is 
+	if list
+		push reverse tail list head list
+	else
+		nil
+
+concat list1 list2 is
+	if list2
+		concat push list1 head list2 tail list2
+	else
+		list1
+
+removeAll list element is
+	if list
+		if eq head list element
+			removeAll tail list element
+		else
+			add head list removeAll tail list element
+	else 
+		nil
+
+uniq list is
+	if list
+		add head list removeAll tail list head list
+	else
+		nil
+
+contains list element is
+	both 
+		list
+		either 
+			eq head list element
+			contains tail list element
+
+count list element is
+	if list
+		if head list
+			inc count tail list element
+		else 
+			tail list element
+	else 0
+
+insertIntoSorted list element is
+	if list
+		if less element head list
+			pair element list
+		else
+			pair head list insertIntoSorted tail list element
+	else
+		pair element nil
+
+sort list is 
+	if list
+		insertIntoSorted sort tail list head list
+	else
+		nil
+
+isSubsequence sub list is
+	if sub
+		if list
+			if eq head sub head list
+				isSubsequence tail sub tail list
+			else
+				isSubsequence sub tail list
+		else false
+	else true
+
+indexOf element list is
+	if list
+		if eq head list element
+			0
+		else
+			function x to if eq x -1 then -1 else inc x
+				indexOf element tail list
+	else -1
+
+substr list from length is
+	both list
+	if eq from 0
+		if eq length 0
+			nil
+		else pair head list substr tail list 0 dec length
+	else substr tail list dec from length
+
+startsWith prefix list is
+	if prefix
+		both list
+		both eq head prefix head list
+		startsWith tail prefix tail list
+	else true
+
+endsWith postfix list is
+	startsWith postfix reverse list
+
+union list1 list2 is
+	uniq concat list1 list2
+
+intersection list1 list2 is
+	both list1
+	if contains list2 head list1
+		pair head list1 intersection tail list1 list2
+	else
+		intersection tail list1 list2
+
+elementAt index list is
+	both list
+	if eq index 0
+		head list
+	else elementAt dec index tail list
+
+cyclic list is
+	concat list cyclic list
+
+inifiniteList element is
+	cyclic pair element nil
+
+isPalindrome list is
+	eq list reverse list
+
+infiniteTree is
+	pair infiniteTree infiniteTree
+
+replace from to list is
+	both list
+	if eq from head list
+		pair to replace from to tail list
+	else pair head list replace from to tail list
+
+mapToIndex list map is
+	both list
+	pair indexOf head list map mapToIndex tail list map
+
+toStructure list is
+	mapToIndex list list
+	
+ofSameStructure list1 list2 is
+	eq toStructure list1 toStructure list2	
+
+countPair list element is
+	pair element count list element
+
+mapCount list1 list2 is
+	both list1
+	pair countPair head list1 mapCount tail list1 list2
+
+counts list is
+	mapCount uniq list list
+
+subTree x y is
+	if x
+		if y
+			both
+				subTree first x first y
+				subTree second x second y
+		else false
+	else true 
+
+
+

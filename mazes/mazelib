@@ -1,0 +1,19 @@
+use numbers
+
+execute command state is
+	pair command state
+
+command type argument is
+	pair command argument
+
+movement is 0
+painting is 1
+
+move direction state is
+	execute command movement direction state
+
+paint color state is
+	execute command painting color state
+
+# main state color is ...
+# should return move D S or paint D S

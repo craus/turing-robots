@@ -1,0 +1,105 @@
+TASK: true
+
+true
+if true pair nil nil nil
+if first true nil pair nil nil
+if second true nil pair nil nil
+
+ANSWER:
+
+true is pair nil nil
+
+LONG ANSWER:
+
+true is first pair pair nil nil nil
+
+BONUS: 
+
+1 is true
+
+
+TASK: false
+
+if false nil true
+if first false nil true
+if second false nil true
+
+ANSWER:
+
+false is nil
+
+LONG ANSWER:
+
+false is second pair nil nil
+
+BONUS:
+
+0 is false
+
+
+TASK: exactly x
+
+exactly true
+if exactly false false true
+if first exactly true false true
+if second exactly true false true
+
+ANSWER:
+
+exactly x is x
+
+BONUS:
+
+then x is exactly x
+else x is exactly x
+
+
+TASK: not x
+
+not false
+if not true false true
+not first not false
+not second not false
+if not pair 0 1 false true
+
+ANSWER: 
+
+not x is if x false true
+
+LONG ANSWER:
+
+not x is if x first 0 1
+
+TASK: both x y
+
+both true true
+not both false true
+not both true false
+not both false false
+
+
+TASK: eq x y
+
+TESTS:
+
+eq nil nil
+eq true true
+eq pair true nil pair true nil
+eq pair nil true pair nil true
+eq pair true true pair true true
+not eq nil true
+not eq true nil
+not eq nil pair true nil
+
+ANSWER:
+
+eq x y is 
+	if x
+		if y 
+			both 
+				eq first x first y
+				eq second x second y
+		else
+			false
+	else
+		not y

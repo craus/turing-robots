@@ -1,0 +1,33 @@
+use bool
+
+0 is pair false nil
+1 is pair true nil
+
+inc x is 
+	if head x
+		pair false inc tail x
+	else pair true tail x
+
+shorten x is
+	if eq tail x 0
+		pair head x nil
+	else x
+
+normalize x is
+	if x
+		shorten pair head x normalize tail x
+	else 0
+	
+dec x is
+	if head x
+		pair false tail x
+	else normalize pair true dec tail x
+
+double x is
+	pair false x
+
+half x is
+	second x
+
+sum x y is
+	

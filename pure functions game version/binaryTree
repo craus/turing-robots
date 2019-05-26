@@ -1,0 +1,34 @@
+use binaryNode
+
+keysList tree is
+	addTreeKeysToList tree emptyList
+
+addTreeKeysToList tree list is
+	if tree
+		add root tree
+			addTreeKeysToList left tree
+				addTreeKeysToList right tree
+					list
+	else list
+
+use numbers
+
+sampleTree is
+	node 3
+		node 5
+			node 7 nil nil
+			node 8
+				node 2
+					node 6 nil nil
+					node 5 nil nil
+				nil
+		node 4
+			nil
+			node 1 nil nil
+
+sampleKeysList is
+	pair 3 pair 5 pair 7 pair 8 
+	pair 2 pair 6 pair 5 pair 4 
+	pair 1 nil
+
+assert eq keysList sampleTree sampleKeysList

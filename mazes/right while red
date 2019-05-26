@@ -1,0 +1,20 @@
+E.
+SX
+
+XE.
+R.X
+
+XXE.
+Rr.X
+
+XXXE.
+Rrr.X
+
+XXXXE.
+Rrrr.X
+
+main state color is
+	if eq color red 
+		move right nil
+	else
+		move up nil

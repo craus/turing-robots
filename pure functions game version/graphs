@@ -1,0 +1,19 @@
+use filterWithData
+
+verticesList graph is first graph
+edgesList graph is second graph
+
+from edge is first edge
+to edge is second edge
+
+fromVertex edge vertex is
+	eq from edge vertex
+
+toVertex edge vertex is
+	eq to edge vertex
+
+filterFromVertex is filterWithData fromVertex
+
+edgesFromVertex graph vertex is 
+	filterFromVertex edgesList graph vertex
+

@@ -1,0 +1,18 @@
+nil
+pair x y
+first p
+second p
+if x y z
+
+first pair a b is a
+second pair a b is b
+if pair a b c d is c
+if nil a b is b
+
+[function_name] [arguments] is [function_body]
+
+<function definition> ::= <function name> <argument list> is <expression>
+
+<expression> ::= <function call> | <argument name>
+
+<function call> ::= <function name> <arguments list>

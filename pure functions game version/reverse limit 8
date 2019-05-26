@@ -1,0 +1,23 @@
+reverse list is 
+	if list
+		push reverse tail list head list
+	else
+		nil // 13
+
+reverse list is 
+	both list 
+	push reverse tail list head list // 11
+
+// limit 8
+
+reverse list is
+	both list reverseNonEmpty list
+
+reverseNonEmpty list is
+	reverseNonEmptyHT head list tail list
+
+reverseNonEmpty is pairVersion reverseNonEmptyHT generic 
+
+reverseNonEmptyHT h t is
+	push reverse t h
+

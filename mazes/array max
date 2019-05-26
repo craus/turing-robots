@@ -1,0 +1,61 @@
+S
+E
+
+#.
+S.
+XE
+
+.##
+.#.
+S..
+EXX
+
+##.#
+.#..
+....
+....
+S...
+XXEX
+
+#######.
+.##.###.
+.##.###.
+.##.###.
+..#.###.
+.....##.
+......#.
+........
+S.......
+XXXXXXXE
+
+####.######
+##.#..##.##
+#..#..##.#.
+......#..#.
+......#....
+S..........
+XXXXEXXXXXX
+
+x state is first first second state
+mx state is second first second state
+mxv state is first second second state
+cur state is second second second state
+
+mem line x mx mxv cur is 
+	pair 
+		line
+		pair
+			pair x mx
+			pair mxv cur
+
+line state x y z is if eq first state x y z
+	
+main state color is
+	if not state paint red mem 1 0 0 0 0
+	line state 1 
+		move up pair 2 second state
+	line state 2
+		if eq color red
+			???
+		else
+			paint red 	

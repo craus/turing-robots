@@ -1,0 +1,11 @@
+true is pair nil nil
+false is nil
+then x is x
+else x is x
+unless x y z is if x z y
+not x is if x false true
+both x y is if x y x
+either x y is if x x y
+none x y is not either x y
+xor x y is if x not y y
+imply x y is either not x y
