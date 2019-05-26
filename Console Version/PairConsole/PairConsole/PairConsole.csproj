@@ -72,6 +72,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="bin\Debug\Pair Code\output.txt" />
+    <None Include="Pair Code\list.pair">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pair\Builtin Functions\" />

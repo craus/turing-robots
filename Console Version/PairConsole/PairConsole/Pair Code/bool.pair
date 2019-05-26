@@ -42,3 +42,5 @@ eq x y is
 assert eq 1 pair nil nil
 assert eq false 0
 assert not eq pair 1 1 pair 1 0
+assert eq pair pair 1 0 pair pair 1 0
+assert not eq pair pair 0 0 pair pair 1 0
