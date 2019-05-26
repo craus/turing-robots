@@ -4,19 +4,23 @@ using UnityEngine;
 #endif
 using System.Linq;
 using System;
+using System.IO;
 
 public class PairProgram
 {
 	const string IS = "is";
 	const string ASSERT = "assert";
 	const string OUTPUT = "output";
+	const string USE = "use";
 
 	public Dictionary<string, Function> functions = new Dictionary<string, Function>();
 	public List<Expression> asserts = new List<Expression>();
 	public List<Expression> outputs = new List<Expression>();
 
-	public string[] tokens;
+	public List<string> tokens = new List<string>();
 	public int cur;
+
+	public HashSet<string> files = new HashSet<string>();
 
 	private Expression ReadExpression(Function definingFunction = null) {
 		if (definingFunction != null) {
@@ -42,7 +46,7 @@ public class PairProgram
 
 	void FindFunctionDefinitions() {
 		Map<string, int> shortestIs = new Map<string, int>();
-		for (int i = 0; i < tokens.Length; i++) {
+		for (int i = 0; i < tokens.Count; i++) {
 			if (tokens[i] == IS) {
 				for (int j = 1; j <= i; j++) {
 					if (tokens[i - j] == IS) {
@@ -96,13 +100,19 @@ public class PairProgram
 		outputs.Add(ReadExpression());
 	}
 
+	void ReadUse() {
+		cur += 2;// skip "use" and filename	
+	}
+
 	private void ReadProgram() {
 		cur = 0;
-		while (cur < tokens.Length) {
+		while (cur < tokens.Count) {
 			if (tokens[cur] == ASSERT) {
 				ReadAssert();
 			} else if (tokens[cur] == OUTPUT) {
 				ReadOutput();
+			} else if (tokens[cur] == USE) {
+                ReadUse();
 			} else {
 				ReadFunctionDefinition();
 			}
@@ -117,9 +127,32 @@ public class PairProgram
 		functions.Add("if", new If());
 	}
 
-	public void Compile(string program) {
+	string GetFileName(string current, string relative) {
+		var currentDirectory = Path.GetDirectoryName(current);
+		var file = Path.Combine(currentDirectory, relative);
+		if (Path.GetExtension(file) == "") {
+			file = Path.ChangeExtension(file, "pair");
+		}
+		return file;
+	}
+
+	private void Build(string file) {
+		if (files.Contains(file)) {
+			return;
+		}
+		files.Add(file);
+		var code = File.ReadAllText(file);
 		//Debug.LogFormat("Compiling program:\n{0}", program);
-		tokens = program.Split(new char[] { ' ', '\t', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+		var newTokens = code.Split(new char[] { ' ', '\t', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+		tokens.AddRange(newTokens);
+		for (int i = 0; i < newTokens.Count; i++) {
+			if (newTokens[i] == USE) {
+				Build(GetFileName(file, newTokens[i + 1]));
+			}
+		}
+	}
+
+	void Compile() {
 		CreateBuiltinFunctions();
 		FindFunctionDefinitions();
 		ReadProgram();
@@ -146,7 +179,8 @@ public class PairProgram
 		Debug.LogFormat("{1} = {0}", PairObject.Structure(result), functions["main"].ToString());
 	}
 
-	public PairProgram(string code) {
-		Compile(code);
+	public PairProgram(string fileName) {
+		Build(fileName);
+		Compile();
 	}
 }
