@@ -1,4 +1,3 @@
 ﻿use bool
-use list
 
-output pair 1 pair 1 1
+output pair 0 pair 0 1

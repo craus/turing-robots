@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="CommonExtensions.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Pair\CodePosition.cs" />
+    <Compile Include="Pair\CompileError.cs" />
     <Compile Include="Pair\DataObject.cs" />
     <Compile Include="Pair\DataObjects\Calculatable.cs" />
     <Compile Include="Pair\DataObjects\PairObject.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Pair\Functions\DefinedFunction.cs" />
     <Compile Include="Pair\Functions\Function.cs" />
     <Compile Include="Pair\PairProgram.cs" />
+    <Compile Include="Pair\Token.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,0 @@
-E:\github\(0) Unity\pair\Console Version\PairConsole\PairConsole\bin\Debug\PairConsole.exe
-E:\github\(0) Unity\pair\Console Version\PairConsole\PairConsole\bin\Debug\PairConsole.pdb
-E:\github\(0) Unity\pair\Console Version\PairConsole\PairConsole\obj\x86\Debug\PairConsole.exe
-E:\github\(0) Unity\pair\Console Version\PairConsole\PairConsole\obj\x86\Debug\PairConsole.pdb
-E:\github\(0) Unity\pair\Console Version\PairConsole\PairConsole\bin\Debug\Pair Code\program.pair
