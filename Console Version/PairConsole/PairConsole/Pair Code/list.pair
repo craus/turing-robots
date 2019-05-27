@@ -4,5 +4,17 @@ head list is first list
 tail list is second list
 add element list is pair element list
 
+push list element is
+  if list
+    pair head list push tail list element
+  else pair element nil
+
+assert eq 
+  push pair 0 nil 1 
+  pair nil pair 1 nil
+
+assert eq 
+  push pair 1 pair 1 pair 0 pair 1 nil 1
+  pair 1 pair 1 pair 0 pair 1 pair 1 nil
 
 

@@ -14,6 +14,7 @@ public abstract class Function
 		return result;
 	}
 	public override string ToString() {
-		return "{0}{1}".i(name, arguments.Count > 0 ? arguments.ExtToString(format: "({0})") : "");
+		return name;
+		//return "{0}{1}".i(name, arguments.Count > 0 ? arguments.ExtToString(format: "({0})") : "");
 	}
 }

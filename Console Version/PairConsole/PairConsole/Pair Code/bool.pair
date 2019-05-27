@@ -4,6 +4,8 @@ not x is if x false true
 
 1 is true
 0 is nil
+else x is x
+then x is x
 
 assert true
 assert not false

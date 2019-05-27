@@ -1,3 +1,4 @@
 ﻿use bool
+use list
 
-output pair 0 pair 0 1
+output push pair 0 pair 0 nil 1

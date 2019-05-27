@@ -52,7 +52,7 @@ public class PairProgram
 	}
 
 	void FindFunctionDefinitions() {
-		Map<string, int> shortestIs = new Map<string, int>();
+		Map<string, int> shortestIs = new Map<string, int>(() => int.MaxValue);
 		for (int i = 0; i < tokens.Count; i++) {
 			if (tokens[i] == IS) {
 				for (int j = 1; j <= i; j++) {
@@ -72,14 +72,18 @@ public class PairProgram
 			}
 			functions.Add(key, new DefinedFunction());
 			functions[key].name = key;
-			for (int i = 0; i < shortestIs[key]; i++) {
+			for (int i = 0; i < shortestIs[key]-1; i++) {
 				functions[key].arguments.Add(new Argument("", i));
 			}
 		});
 	}
 
 	void ReadFunctionDefinition() {
+		trace.Push("read function definition {0}".i(tokens[cur]));
 		var f = functions[tokens[cur]] as DefinedFunction;
+		if (f == null) {
+			throw new CompileError("Trying to define function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
+		}
 		if (f.body != null) {
 			Debug.LogFormat("Functions: {0}", functions.ExtToString());
 			throw new CompileError("Function already exists: '{0}'".i(f.name), tokens[cur].position, trace);
@@ -95,6 +99,7 @@ public class PairProgram
 		++cur;// skip "is"	
 		f.body = ReadExpression(f);
 		//Debug.LogFormat("{0} body end", f.name);
+		trace.Pop();
 	}
 
 	void ReadAssert() {
@@ -189,7 +194,7 @@ public class PairProgram
 		//Debug.LogFormat("Functions: {0}", functions.Values.ExtToString());
 		//Debug.LogFormat("Assertions: {0}", asserts.Count);
 		asserts.ForEach(a => {
-			Debug.LogFormat("asserting {0}", a);
+			//Debug.LogFormat("asserting {0}", a);
 			var assertResult = a.Evaluate().Calculate();
 			if (assertResult == null) {
 				Debug.LogFormat("ASSERTION FAILED {0}", a);
