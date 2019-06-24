@@ -27,7 +27,12 @@ public class PairProgram
 	public Stack<string> trace = new Stack<string>();
 
 	private Expression ReadExpression(Function definingFunction = null) {
-		trace.Push("read expression {0}".i(tokens[cur]));
+		trace.Push("read expression {0}{1}".i(
+			tokens[cur],
+			functions.ContainsKey(tokens[cur])
+				? " ({0} args)".i(functions[tokens[cur]].arguments.Count)
+				: ""
+		));
 		if (definingFunction != null) {
 			var arg = definingFunction.arguments.FirstOrDefault(a => a.name == tokens[cur]);
 			if (arg != null) {
@@ -154,25 +159,36 @@ public class PairProgram
 		return null;
 	}
 
+	void SplitLineToTokens(string file, int i, string line, List<Token> result) {
+		var separators = new char[] { ' ', '\t', '\r' };
+		int from = 0;
+		for (int j = 0; j < line.Length; j++) {
+			char c = line[j];
+			if (separators.Contains(c)) {
+				if (from < j) {
+					var newToken = new Token(
+						line.Substring(from, j - from),
+						new CodePosition(file, i + 1, from + 1)
+					);
+					if (newToken.text[0] == '#') {
+						return;
+					}
+					result.Add(newToken);
+				}
+				from = j + 1;
+			}
+		}
+		if (from < line.Length) {
+			result.Add(new Token(line.Substring(from, line.Length - from), new CodePosition(file, i + 1, from + 1)));
+		}
+	}
+
 	List<Token> SplitToTokens(string file, string code) {
 		List<Token> result = new List<Token>();
 		var lines = code.Split('\n');
-		var separators = new char[] { ' ', '\t', '\r' };
 		for (int i = 0; i < lines.Length; i++) {
 			string line = lines[i];
-			int from = 0;
-			for (int j = 0; j < line.Length; j++) {
-				char c = line[j];
-				if (separators.Contains(c)) {
-					if (from < j) {
-						result.Add(new Token(line.Substring(from, j - from), new CodePosition(file, i+1, from+1)));
-					}
-					from = j + 1;
-				}
-			}
-			if (from < line.Length) {
-				result.Add(new Token(line.Substring(from, line.Length - from), new CodePosition(file, i+1, from+1)));
-			}
+			SplitLineToTokens(file, i, line, result);
 		}
 		return result;
 	}
