@@ -1,0 +1,3 @@
+writeString s io is
+	both s
+		writeString tail s cout head s

@@ -1,0 +1,16 @@
+insertionSort list less is
+	if list
+	insertIntoSorted 
+		sort second list less 
+		first list
+		less
+	nil
+
+insertIntoSorted list x less is
+	if list
+		if call less pair x pair first list nil
+		pair x list
+		pair 
+			first list 
+			insertIntoSorted second list x less
+	nil

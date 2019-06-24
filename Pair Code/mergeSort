@@ -1,0 +1,29 @@
+use list
+use calls
+
+bisect list is
+	if tail list
+		give bisect tail tail list function result to
+			pair
+				pair head list first result
+				pair head tail list second result
+	else pair list nil
+
+merge list1 list2 less is 
+	if list1
+		if list2
+			if call1 less head list1 head list2
+				pair head list1 merge tail list1 list2
+			else
+				pair head list2 merge list1 tail list2
+		else list1
+	else list2
+
+mergeSort list less is
+	if tail list 
+		give bisect list function p to
+			merge
+				mergeSort first p less
+				mergeSort second p less
+				less
+	else list

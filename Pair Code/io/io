@@ -1,0 +1,29 @@
+cout c is builtin function
+cin 
+
+main state is startup function
+
+input state is first state
+memory state is second state
+
+eof input is first input
+char input is second input
+
+x is variable nil
+y is variable x
+
+main state is program state
+	readint x
+	readint y
+	writeint sum x y
+
+
+
+function
+
+less is function x y
+
+eval2 f x y is
+
+
+sort list less is function

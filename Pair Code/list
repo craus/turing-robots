@@ -1,0 +1,168 @@
+use bool
+use eq
+use calls
+
+list head tail is pair head tail
+head list is first list
+tail list is second list
+isEmpty list is not list
+emptyList is nil
+
+last list is
+	if tail list last tail list
+	else head list
+
+push list x is
+	if list pair head list push tail list x
+	else pair x nil
+
+reverse list is
+	both list
+	push reverse tail list head list
+
+concat list1 list2 is
+	if list2
+		concat push list1 head list2 tail list2
+	else
+		list1
+
+removeAll list element is
+	both list
+	if eq head list element
+		removeAll tail list element
+	else
+		pair head list removeAll tail list element
+
+remove list element is
+	both list
+	if eq head list element
+	then tail list
+	else pair head list remove tail list element
+
+uniq list is
+	both list
+	pair head list removeAll tail list head list
+
+intersect list1 list2 is
+	both list2
+	either 
+		contains list1 head list2
+		intersect list1 tail list2
+
+isSubsequence sub list is
+	if isEmpty sub true
+	if isEmpty list false
+	isSubsequence
+		if eq head sub head list
+			then tail sub
+			else sub
+		tail list
+
+startsWith prefix list is
+	if not prefix true
+	if not list false
+	both eq head prefix head list
+		startsWith tail prefix tail list
+
+endsWith postfix list is
+	startsWith reverse postfix reverse list
+
+union list1 list2 is
+	uniq concat list1 list2
+
+cyclic list is
+	concat list cyclic list
+
+inifiniteList element is
+	cyclic pair element nil
+
+isPalindrome list is
+	eq list reverse list
+
+infiniteTree is
+	pair infiniteTree infiniteTree
+
+# higher-order functions
+
+map list selector is
+	both list
+	pair 
+		call1 selector head list 
+		map tail list selector
+
+/*
+map selector is
+	function list to
+		both list
+		pair 
+			call1 selector head list
+			map selector tail list
+*/
+
+reduce list base reducer is
+	unless list base
+	reduce 
+		tail list 
+		call2 reducer base head list 
+		reducer
+
+filter criteria list is
+	both list
+	if call1 criteria head list
+		pair head list filter criteria tail list
+	else 
+		filter criteria tail list
+
+filterCurried criteria is 
+	function list to filter criteria list
+
+replace from to list is
+	map list function x to 
+		if eq x from 
+		then to 
+		else x
+
+max x y less is
+	if call2 less x y y x
+
+min x y less is
+	if call2 less x y x y
+
+maxInList list less is
+	reduce 
+		tail list 
+		head list 
+		function x y to max x y less
+
+minInList list less is
+	reduce 
+		tail list 
+		head list 
+		function x y to min x y less
+
+sumList list sum zero is
+	reduce list zero sum
+
+intersection list1 list2 is
+	filter function x to contains list2 x
+		list1
+
+any criteria list is
+	both list
+	either 
+		call1 criteria head list
+		any criteria tail list
+
+inverted criteria is
+	function x to not call1 criteria x
+
+all criteria list is
+	not any inverted criteria list 
+
+contains list x is
+	any function el to eq el x list
+
+forEach action list callback is
+	if not list call1 callback
+	call1 action head list function to
+	forEach action tail list callback

@@ -1,0 +1,15 @@
+eq x y is eqp pair x y // eq is eqp pair
+eqp p is either nils p areEqPairs p
+nils p is none first p second p
+none x y is not either x y
+areEqPairs p is both pairs p eqPairs p
+pairs p is both first p second p
+eqPairs p is both eqFirsts p eqSeconds p
+eqFirsts p is eqp firsts p
+eqSeconds p is eqp seconds p
+ff p is first first p
+fs p is first second p
+sf p is second first p
+ss p is second second p
+firsts p is pair ff p fs p
+seconds p is pair sf p ss p

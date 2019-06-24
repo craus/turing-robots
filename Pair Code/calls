@@ -1,0 +1,8 @@
+# uncall f is value
+# call f argsList is function
+
+call1 f x is call f pair x nil
+call2 f x y is call f pair x pair y nil
+call3 f x y z is call f pair x pair y pair z nil
+
+give x f is call1 f x

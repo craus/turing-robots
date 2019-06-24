@@ -1,0 +1,58 @@
+# basic
+(\x \y y x) (\x \y y x) \give
+give (\x x) \i
+give (\x x x) \applySelf
+give (\f \x \y f y x) \swapArgs
+give (\x \y x) \const
+
+# bool
+give const \true
+give (const i) \false
+give (\cond \whenTrue \whenFalse cond whenTrue whenFalse) \if
+give i \then
+give i \else
+give (\x \y if x x y) \either
+give (\x \y if x y false) \both
+
+# pair
+give (\x \y \f f x y) \pair
+give (\p p true) \first
+give (\p p false) \second
+give (\p pair (second p) (first p)) \swap
+
+# union
+give (\value \f \g f value) \unionFirst
+give (\value \f \g g value) \unionSecond
+give (\union \f \g union f g) \unionSwitch
+
+# union checks
+give (\union unionSwitch union (const true) (const false)) \unionIsFirst
+give (\union unionSwitch union (const false) (const true)) \unionIsSecond
+
+# maybePair
+give (unionSecond i) \nil
+give (\x \y unionFirst pair x y) \maybePair
+give (\f \mp unionSwitch mp f (const nil)) \bindMaybe
+give (bindMaybe first) \first?
+give (bindMaybe second) \second?
+give (bindMaybe swap) \swap?
+
+# list
+give nil \emptyList
+give maybePair list
+give unionIsSecond \isEmpty
+give first? \head
+give second? \tail
+
+# rec
+give (applySelf (\rf \pf \x pf rf x)) \rec
+
+# map
+give (rec \map \f \l
+	if (isEmpty l)
+	(then emptyList)
+	(else
+		(list (f (head l)) (map f (tail l)))
+	)
+) \map
+

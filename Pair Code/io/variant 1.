@@ -1,0 +1,18 @@
+variant 1.
+
+main returns command + function what to do next
+	command is cin, cout or quit
+
+require bool
+give rec (\sout \s \f 
+	if (isEmpty s) 
+	(then f)
+	(else (cout (head s) (sout (tail s) f)))
+)
+sout (
+	list 'h'
+	list 'e'
+	list 'l'
+	list 'l'
+	list ''
+)

@@ -130,6 +130,9 @@ public class PairProgram
 	string GetFileName(string current, string relative) {
 		var currentDirectory = Path.GetDirectoryName(current);
 		var file = Path.Combine(currentDirectory, relative);
+		if (File.Exists(file)) {
+			return file;
+		}
 		if (Path.GetExtension(file) == "") {
 			file = Path.ChangeExtension(file, "pair");
 		}

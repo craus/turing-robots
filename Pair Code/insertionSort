@@ -1,0 +1,16 @@
+use list
+use calls
+
+insertIntoSorted list element less is
+	if not list pair element nil
+	if call2 less element head list
+		pair element list
+	else
+		pair head list insertIntoSorted tail list element less
+
+insertionSort list less is 
+	both list
+	insertIntoSorted 
+		insertionSort tail list less
+		head list
+		less

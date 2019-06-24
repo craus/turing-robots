@@ -1,0 +1,18 @@
+use list
+use numbers
+
+( is pair 1 0
+) is pair 0 1
+
+isCorrectBracketSequence list is 
+	checkBracketSequence list 0
+
+checkBracketSequence list balance is
+	if not list then equal balance 0
+	if eq head list (
+		checkBracketSequance tail list inc balance
+	if eq head list )
+		both
+			greater balance 0
+			checkBracketSequence tail list dec balance
+	else false

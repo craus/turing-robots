@@ -1,0 +1,23 @@
+P is pair nil nil
+
+eq x y is 
+	if x 
+		if y
+			if eq first x first y
+				eq second x second y
+			nil
+		nil
+	if y nil
+	P
+
+inc n is
+	if n
+		if first n pair nil inc second n
+		pair P second n
+	pair P nil
+
+indexOf x list is
+	if list
+		if eq x head list nil
+		inc indexOf x tail list
+	P

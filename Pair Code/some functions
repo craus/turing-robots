@@ -1,0 +1,8 @@
+subTree x y is
+	if x
+		if y
+			both
+				subTree first x first y
+				subTree second x second y
+		else false
+	else true 

@@ -1,0 +1,21 @@
+f x is function
+
+map list is
+	both list
+	pair f head list map tail list
+
+map is map f generic
+
+aggregator acc element is function
+
+reduce list base is
+	if not list base
+	reduce tail list aggregator base head list
+
+reduce is reduce aggregator generic
+
+sum x y is function
+zero is function
+
+sumList list is
+	reduce sum list zero

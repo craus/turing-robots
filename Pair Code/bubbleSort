@@ -1,0 +1,29 @@
+use list
+use calls
+
+hasTwoElements list is
+	tail list
+
+swapFirstTwo list is
+	pair head tail list
+	pair head list
+	tail tail list
+
+sortFirstTwo list less is
+	if call1 less head list head tail list
+	then list
+	else swapFirstTwo list
+
+bubbleRunOnTail list less is
+	pair head list 
+	bubbleRun tail list less
+
+bubbleRun list less is
+	if not hasTwoElements list return list
+	bubbleRunOnTail sortFirstTwo list
+
+bubbleSort list less is
+	multipleApply 
+		uncall bubbleRun 
+		size list
+		list

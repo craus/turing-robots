@@ -6,7 +6,7 @@ public class Map<K, V> : Dictionary<K, V>
 {
     public Func<V, bool> removeDefaultValues = v => false;
     private Func<V> defaultValueProvider = null;
-
+		
     public new V this[K key] {
         get {
             if (!ContainsKey(key)) {

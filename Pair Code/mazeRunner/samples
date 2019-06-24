@@ -1,0 +1,24 @@
+use maze
+use calls
+use listWithNumbers
+
+# main color is function color to command
+# then color is function color to command
+# up is function to command
+# walk direction then is function
+# paint color then is function
+
+alwaysUp is 
+	walk up function c to alwaysUp
+
+upRightCycle is 
+	walk up function c to
+	walk right uncall upRightCycle
+
+walkPath c path callback is
+	if not path then call1 callback c
+	walk head path function c to
+	walkPath c tail path callback
+
+measureDistanceToWall direction callback is
+	

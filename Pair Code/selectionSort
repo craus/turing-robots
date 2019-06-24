@@ -1,0 +1,6 @@
+use lists
+use calls
+
+selectionSort list less is
+	give minInList list less function x to
+		pair x remove list x

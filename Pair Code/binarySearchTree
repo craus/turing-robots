@@ -5,17 +5,18 @@ less x y is function
 insert tree key is
 	if tree
 		if less key root tree
-			pair insert left tree key right tree
+			node root tree insert left tree key right tree
 		else
-			pair left tree insert right tree key
+			node root tree pair left tree insert right tree key
 	else node key nil nil
 
 contains tree key is
 	both tree
 	if less key root tree
 		contains left tree key
-	else
+	if less root tree key
 		contains right tree key
+	else true
 
 sortedKeysList tree is
 	addTreeKeysToSortedList tree emptyList

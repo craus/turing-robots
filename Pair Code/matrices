@@ -1,0 +1,39 @@
+use list
+
+# x = AxB, y = AxB
+matrixSum x y is
+	both x
+	pair 
+		sumList head x head y
+		matrixSum tail x tail y
+
+matrixSum is matrixSum sum generic
+
+# x = AxB, y = BxC, B > 0
+matrixMult x y is
+	both x
+	pair
+		vectorMatrixMult head x y
+		matrixMult tail x y
+
+matrixMult is matrixMult sum mult generic
+
+# x = 1xA, y = AxB, A > 0
+vectorMatrixMult x y is
+	both head y
+	pair 
+		vectorMult x map head y
+		vectorMatrixMult x map tail y
+
+vectorMult x y is
+	sumList scaled x y
+
+scaled x y is
+	both x
+	pair 
+		mult head x head y 
+		scaled tail x tail y
+
+sumList list is
+	if not list 0
+	sum head list sumList tail list

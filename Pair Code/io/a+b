@@ -1,0 +1,30 @@
+do command data line is 
+	pair 
+		command 
+		pair line data
+
+response state is first state
+memory state is second state
+
+eof state is first response state
+input state is second response state
+
+line state is first memory state
+data state is second memory state
+
+readint nextData nextLine is function 
+writeint value nextData nextLine is function
+
+main must be function 
+	pair
+		pair eof input
+		memory
+	to pair command nextMemory 
+
+main state is
+	if eq line state 0
+		readint nil 1
+	if eq line state 1
+		readint input state 2
+	if eq line state 2
+		writeint sum input state data state nil nil

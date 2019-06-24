@@ -1,0 +1,13 @@
+use calls
+
+max x y less is
+	if call2 less x y y x
+
+maxInList list less is
+	if tail list
+		max 
+			head list 
+			maxInList tail list less
+			less
+	else 
+		head list

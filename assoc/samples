@@ -1,0 +1,5 @@
+assoc value x with 3
+assoc value y with x
+assoc value v with value
+
+assoc value x with value y

@@ -1,0 +1,20 @@
+use list
+
+splitOnceInner headList splittedTail is
+	pair 
+		pair headList first splittedTail
+		second splittedTail
+
+splitOnce list separators is
+	if contains separators head list
+		pair emptyList tail list
+	else splitOnceInner head list splitOnce tail list separators
+
+splitInner splittedOnce separators is
+	pair 
+		first splittedOnce
+		split second splittedOnce separators
+
+split list separators is
+	if not intersect list separators then list
+	splitInner splitOnce list separators separators

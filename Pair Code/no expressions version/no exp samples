@@ -1,0 +1,80 @@
+nil
+pair x y
+first p
+second p
+if c x y
+
+nil is function
+pair x y is function
+first p is function
+second p is function
+if c x y is function
+
+first pair x y is x
+second pair x y is y
+if pair a b c d is c
+if nil x y is y
+
+
+false is nil
+false is compose nil
+false1 is compose nil
+false2 is compose nil
+
+true is pair nil nil
+true is compose pair nil nil
+true1 is compose pair false1 false1
+true2 is compose pair false2 false2
+
+select1_2 is select 1 2
+select2_2 is select 2 2
+
+both x y is if x y false
+both is compose if select1_2 select2_2 false2
+
+either x y is if x x y
+either is compose if select1_2 select1_2 select2_2
+
+select1_1 is select 1 1
+
+not x is if x false true
+not is compose select1_1 false1 true1
+
+swap p is pair second p first p
+swap is compose pair second first
+
+none x y is not either x y
+none is compose not either
+
+eq x y is 
+	either 
+		none x y
+		both 
+			both x y
+			both 
+				eq first x first y
+				eq second x second y
+
+eq is compose either none botheq
+botheq is compose both both eqp
+eqp is compose both eqFirsts eqSeconds
+eqFirsts is compose eq first1_2 first2_2
+eqSeconds is compose eq second1_2 second2_2
+first1_2 is compose first select1_2
+first2_2 is compose first select2_2
+second1_2 is compose second select1_2
+second2_2 is compose second select2_2
+
+eq x y is
+	c either 
+		none
+		c both
+			both
+			c both
+				c eq c first x c first y
+				c eq c second x c second y
+
+condition x is function
+edit x is function
+editIfCondition x is if condition x edit x x
+editIfCondition is compose if condition edit select1_1

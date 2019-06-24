@@ -1,0 +1,8 @@
+io variants:
+
+1) main returns command + function what to do next
+	command is cin, cout or quit
+2) cin and cout are functions with side-effect
+	however they take extra argument and result io
+	io must be calculated before cin and cout do side-effects
+

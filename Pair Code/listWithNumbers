@@ -1,0 +1,55 @@
+use list
+use numbers
+use calls
+
+size list is
+	if not list 0
+	else inc size tail list
+
+count list criteria is
+	reduce list 0 function acc el to
+		if call1 criteria el
+		then inc acc
+		else acc
+
+indexOf element list is
+	unless list return NaN
+	if eq head list element then return 0
+	give indexOf element tail list function x to 
+		if eq x NaN 
+		then NaN 
+		else inc x
+
+mapToIndex list indexMap is
+	map list function x to indexOf x indexMap
+
+substr list from length is
+	both list
+	if eq from 0
+		if eq length 0
+			nil
+		else pair head list substr tail list 0 dec length
+	else substr tail list dec from length
+
+elementAt index list is
+	both list
+	if eq index 0
+		head list
+	else elementAt dec index tail list
+
+toStructure list is
+	mapToIndex list list
+	
+ofSameStructure list1 list2 is
+	eq toStructure list1 toStructure list2	
+
+countPair list element is
+	pair 
+		element 
+		count list function x to eq x element
+
+mapCount list1 list2 is
+	map list1 function x to countPair list2 x
+
+counts list is
+	mapCount uniq list list
