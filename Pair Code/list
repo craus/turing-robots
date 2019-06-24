@@ -1,6 +1,6 @@
 use bool
-use eq
 use calls
+use listAsserts
 
 list head tail is pair head tail
 head list is first list

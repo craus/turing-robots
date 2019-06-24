@@ -38,7 +38,7 @@ public class PairProgram
 		}
 		var exp = new FunctionCall();
 		if (!functions.ContainsKey(tokens[cur])) {
-			Debug.LogFormat("Functions: {0}", functions.ExtToString());
+			//Debug.LogFormat("Functions: {0}", functions.ExtToString());
 			throw new CompileError("No such function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
 		}
 		exp.function = functions[tokens[cur]];
@@ -85,7 +85,7 @@ public class PairProgram
 			throw new CompileError("Trying to define function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
 		}
 		if (f.body != null) {
-			Debug.LogFormat("Functions: {0}", functions.ExtToString());
+			//Debug.LogFormat("Functions: {0}", functions.ExtToString());
 			throw new CompileError("Function already exists: '{0}'".i(f.name), tokens[cur].position, trace);
 		}
 		f.name = tokens[cur];
@@ -148,7 +148,10 @@ public class PairProgram
 		if (Path.GetExtension(file) == "") {
 			file = Path.ChangeExtension(file, "pair");
 		}
-		return file;
+		if (File.Exists(file)) {
+			return file;
+		}
+		return null;
 	}
 
 	List<Token> SplitToTokens(string file, string code) {
@@ -185,7 +188,17 @@ public class PairProgram
 		tokens.AddRange(newTokens);
 		for (int i = 0; i < newTokens.Count; i++) {
 			if (newTokens[i] == USE) {
-				Build(GetFileName(file, newTokens[i + 1]));
+				var fileToken = newTokens[i + 1];
+				var fileName = GetFileName(file, fileToken);
+				if (fileName != null) {
+					Build(fileName);
+				} else {
+					throw new CompileError(
+						string.Format("File not found: {0}", fileToken.text),
+						fileToken.position, 
+						trace
+					);
+				}
 			}
 		}
 	}

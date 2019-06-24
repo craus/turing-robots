@@ -1,4 +1,6 @@
-﻿assert true
+﻿use bool
+
+assert true
 assert not false
 assert not not true
 assert both true true
@@ -16,5 +18,5 @@ assert not none false true
 assert eq T pair nil nil
 assert eq false 0
 assert not eq pair T T pair T 0
-assert eq pair pair T 0 pair pair T 0
-assert not eq pair pair 0 0 pair pair T 0
+assert eq pair pair T 0 0 pair pair T 0 0
+assert not eq pair pair 0 0 0 pair pair T 0 0
