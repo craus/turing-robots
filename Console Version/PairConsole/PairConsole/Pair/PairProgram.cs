@@ -17,23 +17,29 @@ public class PairProgram
 	public List<Expression> asserts = new List<Expression>();
 	public List<Expression> outputs = new List<Expression>();
 
-	public List<string> tokens = new List<string>();
+	public List<Token> tokens = new List<Token>();
 	public int cur;
 
 	public HashSet<string> files = new HashSet<string>();
 
+	public CompileError error;
+
+	public Stack<string> trace = new Stack<string>();
+
 	private Expression ReadExpression(Function definingFunction = null) {
+		trace.Push("read expression {0}".i(tokens[cur]));
 		if (definingFunction != null) {
 			var arg = definingFunction.arguments.FirstOrDefault(a => a.name == tokens[cur]);
 			if (arg != null) {
 				++cur;
+				trace.Pop();
 				return arg;
 			}
 		}
 		var exp = new FunctionCall();
 		if (!functions.ContainsKey(tokens[cur])) {
 			Debug.LogFormat("Functions: {0}", functions.ExtToString());
-			throw new Exception("No such function: '{0}'".i(tokens[cur]));
+			throw new CompileError("No such function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
 		}
 		exp.function = functions[tokens[cur]];
 		//Debug.LogFormat("Reading function call: {0}", exp.function.name);
@@ -41,11 +47,12 @@ public class PairProgram
 		for (int i = 0; i < exp.function.arguments.Count; i++) {
 			exp.arguments.Add(ReadExpression(definingFunction));
 		}
+		trace.Pop();
 		return exp;
 	}
 
 	void FindFunctionDefinitions() {
-		Map<string, int> shortestIs = new Map<string, int>();
+		Map<string, int> shortestIs = new Map<string, int>(() => int.MaxValue);
 		for (int i = 0; i < tokens.Count; i++) {
 			if (tokens[i] == IS) {
 				for (int j = 1; j <= i; j++) {
@@ -65,17 +72,21 @@ public class PairProgram
 			}
 			functions.Add(key, new DefinedFunction());
 			functions[key].name = key;
-			for (int i = 0; i < shortestIs[key]; i++) {
+			for (int i = 0; i < shortestIs[key]-1; i++) {
 				functions[key].arguments.Add(new Argument("", i));
 			}
 		});
 	}
 
 	void ReadFunctionDefinition() {
+		trace.Push("read function definition {0}".i(tokens[cur]));
 		var f = functions[tokens[cur]] as DefinedFunction;
+		if (f == null) {
+			throw new CompileError("Trying to define function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
+		}
 		if (f.body != null) {
 			Debug.LogFormat("Functions: {0}", functions.ExtToString());
-			throw new Exception("Function already exists: '{0}'".i(f.name));
+			throw new CompileError("Function already exists: '{0}'".i(f.name), tokens[cur].position, trace);
 		}
 		f.name = tokens[cur];
 		f.arguments = new List<Argument>();
@@ -88,6 +99,7 @@ public class PairProgram
 		++cur;// skip "is"	
 		f.body = ReadExpression(f);
 		//Debug.LogFormat("{0} body end", f.name);
+		trace.Pop();
 	}
 
 	void ReadAssert() {
@@ -139,6 +151,29 @@ public class PairProgram
 		return file;
 	}
 
+	List<Token> SplitToTokens(string file, string code) {
+		List<Token> result = new List<Token>();
+		var lines = code.Split('\n');
+		var separators = new char[] { ' ', '\t', '\r' };
+		for (int i = 0; i < lines.Length; i++) {
+			string line = lines[i];
+			int from = 0;
+			for (int j = 0; j < line.Length; j++) {
+				char c = line[j];
+				if (separators.Contains(c)) {
+					if (from < j) {
+						result.Add(new Token(line.Substring(from, j - from), new CodePosition(file, i+1, from+1)));
+					}
+					from = j + 1;
+				}
+			}
+			if (from < line.Length) {
+				result.Add(new Token(line.Substring(from, line.Length - from), new CodePosition(file, i+1, from+1)));
+			}
+		}
+		return result;
+	}
+
 	private void Build(string file) {
 		if (files.Contains(file)) {
 			return;
@@ -146,7 +181,7 @@ public class PairProgram
 		files.Add(file);
 		var code = File.ReadAllText(file);
 		//Debug.LogFormat("Compiling program:\n{0}", program);
-		var newTokens = code.Split(new char[] { ' ', '\t', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries).ToList();
+		var newTokens = SplitToTokens(file, code);
 		tokens.AddRange(newTokens);
 		for (int i = 0; i < newTokens.Count; i++) {
 			if (newTokens[i] == USE) {
@@ -162,7 +197,7 @@ public class PairProgram
 		//Debug.LogFormat("Functions: {0}", functions.Values.ExtToString());
 		//Debug.LogFormat("Assertions: {0}", asserts.Count);
 		asserts.ForEach(a => {
-			Debug.LogFormat("asserting {0}", a);
+			//Debug.LogFormat("asserting {0}", a);
 			var assertResult = a.Evaluate().Calculate();
 			if (assertResult == null) {
 				Debug.LogFormat("ASSERTION FAILED {0}", a);
@@ -183,7 +218,12 @@ public class PairProgram
 	}
 
 	public PairProgram(string fileName) {
-		Build(fileName);
-		Compile();
+		try {
+			Build(fileName);
+			Compile();
+		} catch (CompileError e) {
+			error = e;
+			Debug.LogFormat(e.Message);
+		}
 	}
 }
