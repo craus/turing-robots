@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
-
-public class Nil : BuiltinFunction
+namespace Pair
 {
-	public Nil() {
-		name = "nil";
-	}
+	public class Nil : BuiltinFunction
+	{
+		public Nil() {
+			name = "nil";
+		}
 
-	protected override PairObject CallInternal(params Calculatable[] arguments) {
-		return null;
+		protected override PairObject CallInternal(params Calculatable[] arguments) {
+			return null;
+		}
 	}
 }

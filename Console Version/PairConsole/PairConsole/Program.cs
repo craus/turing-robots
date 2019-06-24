@@ -25,7 +25,7 @@ namespace PairConsole
 			//}
 			//Console.SetOut(writer);
 
-			var program = new PairProgram(args[0]);
+			var program = new Pair.Program(args[0]);
 			program.Run();
 
 			//writer.Close();

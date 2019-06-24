@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
-public abstract class BuiltinFunction : Function
-{
+namespace Pair {
+	public abstract class BuiltinFunction : Function
+	{
+	}
 }
