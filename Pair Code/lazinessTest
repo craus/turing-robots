@@ -1,0 +1,14 @@
+use bool
+
+bothPair p is if first p second p nil
+
+infiniteTree is pair infiniteTree infiniteTree
+
+assert bothPair infiniteTree
+
+grid is pair pair grid nil pair nil grid
+
+assert 
+	both not second first grid
+  bothPair second second grid
+

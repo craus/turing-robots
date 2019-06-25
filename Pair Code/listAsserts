@@ -96,7 +96,7 @@ assert eq
 assert eq
 	uniq emptyList
 	emptyList
-	
+
 assert intersect 
 	list T list T list 1 nil
 	list 0 list T list 0 nil
@@ -137,5 +137,110 @@ assert endsWith
 	emptyList
 	emptyList
 
+assert eq
+	union 
+		list 0 list pair T T nil
+		list pair T T list pair T T list 1 nil
+	list 0 list pair T T list 1 nil
 
+assert eq
+	union
+		list 1 list 1 nil
+		emptyList
+	list 1 nil
+
+assert eq
+	head tail tail tail 
+		cyclic list 1 list 0 list T nil
+	1
+
+assert eq
+	head tail tail tail tail 
+		cyclic list 1 list 0 list T nil
+	0
+
+assert eq
+	head tail tail infiniteList pair 0 pair T 1
+	pair 0 pair T 1
+
+assert eq
+	head tail tail tail tail infiniteList pair T pair 0 0
+	pair T pair 0 0
+
+assert isPalindrome list 0 list T list 1 list T list 0 nil
+assert isPalindrome emptyList
+assert isPalindrome list pair T T nil
+assert not isPalindrome list T list 0 nil
+
+assert both first infiniteTree second infiniteTree
+
+assert eq 
+	map 
+		list 0 list T list T list 1 nil
+		function x to pair 0 x
+	list pair 0 0 list pair 0 T list pair 0 T list pair 0 1 nil
+
+assert eq
+	map 
+		list pair T 0 list pair 1 1 list pair 0 0 nil
+		uncall first
+	list T list 1 list 0 nil
+
+assert eq
+	reduce 
+		list 0 list 1 list 1 list T nil
+		nil
+		function acc el to pair acc el
+	pair pair pair pair nil 0 1 1 T
+
+assert reduce 
+	list true list true nil
+	true
+	function acc el to both acc el
+
+assert not reduce
+	list true list false nil
+	true
+	function acc el to both acc el
+
+assert eq
+	filter function x to x
+		list 0 list 1 list 0 list T list 1 list 0 nil
+	list 1 list T list 1 nil
+
+assert eq
+	filter uncall not
+		list 0 list 1 list 0 list T list 1 list 0 nil
+	list 0 list 0 list 0 nil
+
+assert eq
+	call1 filterCurried uncall first
+		list T list 0 list 1 list T nil
+	list 1 nil
+
+assert eq
+	replace 1 T 
+		list T list 1 list 0 list 0 list 1 nil
+	list T list T list 0 list 0 list T nil
+
+assert eq
+	intersection 
+		list T list 1 list 0 list 1 list T nil
+		list 1 list 0 nil
+	list 1 list 0 list 1 nil
+
+assert any uncall first list 1 list 0 list 1 list T nil
+assert not any uncall first list T list 0 list T nil
+assert not any function x to x nil
+
+assert all function x to not second first x 
+	list 1 list 0 list T list T nil
+
+assert not all function x to not second first x
+	list 1 list 0 list pair pair 0 T 0 list T nil
+
+assert contains list 1 list 0 list pair pair 1 T 1 list T nil
+	pair pair 1 T 1
+
+assert not contains emptyList nil
 

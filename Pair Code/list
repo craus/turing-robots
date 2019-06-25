@@ -21,10 +21,9 @@ reverse list is
 	push reverse tail list head list
 
 concat list1 list2 is
-	if list2
-		concat push list1 head list2 tail list2
-	else
-		list1
+	if list1
+	then pair head list1 concat tail list1 list2
+	else list2
 
 removeAll list element is
 	both list
@@ -71,9 +70,9 @@ union list1 list2 is
 	uniq concat list1 list2
 
 cyclic list is
-	concat list cyclic list
+	concat list cyclic list 
 
-inifiniteList element is
+infiniteList element is
 	cyclic pair element nil
 
 isPalindrome list is

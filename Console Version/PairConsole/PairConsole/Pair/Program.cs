@@ -30,7 +30,7 @@ namespace Pair
 
 		public HashSet<string> files = new HashSet<string>();
 
-		public CompileError error;
+		public PairError error;
 
 		public Stack<string> trace = new Stack<string>();
 
@@ -333,7 +333,7 @@ namespace Pair
 			try {
 				Build(fileName);
 				Compile();
-			} catch (CompileError e) {
+			} catch (PairError e) {
 				error = e;
 				Debug.LogFormat(e.Message);
 			}
