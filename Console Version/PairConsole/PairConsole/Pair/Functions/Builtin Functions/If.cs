@@ -11,7 +11,7 @@ namespace Pair
 			arguments.Add(new Argument("when_false", 2));
 		}
 
-		protected override PairObject CallInternal(params Calculatable[] arguments) {
+		protected override Object CallInternal(params Calculatable[] arguments) {
 			if (arguments[0].Calculate() != null) {
 				return arguments[1].Calculate();
 			} else {

@@ -10,8 +10,8 @@ namespace Pair
 			arguments.Add(new Argument("y", 1));
 		}
 
-		protected override PairObject CallInternal(params Calculatable[] arguments) {
-			return new PairObject(arguments[0].Calculate(), arguments[1].Calculate());
+		protected override Object CallInternal(params Calculatable[] arguments) {
+			return new PairObject(arguments[0], arguments[1]);
 		}
 	}
 }

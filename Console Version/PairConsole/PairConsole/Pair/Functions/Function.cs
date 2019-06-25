@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Pair
 {
@@ -9,9 +10,15 @@ namespace Pair
 
 		//public Dictionary< hash;
 
-		protected abstract PairObject CallInternal(params Calculatable[] arguments);
+		protected abstract Object CallInternal(params Calculatable[] arguments);
 
-		public PairObject Call(params Calculatable[] arguments) {
+		public Map<string, Expression> Context() {
+			var result = new Map<string, Expression>();
+			arguments.ForEach(a => result.Add(a.name, a));
+			return result;
+		}
+
+		public Object Call(params Calculatable[] arguments) {
 			var result = CallInternal(arguments);
 			return result;
 		}

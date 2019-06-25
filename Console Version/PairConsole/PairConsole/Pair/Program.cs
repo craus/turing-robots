@@ -14,6 +14,9 @@ namespace Pair
 		const string ASSERT = "assert";
 		const string OUTPUT = "output";
 		const string USE = "use";
+		const string UNCALL = "uncall";
+		const string FUNCTION = "function";
+		const string TO = "to";
 
 		public Dictionary<string, Function> functions = new Dictionary<string, Function>();
 		public List<Expression> asserts = new List<Expression>();
@@ -28,20 +31,62 @@ namespace Pair
 
 		public Stack<string> trace = new Stack<string>();
 
-		private Expression ReadExpression(Function definingFunction = null) {
+		Function ReadAnonymousFunction(Map<string, Expression> context = null) {
+			if (context == null) {
+				context = new Map<string, Expression>();
+			}
+			trace.Push("read anonymous function {0}{1}".i(
+				tokens[cur],
+				functions.ContainsKey(tokens[cur])
+					? " ({0} args)".i(functions[tokens[cur]].arguments.Count)
+					: ""
+			));
+			var f = new DefinedFunction();
+			f.arguments = new List<Argument>();
+			//Debug.LogFormat("Defining function: {0}", f.name);
+			++cur;
+			while (tokens[cur] != TO) {
+				f.arguments.Add(new Argument(tokens[cur], f.arguments.Count()));
+				++cur;
+			}
+
+			++cur;// skip "to"	
+			f.body = ReadExpression(f.Context().Merge(context));
+			//Debug.LogFormat("{0} body end", f.name);
+			trace.Pop();
+			return f;
+		}
+
+		private Expression ReadExpression(Map<string, Expression> context = null) {
+			if (context == null) {
+				context = new Map<string, Expression>();
+			}
 			trace.Push("read expression {0}{1}".i(
 				tokens[cur],
 				functions.ContainsKey(tokens[cur])
 					? " ({0} args)".i(functions[tokens[cur]].arguments.Count)
 					: ""
 			));
-			if (definingFunction != null) {
-				var arg = definingFunction.arguments.FirstOrDefault(a => a.name == tokens[cur]);
-				if (arg != null) {
-					++cur;
-					trace.Pop();
-					return arg;
+			if (tokens[cur] == UNCALL) {
+				if (!functions.ContainsKey(tokens[cur+1])) {
+					//Debug.LogFormat("Functions: {0}", functions.ExtToString());
+					throw new CompileError("No such function: '{0}'".i(tokens[cur+1].text), tokens[cur+1].position, trace);
 				}
+				var f = new Constant(new FunctionObject(functions[tokens[cur + 1]]));
+				cur += 2;
+				trace.Pop();
+				return f;
+			}
+			if (tokens[cur] == FUNCTION) {
+				var f = new Constant(new FunctionObject(ReadAnonymousFunction(context)));
+				trace.Pop();
+				return f;
+			}
+			if (context[tokens[cur]] != null) {
+				var result = context[tokens[cur]];
+				++cur;
+				trace.Pop();
+				return result;
 			}
 			var exp = new FunctionCall();
 			if (!functions.ContainsKey(tokens[cur])) {
@@ -52,7 +97,7 @@ namespace Pair
 			//Debug.LogFormat("Reading function call: {0}", exp.function.name);
 			++cur;
 			for (int i = 0; i < exp.function.arguments.Count; i++) {
-				exp.arguments.Add(ReadExpression(definingFunction));
+				exp.arguments.Add(ReadExpression(context));
 			}
 			trace.Pop();
 			return exp;
@@ -104,7 +149,7 @@ namespace Pair
 				++cur;
 			}
 			++cur;// skip "is"	
-			f.body = ReadExpression(f);
+			f.body = ReadExpression(f.Context());
 			//Debug.LogFormat("{0} body end", f.name);
 			trace.Pop();
 		}
@@ -144,6 +189,7 @@ namespace Pair
 			functions.Add("second", new Second());
 			functions.Add("nil", new Nil());
 			functions.Add("if", new If());
+			functions.Add("call", new Call());
 		}
 
 		string GetFileName(string current, string relative) {
@@ -161,6 +207,27 @@ namespace Pair
 			return null;
 		}
 
+		bool ignoreMode = false;
+		bool ignoreToEndOfLine = false;
+		void ReadToken(List<Token> result, Token token) {
+			if (ignoreToEndOfLine) {
+				return;
+			}
+			if (token.text.StartsWith("/*")) {
+				ignoreMode = true;
+			}
+			if (!ignoreMode) {
+				if (token.text[0] == '#') {
+					ignoreToEndOfLine = true;
+					return;
+				}
+				result.Add(token);
+			}
+			if (token.text.EndsWith("*/")) {
+				ignoreMode = false;
+			}
+		}
+
 		void SplitLineToTokens(string file, int i, string line, List<Token> result) {
 			var separators = new char[] { ' ', '\t', '\r' };
 			int from = 0;
@@ -172,17 +239,16 @@ namespace Pair
 							line.Substring(from, j - from),
 							new CodePosition(file, i + 1, from + 1)
 						);
-						if (newToken.text[0] == '#') {
-							return;
-						}
-						result.Add(newToken);
+						ReadToken(result, newToken);
 					}
 					from = j + 1;
 				}
 			}
 			if (from < line.Length) {
-				result.Add(new Token(line.Substring(from, line.Length - from), new CodePosition(file, i + 1, from + 1)));
+				var newToken = new Token(line.Substring(from, line.Length - from), new CodePosition(file, i + 1, from + 1));
+				ReadToken(result, newToken);
 			}
+			ignoreToEndOfLine = false;
 		}
 
 		List<Token> SplitToTokens(string file, string code) {
@@ -235,7 +301,7 @@ namespace Pair
 				}
 			});
 			outputs.ForEach(o => {
-				Debug.LogFormat("output: {0} is {1}", o, PairObject.Structure(o.Evaluate().Calculate()));
+				Debug.LogFormat("output: {0} is {1}", o, Object.Structure(o.Evaluate().Calculate()));
 			});
 		}
 
@@ -245,7 +311,7 @@ namespace Pair
 				return;
 			}
 			var result = functions["main"].Call();
-			Debug.LogFormat("{1} = {0}", PairObject.Structure(result), functions["main"].ToString());
+			Debug.LogFormat("{1} = {0}", Object.Structure(result), functions["main"].ToString());
 		}
 
 		public Program(string fileName) {

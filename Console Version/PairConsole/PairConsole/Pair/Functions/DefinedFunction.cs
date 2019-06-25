@@ -6,7 +6,7 @@ namespace Pair
 	{
 		public Expression body;
 
-		protected override PairObject CallInternal(params Calculatable[] arguments) {
+		protected override Object CallInternal(params Calculatable[] arguments) {
 			var exp = body.Evaluate(arguments);
 			var args = arguments.ToList().ExtToString(format: "({0})");
 			//Debug.LogFormat("{0}{1} = {2}", name, this.arguments.Count > 0 ? args : "", exp);

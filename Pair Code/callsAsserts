@@ -1,0 +1,29 @@
+use calls
+use bool
+
+assert eq 
+	call1 uncall first 
+		pair 
+			pair nil pair nil nil 
+			nil 
+	pair nil pair nil nil
+
+assert eq 
+	call1 uncall second 
+		pair 
+			pair nil pair nil nil 
+			nil 
+	nil
+
+assert eq 
+	call2 uncall pair 
+		pair nil nil
+		nil
+	pair pair nil nil nil
+
+assert eq
+	call3 function x y z to pair x pair z y
+		nil 
+		pair nil nil
+		nil
+	pair nil pair nil pair nil nil
