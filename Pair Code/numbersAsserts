@@ -1,0 +1,3 @@
+use numbers
+
+assert eq inc 0 1

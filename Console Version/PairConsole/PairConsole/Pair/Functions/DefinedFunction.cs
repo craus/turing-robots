@@ -4,6 +4,8 @@ namespace Pair
 {
 	public class DefinedFunction : Function, IArgumentable
 	{
+		public CodePosition position;
+
 		public Expression body;
 
 		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
@@ -17,6 +19,15 @@ namespace Pair
 
 		public override string ToString() {
 			return string.Format("{0} {1}", base.ToString(), arguments.ExtToString());
+		}
+
+		public string Source() {
+			return string.Format(
+				"{0}{1} is {2}", 
+				name, 
+				arguments.Count == 0 ? "" : arguments.ExtToString(format: " {0}", delimiter: " "), 
+				body
+			);
 		}
 	}
 }

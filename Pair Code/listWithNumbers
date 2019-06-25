@@ -53,3 +53,6 @@ mapCount list1 list2 is
 
 counts list is
 	mapCount uniq list list
+
+alignNumber x len is
+	concat x listOfZeroes subtract len size x

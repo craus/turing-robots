@@ -1,5 +1,3 @@
-use boolAsserts
-
 true is pair nil nil
 false is nil
 T is true

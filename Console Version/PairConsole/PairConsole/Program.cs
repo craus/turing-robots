@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 namespace PairConsole
 {
@@ -45,8 +46,13 @@ namespace PairConsole
 
 			//TestStartsWith();
 
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
 			var program = new Pair.Program(args[0]);
+			Debug.LogFormat("Compile time: {0}", watch.ElapsedMilliseconds);
+			watch.Restart();
 			program.Run();
+			Debug.LogFormat("Run time: {0}", watch.ElapsedMilliseconds);
 			//writer.Close();
 			//ostrm.Close();
 		}

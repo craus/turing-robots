@@ -32,7 +32,8 @@ public class Map<K, V> : Dictionary<K, V>
         }
     }
 
-    public Map(Func<V> defaultValueProvider = null) {
+    public Map(Func<V> defaultValueProvider = null) 
+	{
         this.defaultValueProvider = defaultValueProvider;
     }
 

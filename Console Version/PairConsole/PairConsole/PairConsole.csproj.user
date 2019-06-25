@@ -9,13 +9,19 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'List' ">
     <StartAction>Project</StartAction>
-    <StartArguments>list</StartArguments>
+    <StartArguments>listAsserts</StartArguments>
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'LazinessTest' ">
     <StartAction>Project</StartAction>
     <StartArguments>lazinessTest</StartArguments>
+    <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Numbers' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>numbersAsserts</StartArguments>
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>

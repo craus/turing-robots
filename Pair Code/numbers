@@ -1,8 +1,6 @@
 use bool
 use list
-use eq
 
-0 is nil
 1 is list true nil
 NaN is pair nil nil
 
@@ -42,6 +40,9 @@ subtract x y is
 
 half x is tail x
 
+double x is
+	pair 0 x
+
 mult x y is
 	both y
 	if head y
@@ -59,39 +60,6 @@ fastpow x y is
 	else if head y 
 		then mult x sqr fastpow x half y 
 		else sqr fastpow x half y
-
-gcd x y is
-	if equal y zero x
-	gcd y mod x y
-
-divideInner x y p2 is
-	if less second p2 y
-	then pair double first p2 second p2
-	else pair inc double first p2 subtract second p2 y
-
-divide x y is
-	if less x y 
-	then pair 0 x
-	else divideInner x y divide x double y
-
-div x y is first divide x y
-
-mod x y is second divide x y
-
-double x is
-	pair zero x
-
-normalize x is
-	if neitner head tail x tail tail x
-	then pair head x nil
-	else x
-
-listOfZeroes len is
-	both len
-	pair 0 list OfZeroes dec len
-
-alignNumber x len is
-	concat x listOfZeroes subtract len size x
 
 < is pair 0 1
 > is pair 1 0
@@ -114,6 +82,33 @@ greater x y is eq compare x y >
 equal x y is eq compare x y =
 lessOrEqual x y is not eq compare x y >
 greaterOrEqual x y is not eq compare x y <
+
+divideInner x y p2 is
+	if less second p2 y
+	then pair double first p2 second p2
+	else pair inc double first p2 subtract second p2 y
+
+divide x y is
+	if less x y 
+	then pair 0 x
+	else divideInner x y divide x double y
+
+div x y is first divide x y
+
+mod x y is second divide x y
+
+gcd x y is
+	if equal y 0 x
+	gcd y mod x y
+
+normalize x is
+	if neither head tail x tail tail x
+	then pair head x nil
+	else x
+
+listOfZeroes len is
+	both len
+	pair 0 listOfZeroes dec len
 
 inf is pair true inf
 

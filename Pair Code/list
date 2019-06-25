@@ -1,6 +1,5 @@
 use bool
 use calls
-use listAsserts
 
 list head tail is pair head tail
 head list is first list
@@ -41,6 +40,11 @@ remove list element is
 uniq list is
 	both list
 	pair head list uniq removeAll tail list head list
+
+contains list element is
+	both list
+	either eq head list element
+	contains tail list element
 
 intersect list1 list2 is
 	both list2
@@ -157,9 +161,6 @@ inverted criteria is
 
 all criteria list is
 	not any inverted criteria list 
-
-contains list x is
-	any function el to eq el x list
 
 forEach action list callback is
 	if not list call1 callback

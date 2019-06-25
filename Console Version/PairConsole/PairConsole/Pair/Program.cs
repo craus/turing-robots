@@ -19,7 +19,7 @@ namespace Pair
 		const string FUNCTION = "function";
 		const string TO = "to";
 
-		public Dictionary<string, Function> functions = new Dictionary<string, Function>();
+		public Map<string, Function> functions = new Map<string, Function>();
 		public List<Expression> asserts = new List<Expression>();
 		public List<Expression> outputs = new List<Expression>();
 
@@ -33,6 +33,8 @@ namespace Pair
 		public PairError error;
 
 		public Stack<string> trace = new Stack<string>();
+
+		public DefinedFunction last;
 
 		Lambda ReadLambda(Map<string, Expression> context = null) {
 			if (context == null) {
@@ -97,6 +99,12 @@ namespace Pair
 				throw new CompileError("No such function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
 			}
 			exp.function = functions[tokens[cur]];
+			var df = exp.function as DefinedFunction;
+			if (df != null) {
+				if (df.body == null) {
+					Debug.LogWarning("{2} Function definition deduced: {0} ({1})", df.name, df.position, tokens[cur].position);
+				}
+			}
 			//Debug.LogFormat("Reading function call: {0}", exp.function.name);
 			++cur;
 			for (int i = 0; i < exp.function.arguments.Count; i++) {
@@ -107,14 +115,18 @@ namespace Pair
 		}
 
 		void FindFunctionDefinitions() {
-			Map<string, int> shortestIs = new Map<string, int>(() => int.MaxValue);
+			var shortestIs = new Map<string, Tuple<int, Token>>(
+				() => new Tuple<int, Token>(int.MaxValue, null)
+			);
 			for (int i = 0; i < tokens.Count; i++) {
 				if (tokens[i] == IS) {
 					for (int j = 1; j <= i; j++) {
 						if (tokens[i - j] == IS) {
 							break;
 						}
-						shortestIs[tokens[i - j]] = Math.Min(shortestIs[tokens[i - j]], j);
+						if (j < shortestIs[tokens[i - j]].Item1) {
+							shortestIs[tokens[i - j]] = new Tuple<int, Token>(j, tokens[i - j]);
+						}
 					}
 				}
 			}
@@ -127,7 +139,8 @@ namespace Pair
 				}
 				functions.Add(key, new DefinedFunction());
 				functions[key].name = key;
-				for (int i = 0; i < shortestIs[key] - 1; i++) {
+				(functions[key] as DefinedFunction).position = shortestIs[key].Item2.position;
+				for (int i = 0; i < shortestIs[key].Item1 - 1; i++) {
 					functions[key].arguments.Add(new Argument(functions[key], "", i));
 				}
 			});
@@ -141,19 +154,33 @@ namespace Pair
 			}
 			if (f.body != null) {
 				//Debug.LogFormat("Functions: {0}", functions.ExtToString());
-				throw new CompileError("Function already exists: '{0}'".i(f.name), tokens[cur].position, trace);
+				throw new CompileError("Function already exists: '{0} ({1})'".i(f.name, f.position), tokens[cur].position, trace);
 			}
 			f.name = tokens[cur];
+			f.position = tokens[cur].position;
+
 			f.arguments = new List<Argument>();
 			//Debug.LogFormat("Defining function: {0}", f.name);
 			++cur;
 			while (tokens[cur] != IS) {
+				if (f.arguments.Any(a => a.name == tokens[cur])) {
+					throw new CompileError(
+						"Function {0} takes same argument twice: {1}".i(
+							"{0} ({1})".i(f.name, f.position),
+							tokens[cur].text
+						),
+						tokens[cur].position,
+						trace
+					);
+				}
 				f.arguments.Add(new Argument(f, tokens[cur], f.arguments.Count()));
 				++cur;
 			}
 			++cur;// skip "is"	
+			f.body = new IncompleteExpression();
 			f.body = ReadExpression(f.Context());
 			//Debug.LogFormat("{0} body end", f.name);
+			last = f;
 			trace.Pop();
 		}
 
@@ -277,7 +304,6 @@ namespace Pair
 			var code = File.ReadAllText(file);
 			//Debug.LogFormat("Compiling program:\n{0}", program);
 			var newTokens = SplitToTokens(file, code);
-			tokens.AddRange(newTokens);
 			for (int i = 0; i < newTokens.Count; i++) {
 				if (newTokens[i] == USE) {
 					var fileToken = newTokens[i + 1];
@@ -293,6 +319,7 @@ namespace Pair
 					}
 				}
 			}
+			tokens.AddRange(newTokens);
 		}
 
 		void Compile() {
@@ -315,6 +342,7 @@ namespace Pair
 					Debug.LogFormat("ASSERTION FAILED {0}", a);
 				}
 			});
+			Debug.LogFormat("Asserts: {0}", asserts.Count);
 			outputs.ForEach(o => {
 				Debug.LogFormat("output: {0} is {1}", o, Object.Structure(o.Evaluate().Calculate()));
 			});
@@ -329,6 +357,17 @@ namespace Pair
 			Debug.LogFormat("{1} = {0}", Object.Structure(result), functions["main"].ToString());
 		}
 
+		public string FunctionPosition(Function f) {
+			var df = f as DefinedFunction;
+			if (df == null) return "&";
+			var position = df.position;
+			if (position == null) return "?";
+			if (df.body == null) {
+				return position + " ?";
+			}
+			return position.ToString();
+		}
+
 		public Program(string fileName) {
 			try {
 				Build(fileName);
@@ -336,6 +375,25 @@ namespace Pair
 			} catch (PairError e) {
 				error = e;
 				Debug.LogFormat(e.Message);
+				if (e is CompileError) {
+					Debug.Log();
+					Debug.LogFormat("Last defined function: {0} ({1})", last.Source(), last.position);
+					//Debug.Log();
+					//Debug.LogFormat(
+					//	"Defined functions: {0}",
+					//	functions.OrderBy(f => f.Key).Select(f => "{0}[{2}] ({1})".i(
+					//		f.Key,
+					//		FunctionPosition(f.Value),
+					//		f.Value.arguments.Count
+					//	)).ExtToString(delimiter: "\n", format: "\n{0}")
+	                //);
+					//Debug.Log();
+					//Debug.LogFormat("tokens: {0}", tokens.ExtToString(
+					//	delimiter: "\n", 
+					//	format: "{0}", 
+					//	elementToString: t => t.text
+					//));
+				}
 			}
 		}
 	}
