@@ -38,6 +38,15 @@ assert eq fastpow 2 4 16
 assert eq fastpow 1 9 1
 assert eq fastpow 4 0 1
 
+assert eq log 1 0
+assert eq log 2 1
+assert eq log 3 1
+assert eq log 4 2
+assert eq log 5 2
+assert eq log 7 2
+assert eq log 8 3
+assert eq log 9 3
+
 assert eq compare 2 3 <
 assert eq compare 8 4 >
 assert eq compare 0 0 =

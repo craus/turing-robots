@@ -5,20 +5,20 @@ pairOf x is
 
 treeOfDepth d is
 	both d
-	pairOf newArrayOfDepth dec d
+	pairOf treeOfDepth dec d
 
 newArrayOfDepth d is 
-	pair treeofDepth d d
+	pair treeOfDepth d d
 
 arrayTree a is first a
 arrayDepth a is second a
 
-log x is
+lenToDepth x is
 	if less x 2 then 0
-	else inc log half x
+	inc log2 dec x
 
 newArray len is 
-	newArrayOfDepth log len
+	newArrayOfDepth lenToDepth len
 
 indexToTreePath n depth is
 	reverse alignNumber n depth
@@ -26,25 +26,34 @@ indexToTreePath n depth is
 treeElementByPath tree path is
 	if not path then tree
 	treeElementByPath
-		if head path first tree second tree
+		if head path second tree first tree
 		tail path
 
 setTreeElementByPath tree path x is
 	if not path then x
-	if head path
+	if not head path
 	then pair 
-		setTreeElementByPath left tree tail path x 
-		right tree
+		setTreeElementByPath first tree tail path x 
+		second tree
 	else pair 
-		left tree 
-		setTreeElementByPath right tree tail path x 
+		first tree 
+		setTreeElementByPath second tree tail path x 
 
 getByIndex a i is
 	treeElementByPath 
 		arrayTree a
-		indexToTreePath n arrayDepth a
+		indexToTreePath i arrayDepth a
 
 setByIndex a i x is
-	setTreeElementByPath 
-		arrayTree a
-		indexToTreePath n arrayDepth a
+	pair
+		setTreeElementByPath 
+			arrayTree a
+			indexToTreePath i arrayDepth a
+			x
+		arrayDepth a
+
+listToArray list is
+	reduce withIndex list newArray size list
+	function acc x to
+		setByIndex acc second x first x
+

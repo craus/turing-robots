@@ -56,3 +56,9 @@ counts list is
 
 alignNumber x len is
 	concat x listOfZeroes subtract len size x
+
+withIndexInternal list index is
+	both list
+	pair pair head list index withIndexInternal tail list inc index
+
+withIndex list is withIndexInternal list 0

@@ -1,0 +1,55 @@
+use array
+use testLists
+
+assert eq pairOf 9 pair 9 9
+
+assert eq treeOfDepth 3 pair 
+	pair pair nil nil pair nil nil
+	pair pair nil nil pair nil nil
+
+assert eq treeOfDepth 0 nil
+
+assert eq newArrayOfDepth 2 
+	pair 
+		pair pair nil nil pair nil nil
+		2
+
+assert eq lenToDepth 1 0
+assert eq lenToDepth 2 1
+assert eq lenToDepth 3 2
+assert eq lenToDepth 4 2
+assert eq lenToDepth 5 3
+assert eq lenToDepth 8 3
+assert eq lenToDepth 9 4
+
+assert eq indexToTreePath 6 4 pair 0 pair T pair T pair 0 nil
+assert eq indexToTreePath 3 2 pair T pair T nil
+
+assert eq treeElementByPath
+	pair pair nil nil pair 8 nil
+	pair T pair 0 nil
+	8
+
+assert eq setTreeElementByPath
+	pair pair nil nil pair 8 nil
+	pair 0 pair T nil
+	4
+	pair pair nil 4 pair 8 nil
+
+a329272 is 	
+	pair pair 
+		pair pair 3 2 pair 9 2
+		pair pair 7 2 pair nil nil 3
+
+assert eq getByIndex a329272 4 7
+
+assert eq setByIndex a329272 3 5
+	pair pair 
+		pair pair 3 2 pair 9 5
+		pair pair 7 2 pair nil nil 3
+
+assert eq listToArray l329272
+	pair pair 
+		pair pair 3 2 pair 9 2
+		pair pair 7 2 pair nil nil 3
+

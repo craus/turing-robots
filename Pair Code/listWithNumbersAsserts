@@ -1,4 +1,5 @@
 use listWithNumbers
+use testLists
 
 assert eq size list 4 list 8 list 2 list 3 nil 4
 assert eq size emptyList 0
@@ -24,8 +25,6 @@ assert eq mapToIndex
 	list 4 list 8 list 2 list 3 nil
 	list 2 list 4 list 8 list 5 list 3 nil
 	list 1 list 2 list 0 list 4 nil
-
-l329272 is list 3 list 2 list 9 list 2 list 7 list 2 nil
 
 assert eq substr l329272 2 2
 	list 9 list 2 nil
@@ -61,4 +60,6 @@ assert eq alignNumber 17 9
 	list T list 0 list 0 list 0
 	list T list 0 list 0 list 0 list 0 nil
 
+assert eq withIndex list 3 list 5 list 2 list 0 nil
+	list pair 3 0 list pair 5 1 list pair 2 2 list pair 0 3 nil
 

@@ -3,6 +3,7 @@ use list
 use calls
 
 1 is list true nil
+2 is pair 0 1
 NaN is pair nil nil
 
 inc x is 
@@ -93,6 +94,10 @@ equal x y is eq compare x y =
 lessOrEqual x y is not eq compare x y >
 greaterOrEqual x y is not eq compare x y <
 
+log2 x is
+	if less x 2 then 0
+	else inc log2 half x
+
 divideInner x y p2 is
 	if less second p2 y
 		pair double first p2 second p2
@@ -127,7 +132,6 @@ multipleApply f n is
 
 # list of short numbers
 
-2 is pair 0 1
 3 is pair T 1
 4 is pair 0 2
 5 is pair T 2
