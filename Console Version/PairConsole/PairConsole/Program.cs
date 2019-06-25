@@ -8,9 +8,6 @@ namespace PairConsole
 {
     class Program
     {
-        static string PROGRAM_FILE = "Pair Code/program.pair";
-        static string OUTPUT_FILE = "Pair Code/output.txt";
-
 		static void TestMapMerge() {
 
 			Map<int, int> a = new Map<int, int>();
@@ -29,7 +26,7 @@ namespace PairConsole
 		}
 
 		static void TestStartsWith() {
-			Debug.Log("/*".StartsWith("/*"));
+			Debug.Log("/*".StartsWith("/*", StringComparison.Ordinal));
 		}
 
         static void Main(string[] args) {
@@ -50,9 +47,6 @@ namespace PairConsole
 
 			var program = new Pair.Program(args[0]);
 			program.Run();
-
-			while (Console.ReadLine() == "") {
-			}
 			//writer.Close();
 			//ostrm.Close();
 		}
