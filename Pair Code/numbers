@@ -95,13 +95,13 @@ greaterOrEqual x y is not eq compare x y <
 
 divideInner x y p2 is
 	if less second p2 y
-	then pair double first p2 second p2
-	else pair inc double first p2 subtract second p2 y
+		pair double first p2 second p2
+		pair inc double first p2 subtract second p2 y
 
 divide x y is
 	if less x y 
-	then pair 0 x
-	else divideInner x y divide x double y
+		pair 0 x
+		divideInner x y divide x double y
 
 div x y is first divide x y
 
