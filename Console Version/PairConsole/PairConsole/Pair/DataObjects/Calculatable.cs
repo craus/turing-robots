@@ -18,10 +18,13 @@ namespace Pair
 			this.result = result;
 		}
 
-		public Object Calculate() {
+		public Object Calculate(bool explain = false) {
 			//Debug.LogFormat("{0} = ?", this);
 			if (result == null) {
-				result = function.Call(arguments.ToArray());
+				if (explain) {
+					Debug.Log(this);
+				}
+				result = function.Call(explain, arguments.ToArray());
 			}
 			//Debug.LogFormat("{0} = {1}", this, PairObject.ToString(result));
 			return result;
@@ -32,7 +35,7 @@ namespace Pair
 				return string.Format(
 					"{0}{1}", 
 					function.name, 
-					arguments.Count > 0 ? "({0})".i(arguments.ExtToString(format: "{0}")) : ""
+					arguments.Count > 0 ? "{0}".i(arguments.ExtToString(delimiter: " ", format: " {0}")) : ""
 				);
 			}
 			return result.ToString();

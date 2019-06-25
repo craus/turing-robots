@@ -10,7 +10,7 @@ namespace Pair
 			this.x = new Calculatable(x);
 		}
 
-		public override Calculatable Evaluate(params Calculatable[] argumentValues) {
+		public override Calculatable Evaluate(bool explain = false, params Calculatable[] argumentValues) {
 			return x;
 		}
 

@@ -11,11 +11,11 @@ namespace Pair
 			arguments.Add(new Argument("when_false", 2));
 		}
 
-		protected override Object CallInternal(params Calculatable[] arguments) {
-			if (arguments[0].Calculate() != null) {
-				return arguments[1].Calculate();
+		protected override Object CallInternal(bool explain = false, params Calculatable[] arguments) {
+			if (arguments[0].Calculate(explain) != null) {
+				return arguments[1].Calculate(explain);
 			} else {
-				return arguments[2].Calculate();
+				return arguments[2].Calculate(explain);
 			}
 		}
 	}

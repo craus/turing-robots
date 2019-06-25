@@ -7,7 +7,7 @@ namespace Pair
 			name = "nil";
 		}
 
-		protected override Object CallInternal(params Calculatable[] arguments) {
+		protected override Object CallInternal(bool explain = false, params Calculatable[] arguments) {
 			return null;
 		}
 	}

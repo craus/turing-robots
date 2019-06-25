@@ -12,6 +12,7 @@ namespace Pair
 	{
 		const string IS = "is";
 		const string ASSERT = "assert";
+		const string EXPLAIN = "explain";
 		const string OUTPUT = "output";
 		const string USE = "use";
 		const string UNCALL = "uncall";
@@ -21,6 +22,8 @@ namespace Pair
 		public Dictionary<string, Function> functions = new Dictionary<string, Function>();
 		public List<Expression> asserts = new List<Expression>();
 		public List<Expression> outputs = new List<Expression>();
+
+		public List<Expression> explain = new List<Expression>();
 
 		public List<Token> tokens = new List<Token>();
 		public int cur;
@@ -154,9 +157,12 @@ namespace Pair
 			trace.Pop();
 		}
 
-		void ReadAssert() {
+		void ReadAssert(List<Expression> list = null) {
+			if (list == null) {
+				list = asserts;
+			}
 			++cur;// skip "assert"	
-			asserts.Add(ReadExpression());
+			list.Add(ReadExpression());
 		}
 
 		void ReadOutput() {
@@ -173,6 +179,8 @@ namespace Pair
 			while (cur < tokens.Count) {
 				if (tokens[cur] == ASSERT) {
 					ReadAssert();
+				} else if (tokens[cur] == EXPLAIN) {
+					ReadAssert(explain);
 				} else if (tokens[cur] == OUTPUT) {
 					ReadOutput();
 				} else if (tokens[cur] == USE) {
@@ -296,6 +304,13 @@ namespace Pair
 			asserts.ForEach(a => {
 				//Debug.LogFormat("asserting {0}", a);
 				var assertResult = a.Evaluate().Calculate();
+				if (assertResult == null) {
+					Debug.LogFormat("ASSERTION FAILED {0}", a);
+				}
+			});
+			explain.ForEach(a => {
+				//Debug.LogFormat("asserting {0}", a);
+				var assertResult = a.Evaluate(true).Calculate(true);
 				if (assertResult == null) {
 					Debug.LogFormat("ASSERTION FAILED {0}", a);
 				}

@@ -13,7 +13,7 @@ namespace Pair
 			this.index = index;
 		}
 
-		public override Calculatable Evaluate(params Calculatable[] argumentValues) {
+		public override Calculatable Evaluate(bool explain = false, params Calculatable[] argumentValues) {
 			return argumentValues[index];
 		}
 

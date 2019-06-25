@@ -4,6 +4,6 @@ namespace Pair
 {
 	public abstract class Expression
 	{
-		public abstract Calculatable Evaluate(params Calculatable[] argumentValues);
+		public abstract Calculatable Evaluate(bool explain = false, params Calculatable[] argumentValues);
 	}
 }
