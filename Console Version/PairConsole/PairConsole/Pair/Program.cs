@@ -31,7 +31,7 @@ namespace Pair
 
 		public Stack<string> trace = new Stack<string>();
 
-		Function ReadAnonymousFunction(Map<string, Expression> context = null) {
+		Function ReadLambda(Map<string, Expression> context = null) {
 			if (context == null) {
 				context = new Map<string, Expression>();
 			}
@@ -78,7 +78,7 @@ namespace Pair
 				return f;
 			}
 			if (tokens[cur] == FUNCTION) {
-				var f = new Constant(new FunctionObject(ReadAnonymousFunction(context)));
+				var f = new Constant(new FunctionObject(ReadLambda(context)));
 				trace.Pop();
 				return f;
 			}
@@ -213,7 +213,7 @@ namespace Pair
 			if (ignoreToEndOfLine) {
 				return;
 			}
-			if (token.text.StartsWith("/*")) {
+			if (token.text.StartsWith("/*", StringComparison.Ordinal)) {
 				ignoreMode = true;
 			}
 			if (!ignoreMode) {
@@ -223,7 +223,7 @@ namespace Pair
 				}
 				result.Add(token);
 			}
-			if (token.text.EndsWith("*/")) {
+			if (token.text.EndsWith("*/", StringComparison.Ordinal)) {
 				ignoreMode = false;
 			}
 		}

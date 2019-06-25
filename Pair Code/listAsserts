@@ -2,6 +2,81 @@
 
 1 is pair T nil
 
+assert eq list 0 nil pair 0 nil
+
+assert eq head list 0 nil 0
+assert eq tail list 0 nil nil
+
+assert isEmpty emptyList
+assert not isEmpty list 0 nil
+
+assert eq last list 1 list 0 nil 0
+assert eq last list 1 nil 1
+
+assert eq 
+	push list 1 list 0 nil T
+	list 1 list 0 list T nil
+
+assert eq
+	push emptyList 0
+	list 0 nil
+
+assert eq
+	reverse list 1 list 0 list T nil
+	list T list 0 list 1 nil
+
+assert eq
+	reverse emptyList
+	nil
+
+assert eq
+	concat
+		list 1 list 0 list T nil
+		list 0 list 0 nil
+	list 1 list 0 list T list 0 list 0 nil
+
+assert eq
+	concat
+		list 0 nil
+		emptyList
+	list 0 nil
+
+assert eq
+	removeAll 
+		list 1 list 0 list T list 0 list 0 nil
+		0
+	list 1 list T nil
+
+assert eq
+	removeAll
+		list 1 list 1 list T list T list 0 nil
+		1
+	list T list T list 0 nil
+
+assert eq
+	removeAll
+		list 1 list 1 list 0 list 0 nil
+		T
+	list 1 list 1 list 0 list 0 nil
+
+assert eq
+	remove 
+		list 1 list 0 list T list 0 list 0 nil
+		0
+	list 1 list T list 0 list 0 nil
+
+assert eq
+	remove
+		list 1 list 1 list T list T list 0 nil
+		1
+	list 1 list T list T list 0 nil
+
+assert eq
+	remove 
+		list 1 list 1 list T list T list 0 nil
+		pair T T
+	list 1 list 1 list T list T list 0 nil
+
 assert eq 
   push pair 0 nil 1 
   pair nil pair 1 nil
@@ -10,6 +85,58 @@ assert eq
   push pair 1 pair 1 pair 0 pair 1 nil 1
   pair 1 pair 1 pair 0 pair 1 pair 1 nil
 
-  
+assert eq
+	uniq list 1 list 1 list T list T list 0 nil
+	list 1 list T list 0 nil
+
+assert eq
+	uniq list T list 1 list T list 0 list 1 nil
+	list T list 1 list 0 nil
+
+assert eq
+	uniq emptyList
+	emptyList
+/*
+assert intersect 
+	list T list T list 1 nil
+	list 0 list T list 0 nil
+
+assert intersect
+	list 0 nil
+	list T list 1 list 0 nil
+
+assert not intersect
+	list 0 list 1 list 1 nil
+	list T list T nil
+	*/
+
+assert isSubsequence 
+	list 0 list 1 list 1 nil
+	list T list 0 list 1 list 1 list 0 nil
+
+assert not isSubsequence
+	list 0 list 1 list 1 list 1 nil
+	list T list 0 list 1 list 1 list 0 nil
+
+assert startsWith
+	list 0 list 1 nil
+	list 0 list 1 list 1 nil
+
+assert not startsWith
+	list 1 list 1 nil
+	list 0 list 1 list 1 nil
+
+assert not endsWith
+	list 0 list 1 nil
+	list 0 list 1 list 1 nil
+
+assert endsWith
+	list 1 list 1 nil
+	list 0 list 1 list 1 nil
+
+assert endsWith
+	emptyList
+	emptyList
+
 
 

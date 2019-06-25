@@ -41,7 +41,7 @@ remove list element is
 
 uniq list is
 	both list
-	pair head list removeAll tail list head list
+	pair head list uniq removeAll tail list head list
 
 intersect list1 list2 is
 	both list2
