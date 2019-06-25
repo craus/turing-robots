@@ -5,6 +5,8 @@ using System.Text;
 
 public class Debug
 {
+	public static int verbosity = 0;
+
 	public static void Log(params object[] args) {
 		Console.WriteLine(args.Select(arg => arg.ToString()).ExtToString(format: "{0}"));
 	}

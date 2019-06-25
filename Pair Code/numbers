@@ -1,5 +1,6 @@
 use bool
 use list
+use calls
 
 1 is list true nil
 NaN is pair nil nil
@@ -29,18 +30,27 @@ sum x y is
 		else x
 	else y
 
+shorten x is
+	if neither head x tail x
+	then nil
+	else x
+
+normalize x is
+	both x
+	shorten pair head x normalize tail x
+
 subtract x y is
-	if y
-	then list
+	if not y x
+	shorten pair
 		xor head x head y
 		if both not head x head y
-			dec subtract tail x tail y
-			subtract tail x tail y
-	else x
+			then dec subtract tail x tail y
+			else subtract tail x tail y
 
 half x is tail x
 
 double x is
+	both x
 	pair 0 x
 
 mult x y is
@@ -100,11 +110,6 @@ mod x y is second divide x y
 gcd x y is
 	if equal y 0 x
 	gcd y mod x y
-
-normalize x is
-	if neither head tail x tail tail x
-	then pair head x nil
-	else x
 
 listOfZeroes len is
 	both len

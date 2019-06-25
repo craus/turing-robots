@@ -8,7 +8,6 @@ namespace Pair
 		public string name;
 		public List<Argument> arguments = new List<Argument>();
 
-		public const int MAX_DEPTH = 100;
 		public static int depth = 0;
 		public static Stack<string> stack = new Stack<string>();
 		//public Dictionary< hash;
@@ -22,10 +21,13 @@ namespace Pair
 		}
 
 		public Object Call(bool explain = false, params Calculatable[] argumentValues) {
-			if (stack.Count > MAX_DEPTH) {
+			if (stack.Count > Program.MAX_DEPTH) {
 				throw new RuntimeError("Stack Overflow", stack);
 			}
 			stack.Push(name);
+			if (stack.Count > Program.maxDepth) {
+				Program.maxDepth = stack.Count;
+			}
 			if (explain) {
 				//Debug.LogFormat("{0} {1}", name, arguments.ExtToString(delimiter: " ", format: "{0}"));
 			}

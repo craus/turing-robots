@@ -9,7 +9,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'List' ">
     <StartAction>Project</StartAction>
-    <StartArguments>listAsserts</StartArguments>
+    <StartArguments>listAsserts 2</StartArguments>
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
@@ -21,7 +21,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Numbers' ">
     <StartAction>Project</StartAction>
-    <StartArguments>numbersAsserts</StartArguments>
+    <StartArguments>numbersAsserts 2</StartArguments>
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>

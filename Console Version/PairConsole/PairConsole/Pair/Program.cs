@@ -10,6 +10,9 @@ namespace Pair
 {
 	public class Program
 	{
+		public const int MAX_DEPTH = 300;
+		public static int maxDepth = 0;
+
 		const string IS = "is";
 		const string ASSERT = "assert";
 		const string EXPLAIN = "explain";
@@ -322,7 +325,7 @@ namespace Pair
 			tokens.AddRange(newTokens);
 		}
 
-		void Compile() {
+		void 	Compile() {
 			CreateBuiltinFunctions();
 			FindFunctionDefinitions();
 			ReadProgram();
@@ -330,9 +333,14 @@ namespace Pair
 			//Debug.LogFormat("Assertions: {0}", asserts.Count);
 			asserts.ForEach(a => {
 				//Debug.LogFormat("asserting {0}", a);
+				var w = new System.Diagnostics.Stopwatch();
+				w.Start();
 				var assertResult = a.Evaluate().Calculate();
 				if (assertResult == null) {
 					Debug.LogFormat("ASSERTION FAILED {0}", a);
+				}		
+				if (Debug.verbosity >= 2) {
+					Debug.LogFormat("assert {0} [{1} ms]", a, w.ElapsedMilliseconds);
 				}
 			});
 			explain.ForEach(a => {

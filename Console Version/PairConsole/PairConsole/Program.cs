@@ -46,6 +46,11 @@ namespace PairConsole
 
 			//TestStartsWith();
 
+			if (args.Length >= 2) {
+				Debug.verbosity = int.Parse(args[1]);
+			}
+			
+
 			Stopwatch watch = new Stopwatch();
 			watch.Start();
 			var program = new Pair.Program(args[0]);
@@ -53,6 +58,7 @@ namespace PairConsole
 			watch.Restart();
 			program.Run();
 			Debug.LogFormat("Run time: {0}", watch.ElapsedMilliseconds);
+			Debug.LogFormat("Max stack: {0}", Pair.Program.maxDepth);
 			//writer.Close();
 			//ostrm.Close();
 		}
