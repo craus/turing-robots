@@ -25,4 +25,10 @@
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'ListWithNumbers' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>listWithNumbersAsserts 2</StartArguments>
+    <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
 </Project>

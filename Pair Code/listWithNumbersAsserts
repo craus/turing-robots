@@ -1,0 +1,64 @@
+use listWithNumbers
+
+assert eq size list 4 list 8 list 2 list 3 nil 4
+assert eq size emptyList 0
+
+assert eq count list 4 list 8 list 2 list 3 nil
+	function x to less x 5
+	3
+
+assert eq count list 4 list 8 list 2 list 3 nil
+	function x to eq mod x 4 0
+	2
+
+assert eq count list 4 list 8 list 2 list 3 nil
+	function x to eq mod 6 x 0
+	2
+
+assert eq indexOf 2 list 4 list 8 list 2 list 3 nil 2
+assert eq indexOf 5 list 4 list 8 list 2 list 3 nil NaN
+assert eq indexOf 4 list 4 list 8 list 2 list 3 nil 0
+assert eq indexOf 0 emptyList NaN
+
+assert eq mapToIndex 
+	list 4 list 8 list 2 list 3 nil
+	list 2 list 4 list 8 list 5 list 3 nil
+	list 1 list 2 list 0 list 4 nil
+
+l329272 is list 3 list 2 list 9 list 2 list 7 list 2 nil
+
+assert eq substr l329272 2 2
+	list 9 list 2 nil
+
+assert eq substr l329272 1 4
+	list 2 list 9 list 2 list 7 nil
+
+assert eq substr l329272 12 0
+	emptyList
+
+assert eq elementAt 0 l329272 3
+assert eq elementAt 1 l329272 2
+assert eq elementAt 2 l329272 9
+assert eq elementAt 5 l329272 2
+
+assert ofSameStructure 
+	list 2 list 3 list 3 list 2 nil
+	list 5 list 0 list 0 list 5 nil
+
+assert ofSameStructure
+	list 1 list 2 list 4 list 2 list 5 nil
+	list 7 list 9 list 3 list 9 list 4 nil
+
+assert not ofSameStructure
+	list 2 list 3 list 4 list 5 nil
+	list 1 list 2 list 5 list 1 nil
+
+assert eq alignNumber 12 6 
+	list 0 list 0 list T list T 
+	list 0 list 0 nil
+
+assert eq alignNumber 17 9  
+	list T list 0 list 0 list 0
+	list T list 0 list 0 list 0 list 0 nil
+
+
