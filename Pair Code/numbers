@@ -108,7 +108,7 @@ div x y is first divide x y
 mod x y is second divide x y
 
 gcd x y is
-	if equal y 0 x
+	if not y x
 	gcd y mod x y
 
 listOfZeroes len is
@@ -127,22 +127,22 @@ multipleApply f n is
 
 # list of short numbers
 
-2 is inc 1
-3 is inc 2
-4 is inc 3
-5 is inc 4
-6 is inc 5
-7 is inc 6
-8 is inc 7
-9 is inc 8
-10 is inc 9
-11 is inc 10
-12 is inc 11
-13 is inc 12
-14 is inc 13
-15 is inc 14
-16 is inc 15
-17 is inc 16
-18 is inc 17
-19 is inc 18
-20 is inc 19
+2 is pair 0 1
+3 is pair T 1
+4 is pair 0 2
+5 is pair T 2
+6 is pair 0 3
+7 is pair T 3
+8 is pair 0 4
+9 is pair T 4
+10 is pair 0 5
+11 is pair T 5
+12 is pair 0 6
+13 is pair T 6
+14 is pair 0 7
+15 is pair T 7
+16 is pair 0 8
+17 is pair T 8
+18 is pair 0 9
+19 is pair T 9
+20 is pair 0 10

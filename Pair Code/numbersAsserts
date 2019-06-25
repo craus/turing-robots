@@ -56,6 +56,10 @@ assert eq gcd 12 16 4
 assert eq gcd 5 7 1
 assert eq gcd 13 13 13
 
+assert eq sum 13 6 19
+
+assert eq 18 18
+
 assert eq listOfZeroes 4 pair nil pair nil pair nil pair nil nil
 assert eq listOfZeroes 0 nil
 

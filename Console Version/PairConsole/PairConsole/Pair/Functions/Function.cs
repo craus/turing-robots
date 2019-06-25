@@ -25,6 +25,7 @@ namespace Pair
 				throw new RuntimeError("Stack Overflow", stack);
 			}
 			stack.Push(name);
+			Program.callCnt++;
 			if (stack.Count > Program.maxDepth) {
 				Program.maxDepth = stack.Count;
 			}
