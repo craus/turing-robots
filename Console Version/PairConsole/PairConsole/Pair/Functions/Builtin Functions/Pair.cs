@@ -6,8 +6,8 @@ namespace Pair
 	{
 		public Pair() {
 			name = "pair";
-			arguments.Add(new Argument("x", 0));
-			arguments.Add(new Argument("y", 1));
+			arguments.Add(new Argument(this, "x", 0));
+			arguments.Add(new Argument(this, "y", 1));
 		}
 
 		protected override Object CallInternal(bool explain = false, params Calculatable[] arguments) {

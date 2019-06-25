@@ -8,9 +8,19 @@ namespace Pair
 		public List<Argument> arguments = new List<Argument>();
 		public Expression body;
 
+		public Lambda() {
+		}
+
 		public Lambda(List<Argument> arguments, Expression body) {
 			this.arguments = arguments;
 			this.body = body;
+		}
+
+
+		public Map<string, Expression> Context() {
+			var result = new Map<string, Expression>();
+			arguments.ForEach(a => result.Add(a.name, a));
+			return result;
 		}
 
 		public override Calculatable Evaluate(

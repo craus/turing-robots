@@ -6,8 +6,8 @@ namespace Pair
 	{
 		public Call() {
 			name = "call";
-			arguments.Add(new Argument("f", 0));
-			arguments.Add(new Argument("args", 1));
+			arguments.Add(new Argument(this, "f", 0));
+			arguments.Add(new Argument(this, "args", 1));
 		}
 
 		List<Calculatable> Args(Calculatable list, int len) {

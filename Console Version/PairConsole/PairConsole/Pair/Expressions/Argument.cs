@@ -10,7 +10,8 @@ namespace Pair
 
 		public int index;
 
-		public Argument(string name, int index) {
+		public Argument(IArgumentable owner, string name, int index) {
+			this.owner = owner;
 			this.name = name;
 			this.index = index;
 		}

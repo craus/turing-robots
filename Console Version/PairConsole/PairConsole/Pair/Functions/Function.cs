@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Pair
 {
-	public abstract class Function
+	public abstract class Function : IArgumentable
 	{
 		public string name;
 		public List<Argument> arguments = new List<Argument>();

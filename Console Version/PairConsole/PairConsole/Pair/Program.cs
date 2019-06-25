@@ -34,30 +34,30 @@ namespace Pair
 
 		public Stack<string> trace = new Stack<string>();
 
-		Function ReadLambda(Map<string, Expression> context = null) {
+		Lambda ReadLambda(Map<string, Expression> context = null) {
 			if (context == null) {
 				context = new Map<string, Expression>();
 			}
-			trace.Push("read anonymous function {0}{1}".i(
+			trace.Push("read lambda {0}{1}".i(
 				tokens[cur],
 				functions.ContainsKey(tokens[cur])
 					? " ({0} args)".i(functions[tokens[cur]].arguments.Count)
 					: ""
 			));
-			var f = new DefinedFunction();
-			f.arguments = new List<Argument>();
+			var lambda = new Lambda();
+			lambda.arguments = new List<Argument>();
 			//Debug.LogFormat("Defining function: {0}", f.name);
 			++cur;
 			while (tokens[cur] != TO) {
-				f.arguments.Add(new Argument(tokens[cur], f.arguments.Count()));
+				lambda.arguments.Add(new Argument(lambda, tokens[cur], lambda.arguments.Count()));
 				++cur;
 			}
 
 			++cur;// skip "to"	
-			f.body = ReadExpression(f.Context().Merge(context));
+			lambda.body = ReadExpression(lambda.Context().Merge(context));
 			//Debug.LogFormat("{0} body end", f.name);
 			trace.Pop();
-			return f;
+			return lambda;
 		}
 
 		private Expression ReadExpression(Map<string, Expression> context = null) {
@@ -81,9 +81,9 @@ namespace Pair
 				return f;
 			}
 			if (tokens[cur] == FUNCTION) {
-				var f = new Constant(new FunctionObject(ReadLambda(context)));
+				var lambda = ReadLambda(context);
 				trace.Pop();
-				return f;
+				return lambda;
 			}
 			if (context[tokens[cur]] != null) {
 				var result = context[tokens[cur]];
@@ -128,7 +128,7 @@ namespace Pair
 				functions.Add(key, new DefinedFunction());
 				functions[key].name = key;
 				for (int i = 0; i < shortestIs[key] - 1; i++) {
-					functions[key].arguments.Add(new Argument("", i));
+					functions[key].arguments.Add(new Argument(functions[key], "", i));
 				}
 			});
 		}
@@ -148,7 +148,7 @@ namespace Pair
 			//Debug.LogFormat("Defining function: {0}", f.name);
 			++cur;
 			while (tokens[cur] != IS) {
-				f.arguments.Add(new Argument(tokens[cur], f.arguments.Count()));
+				f.arguments.Add(new Argument(f, tokens[cur], f.arguments.Count()));
 				++cur;
 			}
 			++cur;// skip "is"	

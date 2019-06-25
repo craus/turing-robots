@@ -96,7 +96,7 @@ assert eq
 assert eq
 	uniq emptyList
 	emptyList
-/*
+	
 assert intersect 
 	list T list T list 1 nil
 	list 0 list T list 0 nil
@@ -108,7 +108,6 @@ assert intersect
 assert not intersect
 	list 0 list 1 list 1 nil
 	list T list T nil
-	*/
 
 assert isSubsequence 
 	list 0 list 1 list 1 nil

@@ -6,7 +6,7 @@ namespace Pair
 	{
 		public Second() {
 			name = "second";
-			arguments.Add(new Argument("p", 0));
+			arguments.Add(new Argument(this, "p", 0));
 		}
 
 		public static Calculatable Call(Calculatable c) {
