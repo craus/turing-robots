@@ -2,7 +2,7 @@
 
 namespace Pair
 {
-	public class Calculatable
+	public class Calculatable : Expression
 	{
 		public Function function;
 		public List<Calculatable> arguments;
@@ -28,6 +28,14 @@ namespace Pair
 			}
 			//Debug.LogFormat("{0} = {1}", this, PairObject.ToString(result));
 			return result;
+		}
+
+		public override Calculatable Evaluate(IArgumentable argumentable, bool explain = false, params Calculatable[] argumentValues) {
+			return this;
+		}
+
+		public override Expression Substitute(IArgumentable argumentable, bool explain = false, params Expression[] argumentValues) {
+			return this;
 		}
 
 		public override string ToString() {

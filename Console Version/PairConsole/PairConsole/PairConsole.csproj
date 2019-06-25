@@ -71,9 +71,7 @@
     <Compile Include="Pair\Functions\Builtin Functions\Call.cs" />
     <Compile Include="Pair\Expressions\Constant.cs" />
     <Compile Include="Pair\Expressions\Lambda.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pair\Builtin Functions\" />
+    <Compile Include="Pair\IArgumentable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

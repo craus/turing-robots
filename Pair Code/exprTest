@@ -1,0 +1,5 @@
+g z x y is y
+
+f x is g nil nil x
+
+explain f pair nil nil

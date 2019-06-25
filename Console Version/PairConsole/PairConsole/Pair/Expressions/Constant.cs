@@ -10,7 +10,15 @@ namespace Pair
 			this.x = new Calculatable(x);
 		}
 
-		public override Calculatable Evaluate(bool explain = false, params Calculatable[] argumentValues) {
+		public override Calculatable Evaluate(
+			IArgumentable argumentable,
+			bool explain = false, 
+			params Calculatable[] argumentValues
+		) {
+			return x;
+		}
+
+		public override Expression Substitute(IArgumentable argumentable, bool explain = false, params Expression[] argumentValues) {
 			return x;
 		}
 

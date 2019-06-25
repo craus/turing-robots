@@ -4,6 +4,8 @@ namespace Pair
 {
 	public class Argument : Expression
 	{
+		public IArgumentable owner;
+
 		public string name;
 
 		public int index;
@@ -13,8 +15,23 @@ namespace Pair
 			this.index = index;
 		}
 
-		public override Calculatable Evaluate(bool explain = false, params Calculatable[] argumentValues) {
+		public override Calculatable Evaluate(
+			IArgumentable argumentable,
+			bool explain = false,
+			params Calculatable[] argumentValues
+		) {
 			return argumentValues[index];
+		}
+
+		public override Expression Substitute(
+			IArgumentable argumentable,
+			bool explain = false,
+			params Expression[] argumentValues
+		) {
+			if (argumentable == owner) {
+				return argumentValues[index];
+			}
+			return this;
 		}
 
 		public override string ToString() {

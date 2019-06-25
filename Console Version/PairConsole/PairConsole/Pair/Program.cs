@@ -310,7 +310,7 @@ namespace Pair
 			});
 			explain.ForEach(a => {
 				//Debug.LogFormat("asserting {0}", a);
-				var assertResult = a.Evaluate(true).Calculate(true);
+				var assertResult = a.Evaluate(explain: true).Calculate(explain: true);
 				if (assertResult == null) {
 					Debug.LogFormat("ASSERTION FAILED {0}", a);
 				}

@@ -8,12 +8,40 @@ namespace Pair
 		public Function function;
 		public List<Expression> arguments = new List<Expression>();
 
-		public override Calculatable Evaluate(bool explain = false, params Calculatable[] argumentValues) {
+		public FunctionCall() {
+		}
+
+		public FunctionCall(Function function, List<Expression> arguments) {
+			this.function = function;
+			this.arguments = arguments;
+		}
+
+		public override Calculatable Evaluate(
+			IArgumentable argumentable,
+			bool explain = false, 
+			params Calculatable[] argumentValues
+		) {
 			if (explain) {
 				//Debug.Log(this);
 			}
-			return new Calculatable(function, arguments.Select(expr => expr.Evaluate(explain, argumentValues)).ToList());
+			return new Calculatable(function, arguments.Select(expr => expr.Evaluate(argumentable, explain, argumentValues)).ToList());
 		}
+
+		public override Expression Substitute(
+			IArgumentable argumentable,
+			bool explain = false,
+			params Expression[] argumentValues
+		) {
+			if (explain) {
+				//Debug.Log(this);
+			}
+			return new FunctionCall(
+				function, 
+				arguments.Select(expr => expr.Substitute(
+					argumentable, explain, argumentValues)).ToList()
+			);
+		}
+		//public 
 
 		public override string ToString() {
 			return "{0}{1}".i(function.name, arguments.Count > 0 ? arguments.ExtToString(delimiter: " ", format: " {0}") : "");
