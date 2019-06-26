@@ -77,6 +77,9 @@
     <Compile Include="Pair\Functions\Builtin Functions\Console IO\Bin.cs" />
     <Compile Include="Pair\Console IO\ConsoleIO.cs" />
     <Compile Include="Pair\Console IO\Buffer.cs" />
+    <Compile Include="Pair\DataObjects\CommandObject.cs" />
+    <Compile Include="Pair\Functions\Builtin Functions\Console IO\Bout.cs" />
+    <Compile Include="Pair\Functions\Builtin Functions\Console IO\Eof.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pair\Exceptions\" />

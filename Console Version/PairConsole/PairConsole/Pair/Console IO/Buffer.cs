@@ -15,6 +15,7 @@ namespace Pair
 		public bool eof = false;
 
 		public bool ReadBit() {
+			Debug.LogFormat("ReadBit");
 			if (cnt == -1) {
 				c = Console.Read();
 				cnt = 7;
@@ -25,10 +26,12 @@ namespace Pair
 		}
 
 		public bool Eof() {
+			Debug.LogFormat("Eof");
 			return c == -1;
 		}
 
 		public void WriteBit(bool bit) {
+			Debug.LogFormat("WriteBit {0}", bit ? 1 : 0);
 			c = (c << 1);
 			if (bit) {
 				c |= 1;

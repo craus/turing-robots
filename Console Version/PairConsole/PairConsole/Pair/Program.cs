@@ -22,6 +22,7 @@ namespace Pair
 		const string UNCALL = "uncall";
 		const string FUNCTION = "function";
 		const string TO = "to";
+		const string MAIN = "main";
 
 		public Map<string, Function> functions = new Map<string, Function>();
 		public List<Expression> asserts = new List<Expression>();
@@ -39,6 +40,10 @@ namespace Pair
 		public Stack<string> trace = new Stack<string>();
 
 		public DefinedFunction last;
+
+		Func<CommandObject> currentFunction = null;
+
+		ConsoleIO io = new ConsoleIO();
 
 		Lambda ReadLambda(Map<string, Expression> context = null) {
 			if (context == null) {
@@ -106,7 +111,13 @@ namespace Pair
 			var df = exp.function as DefinedFunction;
 			if (df != null) {
 				if (df.body == null) {
-					Debug.LogWarning("{2} Function definition deduced: {0} ({1})", df.name, df.position, tokens[cur].position);
+					Debug.LogWarning(
+						"{3} Function definition deduced: {0} [{2} args] ({1})", 
+						df.name, 
+						df.position, 
+						df.arguments.Count, 
+						tokens[cur].position
+					);
 				}
 			}
 			//Debug.LogFormat("Reading function call: {0}", exp.function.name);
@@ -229,6 +240,10 @@ namespace Pair
 			functions.Add("nil", new Nil());
 			functions.Add("if", new If());
 			functions.Add("call", new Call());
+
+			functions.Add("bin", new Bin(io));
+			functions.Add("bout", new Bout(io));
+			functions.Add("eof", new Eof(io));
 		}
 
 		string GetFileName(string current, string relative) {
@@ -366,12 +381,19 @@ namespace Pair
 		}
 
 		public void Run() {
-			if (!functions.ContainsKey("main")) {
+			if (!functions.ContainsKey(MAIN)) {
 				Debug.LogFormat("no main function found");
 				return;
 			}
-			var result = functions["main"].Call();
-			Debug.LogFormat("{1} = {0}", Object.Structure(result), functions["main"].ToString());
+			currentFunction = () => functions[MAIN].Call() as CommandObject;
+			while (currentFunction != null) {
+				var command = currentFunction();
+				currentFunction = null;
+				if (command != null) {
+					currentFunction = command.command();
+				}
+			}
+			//Debug.LogFormat("{1} = {0}", Object.Structure(result), functions["main"].ToString());
 		}
 
 		public string FunctionPosition(Function f) {

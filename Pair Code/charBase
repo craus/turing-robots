@@ -1,0 +1,109 @@
+use list
+
+char a b c d e f g h is
+	list h list g list f
+	list e list d list c
+	list b list a emptyList
+
+
+# auto generated
+
+\n is char 0 0 0 0 T 0 T 0
+\r is char 0 0 0 0 T T 0 T
+\s is char 0 0 T 0 0 0 0 0
+\t is char 0 0 0 0 T 0 0 T
+
+'!' is char 0 0 T 0 0 0 0 T
+'"' is char 0 0 T 0 0 0 T 0
+'#' is char 0 0 T 0 0 0 T T
+'$' is char 0 0 T 0 0 T 0 0
+'%' is char 0 0 T 0 0 T 0 T
+'&' is char 0 0 T 0 0 T T 0
+''' is char 0 0 T 0 0 T T T
+'(' is char 0 0 T 0 T 0 0 0
+')' is char 0 0 T 0 T 0 0 T
+'*' is char 0 0 T 0 T 0 T 0
+'+' is char 0 0 T 0 T 0 T T
+',' is char 0 0 T 0 T T 0 0
+'-' is char 0 0 T 0 T T 0 T
+'.' is char 0 0 T 0 T T T 0
+'/' is char 0 0 T 0 T T T T
+'0' is char 0 0 T T 0 0 0 0
+'1' is char 0 0 T T 0 0 0 T
+'2' is char 0 0 T T 0 0 T 0
+'3' is char 0 0 T T 0 0 T T
+'4' is char 0 0 T T 0 T 0 0
+'5' is char 0 0 T T 0 T 0 T
+'6' is char 0 0 T T 0 T T 0
+'7' is char 0 0 T T 0 T T T
+'8' is char 0 0 T T T 0 0 0
+'9' is char 0 0 T T T 0 0 T
+':' is char 0 0 T T T 0 T 0
+';' is char 0 0 T T T 0 T T
+'<' is char 0 0 T T T T 0 0
+'=' is char 0 0 T T T T 0 T
+'>' is char 0 0 T T T T T 0
+'?' is char 0 0 T T T T T T
+'@' is char 0 T 0 0 0 0 0 0
+'A' is char 0 T 0 0 0 0 0 T
+'B' is char 0 T 0 0 0 0 T 0
+'C' is char 0 T 0 0 0 0 T T
+'D' is char 0 T 0 0 0 T 0 0
+'E' is char 0 T 0 0 0 T 0 T
+'F' is char 0 T 0 0 0 T T 0
+'G' is char 0 T 0 0 0 T T T
+'H' is char 0 T 0 0 T 0 0 0
+'I' is char 0 T 0 0 T 0 0 T
+'J' is char 0 T 0 0 T 0 T 0
+'K' is char 0 T 0 0 T 0 T T
+'L' is char 0 T 0 0 T T 0 0
+'M' is char 0 T 0 0 T T 0 T
+'N' is char 0 T 0 0 T T T 0
+'O' is char 0 T 0 0 T T T T
+'P' is char 0 T 0 T 0 0 0 0
+'Q' is char 0 T 0 T 0 0 0 T
+'R' is char 0 T 0 T 0 0 T 0
+'S' is char 0 T 0 T 0 0 T T
+'T' is char 0 T 0 T 0 T 0 0
+'U' is char 0 T 0 T 0 T 0 T
+'V' is char 0 T 0 T 0 T T 0
+'W' is char 0 T 0 T 0 T T T
+'X' is char 0 T 0 T T 0 0 0
+'Y' is char 0 T 0 T T 0 0 T
+'Z' is char 0 T 0 T T 0 T 0
+'[' is char 0 T 0 T T 0 T T
+'\' is char 0 T 0 T T T 0 0
+']' is char 0 T 0 T T T 0 T
+'^' is char 0 T 0 T T T T 0
+'_' is char 0 T 0 T T T T T
+'`' is char 0 T T 0 0 0 0 0
+'a' is char 0 T T 0 0 0 0 T
+'b' is char 0 T T 0 0 0 T 0
+'c' is char 0 T T 0 0 0 T T
+'d' is char 0 T T 0 0 T 0 0
+'e' is char 0 T T 0 0 T 0 T
+'f' is char 0 T T 0 0 T T 0
+'g' is char 0 T T 0 0 T T T
+'h' is char 0 T T 0 T 0 0 0
+'i' is char 0 T T 0 T 0 0 T
+'j' is char 0 T T 0 T 0 T 0
+'k' is char 0 T T 0 T 0 T T
+'l' is char 0 T T 0 T T 0 0
+'m' is char 0 T T 0 T T 0 T
+'n' is char 0 T T 0 T T T 0
+'o' is char 0 T T 0 T T T T
+'p' is char 0 T T T 0 0 0 0
+'q' is char 0 T T T 0 0 0 T
+'r' is char 0 T T T 0 0 T 0
+'s' is char 0 T T T 0 0 T T
+'t' is char 0 T T T 0 T 0 0
+'u' is char 0 T T T 0 T 0 T
+'v' is char 0 T T T 0 T T 0
+'w' is char 0 T T T 0 T T T
+'x' is char 0 T T T T 0 0 0
+'y' is char 0 T T T T 0 0 T
+'z' is char 0 T T T T 0 T 0
+'{' is char 0 T T T T 0 T T
+'|' is char 0 T T T T T 0 0
+'}' is char 0 T T T T T 0 T
+'~' is char 0 T T T T T T 0

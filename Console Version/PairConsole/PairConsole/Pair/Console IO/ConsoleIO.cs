@@ -18,7 +18,7 @@ namespace Pair
 			callback(bit ? one : zero);
 		}
 
-		public void Eof(bool explain, Action<Calculatable> callback) {
+		public void Eof(Action<Calculatable> callback) {
 			bool bit = inputBuffer.Eof();
 			callback( bit ? one : zero);
 		}
