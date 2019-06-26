@@ -8,8 +8,14 @@ namespace Pair
 
 		public Expression body;
 
+		public IArgumentable parent = null;
+
+		public DefinedFunction() {
+			parent = this;
+		}
+
 		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
-			var exp = body.Evaluate(this, explain, argumentValues);
+			var exp = body.Evaluate(parent, explain, argumentValues);
 			if (explain) {
 				var args = argumentValues.ToList().ExtToString(format: "({0})");
 			}

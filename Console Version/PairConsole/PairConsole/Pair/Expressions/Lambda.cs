@@ -8,14 +8,17 @@ namespace Pair
 		public List<Argument> arguments = new List<Argument>();
 		public Expression body;
 
+		public IArgumentable parent;
+
 		public Lambda() {
+			parent = this;
 		}
 
-		public Lambda(List<Argument> arguments, Expression body) {
+		public Lambda(IArgumentable parent, List<Argument> arguments, Expression body) {
 			this.arguments = arguments;
 			this.body = body;
+			this.parent = parent;
 		}
-
 
 		public Map<string, Expression> Context() {
 			var result = new Map<string, Expression>();
@@ -32,6 +35,7 @@ namespace Pair
 			f.arguments = arguments;
 			f.name = "<lambda>";
 			f.body = body.Substitute(argumentable, explain, argumentValues);
+			f.parent = parent;
 			return new Calculatable(new FunctionObject(f));
 		}
 
@@ -40,7 +44,7 @@ namespace Pair
 			bool explain = false,
 			params Expression[] argumentValues
 		) {
-			return new Lambda(arguments, body.Substitute(
+			return new Lambda(parent, arguments, body.Substitute(
 				argumentable,
 				explain,
 				argumentValues

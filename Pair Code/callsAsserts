@@ -1,6 +1,12 @@
 use calls
 use bool
 
+assert eq
+	call 
+		function x to pair x x
+		pair T nil
+	pair T T
+
 assert eq 
 	call1 uncall first 
 		pair 
@@ -27,3 +33,20 @@ assert eq
 		pair nil nil
 		nil
 	pair nil pair nil pair nil nil
+
+assert eq 
+	give 0 function x to
+	pair x x
+	pair 0 0
+
+assert eq 
+	give 0 function x to
+	give T function y to
+	pair x y
+	pair 0 T
+
+assert eq
+	give T function x to
+	give pair x x function y to
+	pair 0 pair y x
+	pair 0 pair pair T T T

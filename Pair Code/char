@@ -27,22 +27,24 @@ ord c is normalize c
 
 chr x is alignNumber x 8
 
-atoib s b is 
-	both s
-	give subtract ord head s ord '0' function x to
-	if tail s 
-	then sum mult x b atoib tail s b
-	else x
+atoib s b result is 
+	if not s then result
+	atoib tail s b
+		sum 
+			mult result b 
+			subtract ord head s ord '0'
 
-atoi s is atoib s 10
+atoi s is atoib s 10 0
 
 itoab x b is
-	reverse
-		if not x then pair '0' nil
-		give divide x b function p to
-		give chr sum ord '0' second p function c to
-		if first p 
-		then pair c itoab first p b
-		else pair c nil
+	reverse itoabr x b
+
+itoabr x b is
+	if not x then pair '0' nil
+	give divide x b function p to
+	give chr sum ord '0' second p function c to
+	if first p 
+	then pair c itoabr first p b
+	else pair c nil
 
 itoa x is itoab x 10

@@ -416,7 +416,11 @@ namespace Pair
 				Debug.LogFormat(e.Message);
 				if (e is CompileError) {
 					Debug.Log();
-					Debug.LogFormat("Last defined function: {0} ({1})", last.Source(), last.position);
+					if (last != null) {
+						Debug.LogFormat("Last defined function: {0} ({1})", last.Source(), last.position);
+					} else {
+						Debug.LogFormat("No defined functions");
+					}
 					//Debug.Log();
 					//Debug.LogFormat(
 					//	"Defined functions: {0}",

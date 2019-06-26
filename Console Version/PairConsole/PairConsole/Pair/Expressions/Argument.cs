@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Pair
 {
@@ -21,7 +22,10 @@ namespace Pair
 			bool explain = false,
 			params Calculatable[] argumentValues
 		) {
-			return argumentValues[index];
+			if (argumentable == owner) {
+				return argumentValues[index];
+			}
+			throw new Exception("Cannot evaluate argument");
 		}
 
 		public override Expression Substitute(

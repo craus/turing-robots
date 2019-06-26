@@ -1,0 +1,13 @@
+use calls
+use bool
+
+output 
+	give 0 function x to
+	give T function y to
+	pair x y
+
+/*
+
+
+
+*/
