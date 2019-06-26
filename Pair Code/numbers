@@ -60,11 +60,12 @@ mult x y is
 		sum double mult x half y x
 	else double mult x half y
 
+sqr x is mult x x
+cb x is mult mult x x x
+
 pow x y is
 	if not y then 1
 	else mult pow x dec y x
-
-sqr x is mult x x
 
 fastpow x y is
 	if not y then 1
@@ -129,6 +130,30 @@ multipleApply f n is
 	return function x to 
 		call1 multipleApply f dec n 
 			call1 f x
+
+binarySearch left right big is
+	if eq left right left
+	give half inc sum left right function c to
+	if call1 big c
+	then binarySearch left dec c big
+	else binarySearch c right big
+
+sqrt x is binarySearch 0 x function y to less x sqr y
+
+cbrt x is binarySearch 0 x function y to less x cb y
+
+divbs x y is binarySearch 0 x function z to less x mult y z
+modbs x y is subtract x mult y divbs x y
+
+gcdbs x y is 
+	if not x y
+	gcdbs modbs y x x
+
+d2 a b is sum mult a 10 b
+d3 a b c is sum mult d2 a b 10 c
+d4 a b c d is sum mult d3 a b c 10 d
+d5 a b c d e is sum mult d4 a b c d 10 e
+d6 a b c d e f is sum mult d5 a b c d e 10 f
 
 # list of short numbers
 

@@ -10,7 +10,7 @@ namespace Pair
 {
 	public class Program
 	{
-		public const int MAX_DEPTH = 300;
+		public const int MAX_DEPTH = 1000;
 		public static int maxDepth = 0;
 		public static int callCnt = 0;
 
@@ -337,12 +337,19 @@ namespace Pair
 				var w = new System.Diagnostics.Stopwatch();
 				w.Start();
 				var from = callCnt;
+				maxDepth = 0;
 				var assertResult = a.Evaluate().Calculate();
 				if (assertResult == null) {
 					Debug.LogFormat("ASSERTION FAILED {0}", a);
 				}		
 				if (Debug.verbosity >= 2) {
-					Debug.LogFormat("assert {0} [{1} ms, {2} calls]", a, w.ElapsedMilliseconds, callCnt - from);
+					Debug.LogFormat(
+						"assert {0} [{1} ms, {2} calls, {3} depth]",
+						a,
+						w.ElapsedMilliseconds, 
+						callCnt - from,
+						maxDepth
+					);
 				}
 			});
 			explain.ForEach(a => {

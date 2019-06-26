@@ -1,0 +1,4 @@
+use char
+
+assert eq char T T 0 T 0 0 0 T
+	list T list 0 list 0 list 0 list T list 0 list T list T nil

@@ -27,6 +27,9 @@ assert eq mult 3 5 15
 assert eq mult 4 0 0
 assert eq mult 1 7 7
 
+assert eq sqr 4 16
+assert eq sqr 0 0
+
 assert eq pow 2 3 8
 assert eq pow 3 2 9
 assert eq pow 2 4 16
@@ -38,14 +41,14 @@ assert eq fastpow 2 4 16
 assert eq fastpow 1 9 1
 assert eq fastpow 4 0 1
 
-assert eq log 1 0
-assert eq log 2 1
-assert eq log 3 1
-assert eq log 4 2
-assert eq log 5 2
-assert eq log 7 2
-assert eq log 8 3
-assert eq log 9 3
+assert eq log2 1 0
+assert eq log2 2 1
+assert eq log2 3 1
+assert eq log2 4 2
+assert eq log2 5 2
+assert eq log2 7 2
+assert eq log2 8 3
+assert eq log2 9 3
 
 assert eq compare 2 3 <
 assert eq compare 8 4 >
@@ -61,11 +64,24 @@ assert eq div 5 2 2
 assert eq div 14 7 2
 assert eq div 15 6 2
 
+assert eq modbs 9 4 1
+assert eq modbs 17 3 2
+assert eq modbs 18 6 0
+assert eq divbs 5 2 2
+assert eq divbs 14 7 2
+assert eq divbs 15 6 2
+
 assert eq gcd 6 8 2
 assert eq gcd 12 16 4
 assert eq gcd 5 7 1
 assert eq gcd 13 13 13
 assert eq gcd 8 13 1
+
+assert eq gcdbs 6 8 2
+assert eq gcdbs 12 16 4
+assert eq gcdbs 5 7 1
+assert eq gcdbs 13 13 13
+assert eq gcdbs 8 13 1
 
 assert eq 18 18
 
@@ -75,3 +91,17 @@ assert eq listOfZeroes 0 nil
 assert eq compare inf 20 >
 
 assert eq call1 multipleApply function x to sum x 2 4 7 15
+
+assert eq d2 1 8 18
+assert eq d3 2 5 6 sqr 16
+assert eq sqr d2 8 1 d4 6 5 6 1
+assert eq pow 2 16 d5 6 5 5 3 6
+assert eq gcd d4 2 8 1 3 d4 8 6 3 3 d2 9 7
+assert eq gcdbs d4 2 8 1 3 d4 8 6 3 3 d2 9 7
+
+assert eq sqrt 16 4
+assert eq sqrt d5 6 5 5 3 6 d3 2 5 6
+
+assert eq cbrt d2 2 7 3
+assert eq cbrt d6 1 2 5 0 0 0 d2 5 0
+

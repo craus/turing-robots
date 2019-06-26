@@ -37,4 +37,10 @@
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Char' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>charAsserts 2</StartArguments>
+    <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
 </Project>

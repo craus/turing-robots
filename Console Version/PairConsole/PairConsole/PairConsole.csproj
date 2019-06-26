@@ -46,7 +46,6 @@
     <Compile Include="CommonExtensions.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Pair\CodePosition.cs" />
-    <Compile Include="Pair\DataObject.cs" />
     <Compile Include="Pair\DataObjects\Calculatable.cs" />
     <Compile Include="Pair\DataObjects\PairObject.cs" />
     <Compile Include="Pair\Debug.cs" />
@@ -75,9 +74,14 @@
     <Compile Include="Pair\Exceptions\RuntimeError.cs" />
     <Compile Include="Pair\Exceptions\PairError.cs" />
     <Compile Include="Pair\Expressions\IncompleteExpression.cs" />
+    <Compile Include="Pair\Functions\Builtin Functions\Console IO\Bin.cs" />
+    <Compile Include="Pair\Console IO\ConsoleIO.cs" />
+    <Compile Include="Pair\Console IO\Buffer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pair\Exceptions\" />
+    <Folder Include="Pair\Functions\Builtin Functions\Console IO\" />
+    <Folder Include="Pair\Console IO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
