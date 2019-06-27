@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Pair
 {
@@ -8,6 +9,7 @@ namespace Pair
 		public List<Calculatable> arguments;
 
 		public Object result;
+		public bool calculated = false;
 
 		public Calculatable(Function function, List<Calculatable> arguments) {
 			this.function = function;
@@ -16,15 +18,17 @@ namespace Pair
 
 		public Calculatable(Object result) {
 			this.result = result;
+			calculated = true;
 		}
 
 		public Object Calculate(bool explain = false) {
 			//Debug.LogFormat("{0} = ?", this);
-			if (result == null) {
+			if (!calculated) {
 				if (explain) {
 					Debug.Log(this);
 				}
 				result = function.Call(explain, arguments.ToArray());
+				calculated = true;
 			}
 			//Debug.LogFormat("{0} = {1}", this, PairObject.ToString(result));
 			return result;

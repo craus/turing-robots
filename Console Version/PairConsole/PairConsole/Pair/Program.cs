@@ -374,10 +374,12 @@ namespace Pair
 					Debug.LogFormat("ASSERTION FAILED {0}", a);
 				}
 			});
-			Debug.LogFormat("Asserts: {0}", asserts.Count);
-			outputs.ForEach(o => {
-				Debug.LogFormat("output: {0} is {1}", o, Object.Structure(o.Evaluate().Calculate()));
-			});
+			if (Debug.verbosity >= 1) {
+				Debug.LogFormat("Asserts: {0}", asserts.Count);
+				outputs.ForEach(o => {
+					Debug.LogFormat("output: {0} is {1}", o, Object.Structure(o.Evaluate().Calculate()));
+				});
+			}
 		}
 
 		public void Run() {

@@ -1,0 +1,46 @@
+use list
+
+# output streams
+
+outputStream bitOutputter data is
+	pair bitOutputter data
+
+bitOutputter outputStream is first outputStream
+streamData outputStream is second outputStream
+
+bsout ostream bit callback is 
+	call2 bitOutputter ostream bit callback
+
+stdout is outputStream 
+	function bit callback to 
+		bout bit function to 
+		call1 callback stdout
+	nil
+
+listoutWithData data is outputStream
+	function bit callback to
+		call1 callback listoutWithData pair bit data
+	data
+
+listout is listoutWithData nil
+
+# input streams
+
+inputStream bitInputter data is
+	pair bitInputter data
+
+bitInputter istream is first istream
+
+bsin istream bit callback is
+	call1 bitInputter istream callback
+
+stdin is inputStream
+	function callback to
+		bin function bit to
+		call2 callback bit stdin
+	nil
+
+listin list is inputStream
+	function callback to
+		call2 callback head list listin tail list
+	list

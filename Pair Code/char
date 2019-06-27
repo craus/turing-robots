@@ -2,6 +2,8 @@ use charBase
 use calls
 use listWithNumbers
 
+end is nil
+
 cin callback is
 	bin function a to
 	bin function b to
@@ -14,6 +16,22 @@ cin callback is
 	call1 callback char a b c d e f g h
 
 cout c callback is
+	give reverse c function c to
+	bout head c function to give tail c function c to
+	bout head c function to give tail c function c to
+	bout head c function to give tail c function c to
+	bout head c function to give tail c function c to
+	bout head c function to give tail c function c to
+	bout head c function to give tail c function c to
+	bout head c function to give tail c function c to
+	bout head c callback
+
+sout s callback is
+	if not s call0 callback
+	cout head s function to
+	sout tail s callback
+
+coutfe c callback is
 	forEach uncall bout reverse c callback
 
 getLine callback is
@@ -36,9 +54,6 @@ atoib s b result is
 
 atoi s is atoib s 10 0
 
-itoab x b is
-	reverse itoabr x b
-
 itoabr x b is
 	if not x then pair '0' nil
 	give divide x b function p to
@@ -46,5 +61,8 @@ itoabr x b is
 	if first p 
 	then pair c itoabr first p b
 	else pair c nil
+
+itoab x b is
+	reverse itoabr x b
 
 itoa x is itoab x 10

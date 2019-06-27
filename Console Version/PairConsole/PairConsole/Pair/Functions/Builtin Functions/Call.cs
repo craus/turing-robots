@@ -19,9 +19,12 @@ namespace Pair
 			return result;
 		}
 
-		protected override Object CallInternal(bool explain = false, params Calculatable[] arguments) {
-			var f = arguments[0].Calculate(explain) as FunctionObject;
-			return f.f.Call(explain, Args(arguments[1], f.f.arguments.Count).ToArray());
+		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
+			var f = argumentValues[0].Calculate(explain) as FunctionObject;
+			if (f == null) {
+				return null;
+			}
+			return f.f.Call(explain, Args(argumentValues[1], f.f.arguments.Count).ToArray());
 		}
 	}
 }

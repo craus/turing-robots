@@ -12,7 +12,7 @@ namespace Pair
 		public static Calculatable Call(Calculatable c) {
 			var pair = c.Calculate() as PairObject;
 			if (pair == null) {
-				return null;
+				return new Calculatable(null);
 			}
 			return pair.first;
 		}

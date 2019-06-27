@@ -7,8 +7,8 @@ namespace Pair
 {
 	public class ConsoleIO
 	{
-		public Buffer inputBuffer;
-		public Buffer outputBuffer;
+		public Buffer inputBuffer = new Buffer();
+		public Buffer outputBuffer = new Buffer();
 
 		public Calculatable one = new Calculatable(new PairObject(null, null));
 		public Calculatable zero = new Calculatable(null);

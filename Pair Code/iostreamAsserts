@@ -1,0 +1,13 @@
+use iostream
+
+assert bsout listout T function ostream to
+	eq streamData ostream pair T nil
+
+assert bsout listout 0 function ostream to
+	bsout ostream T function ostream to
+	eq streamData ostream pair T pair 0 nil
+
+assert bsout listout T function ostream to
+	bsout ostream T function ostream to
+	bsout ostream 0 function ostream to
+	eq streamData ostream pair 0 pair T pair T nil

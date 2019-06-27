@@ -15,6 +15,13 @@ public class Debug
 		Console.WriteLine(format.i(args));
 	}
 
+	public static void LogFormat(int requiredVerbosity, string format, params object[] args) {
+		if (verbosity < requiredVerbosity) {
+			return;
+		}
+		Console.WriteLine(format.i(args));
+	}
+
 	public static void LogWarning(string format, params object[] args) {
 		Console.WriteLine("WARNING: " + format.i(args));
 	}

@@ -7,6 +7,21 @@ assert eq
 		pair T nil
 	pair T T
 
+assert eq
+	call
+		function x y to pair y x
+		pair T nil
+	pair nil T
+
+assert eq
+	call function to pair T T
+		pair 0 pair T pair 0 nil
+	pair T T
+
+assert eq 
+	call0 function to pair 0 pair T 0
+	pair 0 pair T 0
+
 assert eq 
 	call1 uncall first 
 		pair 
@@ -50,3 +65,11 @@ assert eq
 	give pair x x function y to
 	pair 0 pair y x
 	pair 0 pair pair T T T
+
+assert eq
+	give T function x to
+	give pair x x function x to
+	give pair x nil function x to
+	give pair nil x function x to
+	pair x x
+	pair pair nil pair pair T T nil pair nil pair pair T T nil

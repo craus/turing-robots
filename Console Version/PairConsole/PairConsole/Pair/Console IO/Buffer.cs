@@ -31,7 +31,7 @@ namespace Pair
 		}
 
 		public void WriteBit(bool bit) {
-			Debug.LogFormat("WriteBit {0}", bit ? 1 : 0);
+			//Debug.LogFormat("WriteBit {0}", bit ? 1 : 0);
 			c = (c << 1);
 			if (bit) {
 				c |= 1;

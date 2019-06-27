@@ -1,0 +1,7 @@
+use char
+
+main is 
+	sout list 'H' list 'e' list 'l' list 'l' list 'o' list ','
+	list \s list 'w' list 'o' list 'r' list 'l' list 'd' list '!' 
+	list \n nil
+	end

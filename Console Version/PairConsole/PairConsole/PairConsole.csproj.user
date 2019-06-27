@@ -61,4 +61,16 @@
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'HelloWorld' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>helloWorld</StartArguments>
+    <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Iostream' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>iostreamAsserts 2</StartArguments>
+    <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
 </Project>
