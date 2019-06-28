@@ -1,6 +1,5 @@
 use std
 
 main is
-	readln function s to
-	give map split s whiteSpaces uncall atoi function a to
+	readlnIntList function a to
 	writeln itoa maxInList a uncall less end

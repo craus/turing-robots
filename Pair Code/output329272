@@ -1,0 +1,2 @@
+use std
+main is writelnIntList list 3 list 2 list 9 list 2 list 7 list 2 nil end

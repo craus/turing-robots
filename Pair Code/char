@@ -35,6 +35,9 @@ sout s callback is
 	cout head s function to
 	sout tail s callback
 
+write s callback is
+	sout s callback
+	
 writeln s callback is
 	sout s function to
 	cout \n callback

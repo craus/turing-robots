@@ -12,10 +12,10 @@ bisect list is
 merge list1 list2 less is 
 	if list1
 		if list2
-			if call1 less head list1 head list2
-				pair head list1 merge tail list1 list2
+			if call2 less head list1 head list2
+				pair head list1 merge tail list1 list2 less
 			else
-				pair head list2 merge list1 tail list2
+				pair head list2 merge list1 tail list2 less
 		else list1
 	else list2
 
@@ -27,3 +27,12 @@ mergeSort list less is
 				mergeSort second p less
 				less
 	else list
+
+# asserts
+
+use numbers
+
+assert eq mergeSort 
+	list 4 list 8 list 2 list 12 list 5 nil 
+	uncall less
+	list 2 list 4 list 5 list 8 list 12 nil

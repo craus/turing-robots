@@ -1,0 +1,5 @@
+use std
+
+main is 
+	readlnIntList function a to
+	writelnIntList mergeSort a uncall less end

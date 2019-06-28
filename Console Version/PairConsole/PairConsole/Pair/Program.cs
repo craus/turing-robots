@@ -76,6 +76,9 @@ namespace Pair
 			if (context == null) {
 				context = new Map<string, Expression>();
 			}
+			if (cur >= tokens.Count) {
+				throw new CompileError("Unexpected end of program", tokens.Last().position, trace);
+			}
 			trace.Push("read expression {0}{1}".i(
 				tokens[cur],
 				functions.ContainsKey(tokens[cur])
@@ -112,7 +115,7 @@ namespace Pair
 			var df = exp.function as DefinedFunction;
 			if (df != null) {
 				if (df.body == null) {
-					Debug.LogWarning(
+					Debug.LogWarning(1,
 						"{3} Function definition deduced: {0} [{2} args] ({1})", 
 						df.name, 
 						df.position, 
@@ -316,6 +319,7 @@ namespace Pair
 				string line = lines[i];
 				SplitLineToTokens(file, i, line, result);
 			}
+			ignoreMode = false;
 			return result;
 		}
 

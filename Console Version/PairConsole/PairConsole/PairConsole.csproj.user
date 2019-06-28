@@ -75,7 +75,13 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'A+B' ">
     <StartAction>Project</StartAction>
-    <StartArguments>a+b</StartArguments>
+    <StartArguments>a+b 2 &lt; input.txt</StartArguments>
+    <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'SortInput' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>sortInput 2 &lt; input.txt</StartArguments>
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>

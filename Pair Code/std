@@ -1,3 +1,15 @@
 use char
 use split
 use debug
+use mergeSort
+
+readlnIntList callback is
+	readln function s to
+	give map split s whiteSpaces uncall atoi callback
+
+writelnIntList a callback is
+	if not a then 
+		writeln nil callback
+	write itoa head a function to
+	write if tail a then list \s nil else nil function to
+	writelnIntList tail a callback
