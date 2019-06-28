@@ -1,2 +1,6 @@
 Нет возможности показать вычислительный процесс пользователю
-Нет возможности выполнять цепочки действий
+list.forEach compiles but must not
+need ability to test io functions
+random is too slow?
+need random tests
+need interactive mode

@@ -1,0 +1,13 @@
+use std
+
+program seed is 
+	give rnd seed function seed to
+	writeln itoa mod seed 10 function to
+	readln function s to
+	program seed
+
+main is 
+	for 10 function callback to 
+		cout '*' callback
+	writeln nil 
+	end

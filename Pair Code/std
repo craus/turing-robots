@@ -2,6 +2,8 @@ use char
 use split
 use debug
 use mergeSort
+use random
+use for
 
 readlnIntList callback is
 	readln function s to

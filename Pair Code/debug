@@ -32,6 +32,15 @@ debug x is
 	concat debug second x
 	nil
 
+debugBase x is
+	if not x 'nil'
+	concat 'pair' 
+	concat list \s nil 
+	concat debugBase first x 
+	concat list \s nil
+	concat debugBase second x
+	nil
+
 debugWithDepth x depth is
 	if not x list '0' nil
 	if not depth list '?' nil

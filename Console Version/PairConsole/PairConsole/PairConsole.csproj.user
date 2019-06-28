@@ -85,4 +85,10 @@
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Random' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>random 2</StartArguments>
+    <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
 </Project>

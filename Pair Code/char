@@ -55,9 +55,7 @@ readall callback is
 	readall function t to
 	call1 callback pair c t
 
-
 whiteSpaces is list \n list \t list \s nil
-
 
 isLetter c is
 	give ord c function c to
