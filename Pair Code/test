@@ -1,0 +1,10 @@
+use char
+use debug
+
+main is 
+	eof function e to
+	writeln debug e function to
+	eof function e to
+	writeln debug e function to
+	cin function c to
+	writeln debug c end	

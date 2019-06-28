@@ -1,3 +1,2 @@
-Test file for copy problem.
-it contains 03 lines.
-The last line does not end properly.
+2 3 5
+42 17

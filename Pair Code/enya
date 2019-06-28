@@ -1,7 +1,9 @@
 use char
 use split
+use debug
 
 main is 
-	readln function s to
-	split3 s whiteSpaces function n a b to
-	writeln itoa mult atoi n mult atoi a mult atoi b 2 end
+	readInt function n to
+	readInt function a to
+	readInt function b to
+	writeln itoa mult n mult a mult b 2 end

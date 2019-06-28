@@ -1,3 +1,2 @@
-tseT elif rof ypoc melborp.
-ti sniatnoc 03 senil.
-ehT tsal enil seod ton dne ylreporp.
+WARNING: split 16:3 Function definition deduced: split [2 args] (split 18:1)
+5

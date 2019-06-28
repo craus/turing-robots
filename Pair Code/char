@@ -52,47 +52,17 @@ readall callback is
 	readall function t to
 	call1 callback pair c t
 
-'nil' is list 'n' list 'i' list 'l' nil
-'pair' is list 'p' list 'a' list 'i' list 'r' nil
-
-isBit x is
-	either not x eq T x
-
-isListOfBit x n is
-	if not n not x
-	both isBit head x 
-	isListOfBit tail x dec n
-
-isChar x is
-	isListOfBit x 8
 
 whiteSpaces is list \n list \t list \s nil
 
-debug x is
-	if not x 'nil'
-	if eq x T list 'T' nil
-	if isChar x list ''' list x list ''' nil
-	concat 'pair' 
-	concat list \s nil 
-	concat debug first x 
-	concat list \s nil
-	concat debug second x
-	nil
-
-debugWithDepth x depth is
-	if not x list '0' nil
-	if not depth list '?' nil
-	concat 'pair' 
-	concat list \s nil 
-	concat debugWithDepth first x dec depth
-	concat list \s nil
-	concat debugWithDepth second x dec depth
-	nil	
 
 isLetter c is
 	give ord c function c to
 	either between c ord 'A' ord 'Z'
 	between c ord 'a' ord 'z'
+
+isDigit c is
+	between ord c ord '0' ord '9'
 
 coutfe c callback is
 	forEach uncall bout reverse c callback
@@ -103,7 +73,6 @@ getLine callback is
 	cin function c to
 	getLine function s to
 	call1 callback pair c s
-
 
 atoib s b result is 
 	if not s then result
@@ -126,3 +95,15 @@ itoab x b is
 	reverse itoabr x b
 
 itoa x is itoab x 10
+
+readNumber callback is
+	eof function eof to
+	if eof call1 callback nil
+	cin function c to
+	if not isDigit c call1 callback nil
+	readNumber function t to
+	call1 callback pair c t
+
+readInt callback is
+	readNumber function s to
+	call1 callback atoi s

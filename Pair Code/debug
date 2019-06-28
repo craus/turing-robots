@@ -1,0 +1,43 @@
+use char
+
+'nil' is list 'n' list 'i' list 'l' nil
+'pair' is list 'p' list 'a' list 'i' list 'r' nil
+
+isBit x is
+	either not x eq T x
+
+isBitListLength x n is
+	if not n not x
+	both x
+	both isBit head x 
+	isBitListLength tail x dec n
+
+isChar x is
+	isBitListLength x 8
+
+isBitList x is
+	if not x true
+	both isBit head x
+	isBitList tail x
+
+debug x is
+	if not x 'nil'
+	if eq x T list 'T' nil
+	if isChar x list ''' list x list ''' nil
+	if isBitList x itoa x
+	concat 'pair' 
+	concat list \s nil 
+	concat debug first x 
+	concat list \s nil
+	concat debug second x
+	nil
+
+debugWithDepth x depth is
+	if not x list '0' nil
+	if not depth list '?' nil
+	concat 'pair' 
+	concat list \s nil 
+	concat debugWithDepth first x dec depth
+	concat list \s nil
+	concat debugWithDepth second x dec depth
+	nil	
