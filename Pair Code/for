@@ -5,3 +5,21 @@ for n do callback is
 	call1 do function to
 	for dec n do callback
 
+# a, b: integer
+# iteration: Action(integer, afterIteration)
+# 	afterIteration: Action
+# finally: Action
+fori a b iteration finally is
+	if greater a b call0 finally
+	call2 iteration a function to
+	fori inc a b iteration finally
+
+# a, b: integer
+# state: any object
+# changeState: Action(integer, state, withChangedState)
+#		withChangedState: Action(state)
+# actionWithResult: Action(state)
+foris a b state changeState actionWithResult is
+	if greater a b call1 actionWithResult state
+	call3 changeState a state function changedState to
+	foris inc a b changedState changeState actionWithResult

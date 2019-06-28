@@ -49,7 +49,11 @@ namespace PairConsole
 			if (args.Length >= 2) {
 				Debug.verbosity = int.Parse(args[1]);
 			}
-			
+
+			if (args.Length == 0) {
+				Interactor.Run();
+				return;
+			} 
 
 			Stopwatch watch = new Stopwatch();
 			watch.Start();

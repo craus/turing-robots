@@ -5,8 +5,18 @@ random.a is sum mult
 	d6 1 0 0 0 0 0 
 	d5 0 3 9 1 7
 
+mod2_48 x is 
+	substr x 0 d2 4 8
+
+#assert mod2_48
+
 rnd seed is 
 	give pow 2 d2 4 8 function m to
 	give random.a	function a to 
 	give 11 function c to
 	mod sum mult seed a c m
+
+fastrnd seed is 
+	give random.a	function a to 
+	give 11 function c to
+	mod2_48 sum mult seed a c

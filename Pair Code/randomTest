@@ -6,8 +6,14 @@ program seed is
 	readln function s to
 	program seed
 
+main is writeln itoa mod fastrnd fastrnd fastrnd 17 2 end
+/*
 main is 
-	for 10 function callback to 
-		cout '*' callback
+	foris 1 10 rnd 17 function i state next to 
+		give fastrnd state function state to
+		write itoa mod state 2 function to
+		write pair \s nil function to
+		call1 next state
+	function _ to
 	writeln nil 
 	end

@@ -80,6 +80,7 @@
     <Compile Include="Pair\DataObjects\CommandObject.cs" />
     <Compile Include="Pair\Functions\Builtin Functions\Console IO\Bout.cs" />
     <Compile Include="Pair\Functions\Builtin Functions\Console IO\Eof.cs" />
+    <Compile Include="Interactor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pair\Exceptions\" />

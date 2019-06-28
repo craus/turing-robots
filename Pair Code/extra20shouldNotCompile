@@ -1,0 +1,15 @@
+use std
+
+program seed is 
+	give rnd seed function seed to
+	writeln itoa mod seed 10 function to
+	readln function s to
+	program seed
+
+main is 
+	fori 1 10 function i next to 
+		write itoa log2 rnd i 20 function to
+		write pair \s nil next
+	function to
+	writeln nil 
+	end

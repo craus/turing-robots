@@ -1,6 +1,8 @@
 # uncall f is value
 # call f argsList is function
 
+send x y is pair x y
+
 call0 f is call f nil
 call1 f x is call f pair x nil
 call2 f x y is call f pair x pair y nil

@@ -430,6 +430,9 @@ namespace Pair
 			return position.ToString();
 		}
 
+		public Program() {
+		}
+
 		public Program(string fileName) {
 			try {
 				Build(fileName);
