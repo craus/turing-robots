@@ -1,0 +1,6 @@
+use std
+
+main is
+	readln function s to
+	give map split s whiteSpaces uncall atoi function a to
+	writeln itoa sumList a uncall sum 0 end
