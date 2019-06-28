@@ -1,0 +1,17 @@
+use split
+use char
+
+assert eq splitOnce 
+	list '2' list \s list '3' list 'g' nil
+	list \s nil
+	pair list '2' nil list '3' list 'g' nil
+
+assert eq splitOnce
+	list '2' list \s list '3' list 'g' nil
+	list '2' nil
+	pair nil list \s list '3' list 'g' nil
+
+assert eq split
+	list '2' list \s list '3' list 'g' nil
+	list \s nil
+	list list '2' nil list list '3' list 'g' nil nil

@@ -1,0 +1,4 @@
+use char 
+main is 
+	readln function s to
+	writeln s uncall main

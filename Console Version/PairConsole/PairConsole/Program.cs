@@ -55,6 +55,9 @@ namespace PairConsole
 			watch.Start();
 			var program = new Pair.Program(args[0]);
 			Debug.LogFormat(1, "Compile time: {0}", watch.ElapsedMilliseconds);
+			if (program.error != null) {
+				return;
+			}
 			watch.Restart();
 			program.Run();
 			Debug.LogFormat(1, "Run time: {0}", watch.ElapsedMilliseconds);

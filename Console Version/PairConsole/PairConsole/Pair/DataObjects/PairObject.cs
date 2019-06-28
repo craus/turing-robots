@@ -7,6 +7,9 @@ namespace Pair
 		public Calculatable second;
 
 		public PairObject(Calculatable first, Calculatable second) {
+			if (first == null || second == null) {
+				throw new System.Exception("Pair with null");
+			}
 			this.first = first;
 			this.second = second;
 			++lastID;

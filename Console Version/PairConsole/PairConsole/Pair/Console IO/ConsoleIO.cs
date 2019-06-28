@@ -10,8 +10,8 @@ namespace Pair
 		public Buffer inputBuffer = new Buffer();
 		public Buffer outputBuffer = new Buffer();
 
-		public Calculatable one = new Calculatable(new PairObject(null, null));
-		public Calculatable zero = new Calculatable(null);
+		public static Calculatable zero = new Calculatable(null);
+		public static Calculatable one = new Calculatable(new PairObject(zero, zero));
 
 		public void Bin(Action<Calculatable> callback) {
 			bool bit = inputBuffer.ReadBit();

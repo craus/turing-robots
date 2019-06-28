@@ -31,6 +31,51 @@ sout s callback is
 	cout head s function to
 	sout tail s callback
 
+writeln s callback is
+	sout s function to
+	cout \n callback
+
+readln callback is
+	cin function c to
+	if eq c \n call1 callback nil
+	readln function t to
+	call1 callback list c t
+
+'nil' is list 'n' list 'i' list 'l' nil
+'pair' is list 'p' list 'a' list 'i' list 'r' nil
+
+isBit x is
+	either not x eq T x
+
+isListOfBit x n is
+	if not n not x
+	both isBit head x 
+	isListOfBit tail x dec n
+
+isChar x is
+	isListOfBit x 8
+
+debug x is
+	if not x 'nil'
+	if eq x T list 'T' nil
+	if isChar x list ''' list x list ''' nil
+	concat 'pair' 
+	concat list \s nil 
+	concat debug first x 
+	concat list \s nil
+	concat debug second x
+	nil
+
+debugWithDepth x depth is
+	if not x list '0' nil
+	if not depth list '?' nil
+	concat 'pair' 
+	concat list \s nil 
+	concat debugWithDepth first x dec depth
+	concat list \s nil
+	concat debugWithDepth second x dec depth
+	nil	
+
 coutfe c callback is
 	forEach uncall bout reverse c callback
 

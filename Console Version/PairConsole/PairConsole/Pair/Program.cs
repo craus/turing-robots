@@ -139,6 +139,9 @@ namespace Pair
 						if (tokens[i - j] == IS) {
 							break;
 						}
+						if (i-j-1 >= 0 && tokens[i - j - 1] == USE) {
+							continue;
+						}
 						if (j < shortestIs[tokens[i - j]].Item1) {
 							shortestIs[tokens[i - j]] = new Tuple<int, Token>(j, tokens[i - j]);
 						}

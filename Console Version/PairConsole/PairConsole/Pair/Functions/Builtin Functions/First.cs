@@ -17,10 +17,16 @@ namespace Pair
 			return pair.first;
 		}
 
-		protected override Object CallInternal(bool explain = false, params Calculatable[] arguments) {
-			var pair = arguments[0].Calculate() as PairObject;
+		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
+			if (argumentValues.Length < 1) {
+				throw new System.Exception("Too few arguments");
+			}
+			var pair = argumentValues[0].Calculate() as PairObject;
 			if (pair == null) {
 				return null;
+			}
+			if (pair.first == null) {
+				throw new System.Exception("Pair with first = null");
 			}
 			return pair.first.Calculate();
 		}

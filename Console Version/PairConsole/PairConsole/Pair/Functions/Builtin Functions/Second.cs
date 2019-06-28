@@ -17,8 +17,8 @@ namespace Pair
 			return pair.second;
 		}
 	
-		protected override Object CallInternal(bool explain = false, params Calculatable[] arguments) {
-			var pair = arguments[0].Calculate() as PairObject;
+		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
+			var pair = argumentValues[0].Calculate() as PairObject;
 			if (pair == null) {
 				return null;
 			}

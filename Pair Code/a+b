@@ -1,0 +1,16 @@
+use char 
+use listWithNumbers
+use split
+
+main is 
+	readln function s to
+	give split s list \s nil function tokens to
+	writeln itoa sum atoi head tokens atoi head tail tokens end
+
+/*
+
+
+main is writeln debugWithDepth \n 8 end
+
+
+*/

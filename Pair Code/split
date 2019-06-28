@@ -16,5 +16,5 @@ splitInner splittedOnce separators is
 		split second splittedOnce separators
 
 split list separators is
-	if not intersect list separators then list
+	if not intersect list separators then pair list nil
 	splitInner splitOnce list separators separators
