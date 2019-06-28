@@ -1,0 +1,8 @@
+use char
+
+main is 
+	eof function eof to
+	if eof end
+	cin function c to
+	cout c uncall main
+	

@@ -1,0 +1,12 @@
+use char
+
+readWord s is
+	eof function eof to
+	if eof sout s end
+	cin function c to
+	if isLetter c 
+	then readWord pair c s
+	else sout s function to
+	cout c uncall main
+
+main is readWord nil

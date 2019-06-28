@@ -26,6 +26,10 @@ cout c callback is
 	bout head c function to give tail c function c to
 	bout head c callback
 
+ord c is normalize c
+
+chr x is alignNumber x 8
+
 sout s callback is
 	if not s call0 callback
 	cout head s function to
@@ -41,6 +45,13 @@ readln callback is
 	readln function t to
 	call1 callback list c t
 
+readall callback is
+	eof function eof to
+	if eof call1 callback nil
+	cin function c to
+	readall function t to
+	call1 callback pair c t
+
 'nil' is list 'n' list 'i' list 'l' nil
 'pair' is list 'p' list 'a' list 'i' list 'r' nil
 
@@ -54,6 +65,7 @@ isListOfBit x n is
 
 isChar x is
 	isListOfBit x 8
+
 
 debug x is
 	if not x 'nil'
@@ -76,6 +88,11 @@ debugWithDepth x depth is
 	concat debugWithDepth second x dec depth
 	nil	
 
+isLetter c is
+	give ord c function c to
+	either between c ord 'A' ord 'Z'
+	between c ord 'a' ord 'z'
+
 coutfe c callback is
 	forEach uncall bout reverse c callback
 
@@ -86,9 +103,6 @@ getLine callback is
 	getLine function s to
 	call1 callback pair c s
 
-ord c is normalize c
-
-chr x is alignNumber x 8
 
 atoib s b result is 
 	if not s then result

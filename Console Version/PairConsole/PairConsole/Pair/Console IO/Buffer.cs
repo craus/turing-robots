@@ -26,6 +26,9 @@ namespace Pair
 		}
 
 		public bool Eof() {
+			if (cnt == -1) {
+				return Console.In.Peek() == -1;
+			}
 			//Debug.LogFormat("Eof");
 			return c == -1;
 		}

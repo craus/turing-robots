@@ -108,12 +108,23 @@ compare x y is
 	if both not x y then <
 	if neither x y then =
 	else compareInner x y compare tail x tail y
-	
+
 less x y is eq compare x y <
 greater x y is eq compare x y >
 equal x y is eq compare x y =
 lessOrEqual x y is not eq compare x y >
 greaterOrEqual x y is not eq compare x y <
+	
+between x a b is
+	both greaterOrEqual x a lessOrEqual x b
+
+<= is pair 0 2
+>= is pair 2 0
+
+cmp x s y is
+	either eq s compare x y
+	either both eq s <= lessOrEqual x y
+	both eq s >= greaterOrEqual x y
 
 log2 x is
 	if less x 2 then 0

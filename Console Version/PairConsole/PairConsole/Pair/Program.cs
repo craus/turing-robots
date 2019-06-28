@@ -14,6 +14,7 @@ namespace Pair
 		public static int maxDepth = 0;
 		public static int callCnt = 0;
 
+		const string DEF = "def";
 		const string IS = "is";
 		const string ASSERT = "assert";
 		const string EXPLAIN = "explain";

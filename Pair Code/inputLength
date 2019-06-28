@@ -1,0 +1,5 @@
+use char
+
+main is 
+	readall function s to
+	writeln itoa size s end
