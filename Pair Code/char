@@ -66,6 +66,7 @@ isListOfBit x n is
 isChar x is
 	isListOfBit x 8
 
+whiteSpaces is list \n list \t list \s nil
 
 debug x is
 	if not x 'nil'

@@ -18,3 +18,8 @@ splitInner splittedOnce separators is
 split list separators is
 	if not intersect list separators then pair list nil
 	splitInner splitOnce list separators separators
+
+split3 list separators callback is
+	give split list separators function tokens to
+	call3 callback head tokens head tail tokens head tail tail tokens
+
