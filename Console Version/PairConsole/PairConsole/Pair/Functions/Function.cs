@@ -12,7 +12,7 @@ namespace Pair
 		public static Stack<string> stack = new Stack<string>();
 		//public Dictionary< hash;
 
-		protected abstract Object CallInternal(bool explain = false, params Calculatable[] argumentValues);
+		protected abstract Object CallInternal(bool explain, List<Calculatable> argumentValues);
 
 		public Map<string, Expression> Context() {
 			var result = new Map<string, Expression>();
@@ -21,6 +21,10 @@ namespace Pair
 		}
 
 		public Object Call(bool explain = false, params Calculatable[] argumentValues) {
+			return Call(explain, argumentValues.ToList());
+		}
+
+		public Object Call(bool explain, List<Calculatable> argumentValues) {
 			if (stack.Count > Program.MAX_DEPTH) {
 				throw new RuntimeError("Stack Overflow", stack);
 			}

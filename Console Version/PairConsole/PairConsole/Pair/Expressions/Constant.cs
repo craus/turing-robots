@@ -12,13 +12,13 @@ namespace Pair
 
 		public override Calculatable Evaluate(
 			IArgumentable argumentable,
-			bool explain = false, 
-			params Calculatable[] argumentValues
+			bool explain, 
+			List<Calculatable> argumentValues
 		) {
 			return x;
 		}
 
-		public override Expression Substitute(IArgumentable argumentable, bool explain = false, params Expression[] argumentValues) {
+		public override Expression Substitute(IArgumentable argumentable, bool explain, List<Expression> argumentValues) {
 			return x;
 		}
 

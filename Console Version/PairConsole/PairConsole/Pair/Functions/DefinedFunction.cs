@@ -14,7 +14,7 @@ namespace Pair
 			parent = this;
 		}
 
-		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
+		protected override Object CallInternal(bool explain, List<Calculatable> argumentValues) {
 			var exp = body.Evaluate(parent, explain, argumentValues);
 			if (explain) {
 				var args = argumentValues.ToList().ExtToString(format: "({0})");

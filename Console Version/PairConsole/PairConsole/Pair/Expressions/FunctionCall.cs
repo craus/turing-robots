@@ -18,8 +18,8 @@ namespace Pair
 
 		public override Calculatable Evaluate(
 			IArgumentable argumentable,
-			bool explain = false, 
-			params Calculatable[] argumentValues
+			bool explain, 
+			List<Calculatable> argumentValues
 		) {
 			if (explain) {
 				//Debug.Log(this);
@@ -29,8 +29,8 @@ namespace Pair
 
 		public override Expression Substitute(
 			IArgumentable argumentable,
-			bool explain = false,
-			params Expression[] argumentValues
+			bool explain,
+			List<Expression> argumentValues
 		) {
 			if (explain) {
 				//Debug.Log(this);

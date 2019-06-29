@@ -34,11 +34,11 @@ namespace Pair
 			return result;
 		}
 
-		public override Calculatable Evaluate(IArgumentable argumentable, bool explain = false, params Calculatable[] argumentValues) {
+		public override Calculatable Evaluate(IArgumentable argumentable, bool explain, List<Calculatable> argumentValues) {
 			return this;
 		}
 
-		public override Expression Substitute(IArgumentable argumentable, bool explain = false, params Expression[] argumentValues) {
+		public override Expression Substitute(IArgumentable argumentable, bool explain, List<Expression> argumentValues) {
 			return this;
 		}
 

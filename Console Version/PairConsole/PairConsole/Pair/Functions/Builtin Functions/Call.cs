@@ -19,7 +19,7 @@ namespace Pair
 			return result;
 		}
 
-		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
+		protected override Object CallInternal(bool explain, List<Calculatable> argumentValues) {
 			var f = argumentValues[0].Calculate(explain) as FunctionObject;
 			if (f == null) {
 				return null;

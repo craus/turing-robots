@@ -28,21 +28,21 @@ namespace Pair
 
 		public override Calculatable Evaluate(
 			IArgumentable argumentable,
-			bool explain = false, 
-			params Calculatable[] argumentValues
+			bool explain, 
+			List<Calculatable> argumentValues
 		) {
 			var f = new DefinedFunction();
 			f.arguments = arguments;
 			f.name = "<lambda>";
-			f.body = body.Substitute(argumentable, explain, argumentValues);
+			f.body = body.Substitute(argumentable, explain, argumentValues.Cast<Expression>().ToList());
 			f.parent = parent;
 			return new Calculatable(new FunctionObject(f));
 		}
 
 		public override Expression Substitute(
 			IArgumentable argumentable,
-			bool explain = false,
-			params Expression[] argumentValues
+			bool explain,
+			List<Expression> argumentValues
 		) {
 			return new Lambda(parent, arguments, body.Substitute(
 				argumentable,

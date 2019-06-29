@@ -14,7 +14,7 @@ namespace Pair
 			arguments.Add(new Argument(this, "callback", 1));
 		}
 
-		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
+		protected override Object CallInternal(bool explain, List<Calculatable> argumentValues) {
 			return new CommandObject(() => {
 				var bit = argumentValues[0].Calculate(explain) as PairObject;
 				Func<CommandObject> nextFunction = null;

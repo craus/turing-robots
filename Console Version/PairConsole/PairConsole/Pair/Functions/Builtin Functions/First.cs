@@ -17,8 +17,8 @@ namespace Pair
 			return pair.first;
 		}
 
-		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
-			if (argumentValues.Length < 1) {
+		protected override Object CallInternal(bool explain = false, List<Calculatable> argumentValues = null) {
+			if (argumentValues.Count < 1) {
 				throw new System.Exception("Too few arguments");
 			}
 			var pair = argumentValues[0].Calculate() as PairObject;

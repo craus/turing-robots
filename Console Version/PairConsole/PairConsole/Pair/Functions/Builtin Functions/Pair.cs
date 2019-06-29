@@ -10,7 +10,7 @@ namespace Pair
 			arguments.Add(new Argument(this, "y", 1));
 		}
 
-		protected override Object CallInternal(bool explain = false, params Calculatable[] arguments) {
+		protected override Object CallInternal(bool explain, List<Calculatable> arguments) {
 			return new PairObject(arguments[0], arguments[1]);
 		}
 	}
