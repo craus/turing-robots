@@ -93,27 +93,20 @@ fastpow x y is
 		then mult x sqr fastpow x half y 
 		else sqr fastpow x half y
 
-< is pair 0 1
-> is pair 1 0
-= is pair 0 0
-
-compareInner x y comparedTails is
-	if not eq comparedTails = then comparedTails
-	if both head x not head y >
-	if both not head x head y <
-	else = 
+< is pair 0 T
+> is pair T 0
+= is 0
 
 compare x y is
-	if both x not y then >
-	if both not x y then <
-	if neither x y then =
-	else compareInner x y compare tail x tail y
+	if x if y 
+		either compare second x second y compare first x first y
+	else > else if y then < else =
 
-less x y is eq compare x y <
-greater x y is eq compare x y >
-equal x y is eq compare x y =
-lessOrEqual x y is not eq compare x y >
-greaterOrEqual x y is not eq compare x y <
+less x y is second compare x y
+greater x y is first compare x y
+equal x y is not compare x y
+lessOrEqual x y is not greater x y
+greaterOrEqual x y is not less x y
 	
 between x a b is
 	both greaterOrEqual x a lessOrEqual x b
