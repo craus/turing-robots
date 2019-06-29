@@ -46,7 +46,6 @@
     <Compile Include="CommonExtensions.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Pair\CodePosition.cs" />
-    <Compile Include="Pair\DataObjects\Calculatable.cs" />
     <Compile Include="Pair\DataObjects\PairObject.cs" />
     <Compile Include="Pair\Debug.cs" />
     <Compile Include="Pair\Expressions\Argument.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Pair\Functions\Builtin Functions\Console IO\Bout.cs" />
     <Compile Include="Pair\Functions\Builtin Functions\Console IO\Eof.cs" />
     <Compile Include="Interactor.cs" />
+    <Compile Include="Pair\Expressions\Calculatable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pair\Exceptions\" />

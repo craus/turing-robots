@@ -82,10 +82,13 @@ atoib s b is
 
 atoi s is atoib s 10 
 
+digitChar d is 
+	chr sum d2 4 8 d
+
 itoabr x b is
 	if not x then pair '0' nil
 	give divide x b function p to
-	give chr sum ord '0' second p function c to
+	give digitChar second p function c to
 	if first p 
 	then pair c itoabr first p b
 	else pair c nil

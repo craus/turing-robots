@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Program' ">
     <StartAction>Project</StartAction>
-    <StartArguments>perfTest 2</StartArguments>
+    <StartArguments>perfTest 3</StartArguments>
     <StartWorkingDirectory>..\..\..\Pair Code</StartWorkingDirectory>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>

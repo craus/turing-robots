@@ -10,7 +10,7 @@ namespace Pair
 {
 	public class Program
 	{
-		public const int MAX_DEPTH = 10000;
+		public const int MAX_DEPTH = 100000;
 		public static int maxDepth = 0;
 		public static int callCnt = 0;
 
@@ -399,19 +399,17 @@ namespace Pair
 					Debug.LogFormat("output: {0} is {1}", o, Object.Structure(o.Evaluate().Calculate()));
 				});
 			}
-			if (Debug.verbosity >= 3) {
-				Debug.LogFormat("Functions: {0}", functions.ExtToString(
-					delimiter: "\n\n",
-					format: "{0}",
-					elementToString: f => {
-						var df = f.Value as DefinedFunction;
-						if (df != null) {
-							return df.Source();
-						}
-						return f.Value.ToString();
+			Debug.LogFormat(4, "Functions: {0}", functions.ExtToString(
+				delimiter: "\n\n",
+				format: "{0}",
+				elementToString: f => {
+					var df = f.Value as DefinedFunction;
+					if (df != null) {
+						return df.Source();
 					}
-				));
-			}
+					return f.Value.ToString();
+				}
+			));
 		}
 
 		public void Run() {

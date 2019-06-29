@@ -66,6 +66,13 @@ namespace PairConsole
 			program.Run();
 			Debug.LogFormat(1, "Run time: {0}", watch.ElapsedMilliseconds);
 			Debug.LogFormat(1, "Max stack: {0}", Pair.Program.maxDepth);
+			Pair.Function.totalTime.Keys.ToList().ForEach(key => {
+				if (Pair.Function.totalTime[key].ElapsedMilliseconds <= 0) {
+					return;
+				}
+				Debug.LogFormat(3, "{0} selftime: {1}", key, Pair.Function.selfTime[key].ElapsedMilliseconds);
+				Debug.LogFormat(3, "{0} totaltime: {1}", key, Pair.Function.totalTime[key].ElapsedMilliseconds);
+			});
 			//writer.Close();
 			//ostrm.Close();
 		}

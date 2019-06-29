@@ -11,10 +11,21 @@ same x y is if x y not y
 imply x y is either not x y
 
 eq x y is 
-	either 
+	if x 
+		if y
+			if eq first x first y
+				eq second x second y
+			false
+		false
+	not y
+/*
+
+		either 
 		neither x y
 		both 
 			both x y
 			both 
 				eq first x first y
 				eq second x second y
+
+*/

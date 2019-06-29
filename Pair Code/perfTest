@@ -2,8 +2,8 @@ use std
 
 main is
 	give pow 2 d2 4 8 function p to
-	foris 1 2 17 function i s next to
-		foris 1 2 s function j s next to
+	foris 1 3 17 function i s next to
+		foris 1 3 s function j s next to
 			write itoa i function to
 			write pair \s nil function to
 			write itoa j function to
@@ -14,4 +14,5 @@ main is
 		function s to
 		call1 next s
 	function s to
+	writeln itoa s 
 	end

@@ -12,6 +12,11 @@ namespace Pair
 		public static Stack<string> stack = new Stack<string>();
 		//public Dictionary< hash;
 
+		public static string selected = "itoa";
+		public static Map<Function, System.Diagnostics.Stopwatch> totalTime = new Map<Function, System.Diagnostics.Stopwatch>(() => new System.Diagnostics.Stopwatch());
+		public static Map<Function, System.Diagnostics.Stopwatch> selfTime = new Map<Function, System.Diagnostics.Stopwatch>(() => new System.Diagnostics.Stopwatch());
+		public static System.Diagnostics.Stopwatch current = null;
+
 		protected abstract Object CallInternal(bool explain = false, params Calculatable[] argumentValues);
 
 		public Map<string, Expression> Context() {
@@ -24,6 +29,16 @@ namespace Pair
 			if (stack.Count > Program.MAX_DEPTH) {
 				throw new RuntimeError("Stack Overflow", stack);
 			}
+			System.Diagnostics.Stopwatch outer = current;
+			if (Debug.verbosity >= 3) {
+				
+				if (current != null) {
+					current.Stop();
+				}
+				current = selfTime[this];
+				current.Start();
+				totalTime[this].Start();
+			}
 			stack.Push(name);
 			Program.callCnt++;
 			if (stack.Count > Program.maxDepth) {
@@ -34,6 +49,11 @@ namespace Pair
 			}
 			var result = CallInternal(explain, argumentValues);
 			stack.Pop();
+			if (Debug.verbosity >= 3) {
+				totalTime[this].Stop();
+				current.Stop();
+				current = outer;
+			}
 			return result;
 		}
 
