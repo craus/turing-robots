@@ -8,6 +8,8 @@ namespace Pair
 		public Function function;
 		public List<Expression> arguments = new List<Expression>();
 
+		public Calculatable evaluated = null;
+
 		public FunctionCall() {
 		}
 
@@ -24,7 +26,11 @@ namespace Pair
 			if (explain) {
 				//Debug.Log(this);
 			}
-			return new Calculatable(function, arguments.Select(expr => expr.Evaluate(argumentable, explain, argumentValues)).ToList());
+			var newC = new Calculatable(function, arguments.Select(expr => expr.Evaluate(argumentable, explain, argumentValues)).ToList());
+			if (!newC.Same(evaluated)) {
+				evaluated = newC;
+			}
+			return evaluated;
 		}
 
 		public override Expression Substitute(
@@ -35,13 +41,25 @@ namespace Pair
 			if (explain) {
 				//Debug.Log(this);
 			}
-			return new FunctionCall(
+			var newFC = new FunctionCall(
 				function, 
 				arguments.Select(expr => expr.Substitute(
 					argumentable, explain, argumentValues)).ToList()
 			);
+			if (Same(newFC)) {
+				return this;
+			}
+			return newFC;
 		}
-		//public 
+
+		bool Same(FunctionCall fc) {
+			for (int i = 0; i < arguments.Count; i++) {
+				if (arguments[i] != fc.arguments[i]) {
+					return false;
+				}
+			}
+			return true;
+		}
 
 		public override string ToString() {
 			return "{0}{1}".i(function.name, arguments.Count > 0 ? arguments.ExtToString(delimiter: " ", format: " {0}") : "");

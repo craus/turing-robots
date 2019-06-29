@@ -19,7 +19,7 @@ namespace Pair
 		}
 
 		public override Expression Substitute(IArgumentable argumentable, bool explain = false, params Expression[] argumentValues) {
-			return x;
+			return this;
 		}
 
 		public override string ToString() {

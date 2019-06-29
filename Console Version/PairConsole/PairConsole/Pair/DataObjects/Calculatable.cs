@@ -21,6 +21,24 @@ namespace Pair
 			calculated = true;
 		}
 
+		public bool Same(Calculatable other) {
+			if (other == null) {
+				return false;
+			}
+			if (calculated) {
+				return other.calculated && other.result == this.result;
+			}
+			if (other.function != this.function) {
+				return false;
+			}
+			for (int i = 0; i < arguments.Count; i++) {
+				if (other.arguments[i] != arguments[i]) {
+					return false;
+				}
+			}
+			return true;
+		}
+
 		public Object Calculate(bool explain = false) {
 			//Debug.LogFormat("{0} = ?", this);
 			if (!calculated) {
