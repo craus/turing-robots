@@ -27,7 +27,7 @@ isNumber x is
 	last x 
 
 debug x is
-	if not x 'nil'
+	if not x "0"
 	if eq x T list 'T' nil
 	if isChar x list ''' list x list ''' nil
 	if isNumber x itoa x

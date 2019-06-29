@@ -135,19 +135,36 @@ divideInner x y p2 is
 		pair double first p2 second p2
 		pair inc double first p2 subtract second p2 y
 
-divide x y is
+divideB x y is
 	if less x y 
 		pair 0 x
-		divideInner x y divide x double y
+		divideInner x y divideB x double y
+
+divB x y is first divideB x y
+modB x y is second divideB x y
+
+normalizeDivide m d is
+	if less second d m then d
+	pair inc first d subtract second d m
+
+doubleDivide m d is
+	pair double first d double second d
+
+incDivide m d is
+	pair first d inc second d
+
+divide x y is
+	if not x then pair 0 0
+	if head x
+	then normalizeDivide y incDivide y doubleDivide y divide tail x y
+	else normalizeDivide y doubleDivide y divide tail x y
 
 div x y is first divide x y
-
 mod x y is second divide x y
 
 gcd x y is
 	if not y x
 	gcd y mod x y
-
 
 inf is pair true inf
 
