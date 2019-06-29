@@ -208,5 +208,28 @@ positionalNumberBase list base result is
 		sum mult result base head list 
 
 positional list base is positionalNumberBase list base 0
-
 num list is positional list 10
+
+doubleBase x is 
+	map x uncall double
+
+incBase x is
+	if x pair inc head x tail x
+	pair 1 nil
+
+normalizeBase x base is
+	both x
+	if less head x base 
+	then pair head x normalizeBase tail x base
+	else pair subtract head x base normalizeBase incBase tail x base
+ 
+toPositional n base is
+	both n
+	if head n 
+	normalizeBase incBase doubleBase toPositional tail n base base
+	else normalizeBase doubleBase toPositional tail n base base
+
+toPositionalD n base is
+	both n
+	give divide n base function p to
+	pair second p toPositionalD first p base

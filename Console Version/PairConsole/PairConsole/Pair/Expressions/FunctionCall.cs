@@ -38,6 +38,9 @@ namespace Pair
 			bool explain = false,
 			params Expression[] argumentValues
 		) {
+			if (Debug.verbosity >= 3) {
+				PairConsole.Program.totalTime["Substitute"].Start();
+			}
 			if (explain) {
 				//Debug.Log(this);
 			}
@@ -47,7 +50,13 @@ namespace Pair
 					argumentable, explain, argumentValues)).ToList()
 			);
 			if (Same(newFC)) {
+				if (Debug.verbosity >= 3) {
+					PairConsole.Program.totalTime["Substitute"].Stop();
+				}
 				return this;
+			}
+			if (Debug.verbosity >= 3) {
+				PairConsole.Program.totalTime["Substitute"].Stop();
 			}
 			return newFC;
 		}

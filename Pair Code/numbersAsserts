@@ -109,3 +109,12 @@ assert eq sqrt d5 6 5 5 3 6 d3 2 5 6
 assert eq cbrt d2 2 7 3
 assert eq cbrt d6 1 2 5 0 0 0 d2 5 0
 
+assert eq toPositional d2 3 7 5
+	list 2 list 2 list 1 nil
+
+assert eq toPositional d3 2 7 0 3
+	list 0 list 0 list 0 list 1 list 0 list 1 nil
+
+assert eq toPositional 1 2 list 1 nil
+
+assert eq toPositional 0 9 nil

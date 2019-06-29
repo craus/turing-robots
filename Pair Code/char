@@ -85,16 +85,13 @@ atoi s is atoib s 10
 digitChar d is 
 	chr sum d2 4 8 d
 
-itoabr x b is
-	if not x then pair '0' nil
-	give divide x b function p to
-	give digitChar second p function c to
-	if first p 
-	then pair c itoabr first p b
-	else pair c nil
+reverseB x is reverse x
+
+toPositionalR x b is reverseB toPositional x b
 
 itoab x b is
-	reverse itoabr x b
+	if not x pair '0' nil
+	map toPositionalR x b uncall digitChar
 
 itoa x is itoab x 10
 

@@ -16,9 +16,9 @@ namespace Pair
 
 		protected override Object CallInternal(bool explain = false, params Calculatable[] argumentValues) {
 			var exp = body.Evaluate(parent, explain, argumentValues);
-			if (explain) {
-				var args = argumentValues.ToList().ExtToString(format: "({0})");
-			}
+			//if (explain) {
+			//	var args = argumentValues.ToList().ExtToString(format: "({0})");
+			//}
 			//Debug.LogFormat("{0}{1} = {2}", name, this.arguments.Count > 0 ? args : "", exp);
 			var result = exp.Calculate(explain);
 			//Debug.LogFormat("{0}{1} = {2}", name, this.arguments.Count > 0 ? args : "", PairObject.ToString(result));
