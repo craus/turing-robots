@@ -1,7 +1,5 @@
 use listWithNumbers
-
-pairOf x is
-	pair x x 
+use basic
 
 treeOfDepth d is
 	both d

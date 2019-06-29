@@ -2,6 +2,8 @@ use char
 
 'nil' is list 'n' list 'i' list 'l' nil
 'pair' is list 'p' list 'a' list 'i' list 'r' nil
+"p" is list 'p' nil
+"0" is list '0' nil
 
 isBit x is
 	either not x eq T x
@@ -20,11 +22,15 @@ isBitList x is
 	both isBit head x
 	isBitList tail x
 
+isNumber x is
+	both isBitList x 
+	last x 
+
 debug x is
 	if not x 'nil'
 	if eq x T list 'T' nil
 	if isChar x list ''' list x list ''' nil
-	if isBitList x itoa x
+	if isNumber x itoa x
 	concat 'pair' 
 	concat list \s nil 
 	concat debug first x 
@@ -33,8 +39,9 @@ debug x is
 	nil
 
 debugBase x is
-	if not x 'nil'
-	concat 'pair' 
+	if not x "0"
+	if eq x T list 'T' nil
+	concat "p"
 	concat list \s nil 
 	concat debugBase first x 
 	concat list \s nil

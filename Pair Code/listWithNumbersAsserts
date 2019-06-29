@@ -35,6 +35,13 @@ assert eq substr l329272 1 4
 assert eq substr l329272 12 0
 	emptyList
 
+assert eq substr l329272 0 12
+	l329272
+
+assert eq listOf 4 nil pair nil pair nil pair nil pair nil nil
+assert eq listOf 0 nil nil
+assert eq listOf 2 T pair T pair T nil
+
 assert eq elementAt 0 l329272 3
 assert eq elementAt 1 l329272 2
 assert eq elementAt 2 l329272 9

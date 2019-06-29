@@ -1,8 +1,6 @@
 use array
 use testLists
 
-assert eq pairOf 9 pair 9 9
-
 assert eq treeOfDepth 3 pair 
 	pair pair nil nil pair nil nil
 	pair pair nil nil pair nil nil

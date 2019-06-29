@@ -1,5 +1,8 @@
 ﻿use bool
 
+assert eq pairOf pair nil nil pair pair nil nil pair nil nil
+assert eq T pair nil nil
+
 assert true
 assert not false
 assert not not true
@@ -15,7 +18,6 @@ assert first either pair true nil nil
 assert none false false
 assert not none true false
 assert not none false true
-assert eq T pair nil nil
 assert eq false 0
 assert not eq pair T T pair T 0
 assert eq pair pair T 0 0 pair pair T 0 0

@@ -1,0 +1,16 @@
+0 is nil
+false is nil
+
+then x is x
+else x is x
+return x is x
+
+send x y is pair x y
+, x y is pair x y
+
+T is pair nil nil
+true is pair nil nil
+
+pairOf x is	pair x x 
+
+

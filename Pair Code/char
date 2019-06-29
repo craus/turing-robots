@@ -75,14 +75,12 @@ getLine callback is
 	getLine function s to
 	call1 callback pair c s
 
-atoib s b result is 
-	if not s then result
-	atoib tail s b
-		sum 
-			mult result b 
-			subtract ord head s ord '0'
+atoib s b is 
+	positional 
+		map s function x to subtract ord x ord '0'
+		b
 
-atoi s is atoib s 10 0
+atoi s is atoib s 10 
 
 itoabr x b is
 	if not x then pair '0' nil

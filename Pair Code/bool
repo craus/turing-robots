@@ -1,11 +1,5 @@
-true is pair nil nil
-false is nil
-T is true
-F is false
-0 is nil
-then x is x
-else x is x
-return x is x
+use basic
+
 unless x y z is if x z y
 not x is if x false true
 both x y is if x y x

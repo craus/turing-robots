@@ -6,14 +6,31 @@ program seed is
 	readln function s to
 	program seed
 
-main is writeln itoa mod fastrnd fastrnd fastrnd 17 2 end
-/*
 main is 
-	foris 1 10 rnd 17 function i state next to 
+	foris 1 10 17 function i state next to 
 		give fastrnd state function state to
-		write itoa mod state 2 function to
+		write itoa mod state 10 function to
 		write pair \s nil function to
 		call1 next state
-	function _ to
-	writeln nil 
-	end
+	function state to
+	writeln itoa state end
+
+/*
+
+main is 
+	writeln debug fastrnd fastrnd 17 function to
+	writeln debug fastrnd fastrnd fastrnd 17 function to
+	writeln debug rnd rnd 17 function to
+	writeln debug rnd rnd rnd 17 end
+
+
+main is 
+	writeln itoa fastrnd fastrnd 17 function to
+	writeln itoa random.x function to
+	writeln debug eq random.x fastrnd fastrnd 17 function to
+	writeln nil function to
+	writeln debugBase random.y function to
+	writeln debugBase random.m function to
+	writeln debugBase mod random.y random.m function to
+	writeln debugBase mod2_48 random.y end	
+

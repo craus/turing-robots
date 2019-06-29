@@ -46,72 +46,83 @@ namespace Pair
 
 		ConsoleIO io = new ConsoleIO();
 
+
+		void Move(int delta) {
+			cur += delta;
+		}
+
+		Token CurToken() {
+			if (cur >= tokens.Count) {
+				throw new CompileError("Unexpected end of program", tokens.Last().position, trace);
+			}
+			return tokens[cur];
+		}
+
 		Lambda ReadLambda(Map<string, Expression> context = null) {
 			if (context == null) {
 				context = new Map<string, Expression>();
 			}
 			trace.Push("read lambda {0}{1}".i(
-				tokens[cur],
-				functions.ContainsKey(tokens[cur])
-					? " ({0} args)".i(functions[tokens[cur]].arguments.Count)
+				CurToken(),
+				functions.ContainsKey(CurToken())
+					? " ({0} args)".i(functions[CurToken()].arguments.Count)
 					: ""
 			));
 			var lambda = new Lambda();
 			lambda.arguments = new List<Argument>();
 			//Debug.LogFormat("Defining function: {0}", f.name);
-			++cur;
-			while (tokens[cur] != TO) {
-				lambda.arguments.Add(new Argument(lambda, tokens[cur], lambda.arguments.Count()));
-				++cur;
+			Move(1);
+			while (CurToken() != TO) {
+				lambda.arguments.Add(new Argument(lambda, CurToken(), lambda.arguments.Count()));
+				Move(1);
 			}
 
-			++cur;// skip "to"	
+			Move(1);// skip "to"	
 			lambda.body = ReadExpression(lambda.Context().Merge(context));
 			//Debug.LogFormat("{0} body end", f.name);
 			trace.Pop();
 			return lambda;
 		}
 
+
 		private Expression ReadExpression(Map<string, Expression> context = null) {
 			if (context == null) {
 				context = new Map<string, Expression>();
 			}
-			if (cur >= tokens.Count) {
-				throw new CompileError("Unexpected end of program", tokens.Last().position, trace);
-			}
 			trace.Push("read expression {0}{1}".i(
-				tokens[cur],
-				functions.ContainsKey(tokens[cur])
-					? " ({0} args)".i(functions[tokens[cur]].arguments.Count)
+				CurToken(),
+				functions.ContainsKey(CurToken())
+					? " ({0} args)".i(functions[CurToken()].arguments.Count)
 					: ""
 			));
-			if (tokens[cur] == UNCALL) {
-				if (!functions.ContainsKey(tokens[cur+1])) {
+			if (CurToken() == UNCALL) {
+				Move(1);
+				if (!functions.ContainsKey(CurToken())) {
 					//Debug.LogFormat("Functions: {0}", functions.ExtToString());
-					throw new CompileError("No such function: '{0}'".i(tokens[cur+1].text), tokens[cur+1].position, trace);
+					throw new CompileError("No such function: '{0}'".i(CurToken().text), CurToken().position, trace);
 				}
-				var f = new Constant(new FunctionObject(functions[tokens[cur + 1]]));
-				cur += 2;
+				var f = new Constant(new FunctionObject(functions[CurToken()]));
+				Move(1);
 				trace.Pop();
 				return f;
 			}
-			if (tokens[cur] == FUNCTION) {
+			if (CurToken() == FUNCTION) {
 				var lambda = ReadLambda(context);
 				trace.Pop();
 				return lambda;
 			}
-			if (context[tokens[cur]] != null) {
-				var result = context[tokens[cur]];
-				++cur;
+			if (context[CurToken()] != null) {
+				var result = context[CurToken()];
+				Move(1);
 				trace.Pop();
 				return result;
 			}
 			var exp = new FunctionCall();
-			if (!functions.ContainsKey(tokens[cur])) {
+			if (!functions.ContainsKey(CurToken())) {
 				//Debug.LogFormat("Functions: {0}", functions.ExtToString());
-				throw new CompileError("No such function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
+				throw new CompileError("No such function: '{0}'".i(CurToken().text), CurToken().position, trace);
 			}
-			exp.function = functions[tokens[cur]];
+			exp.function = functions[CurToken()];
 			var df = exp.function as DefinedFunction;
 			if (df != null) {
 				if (df.body == null) {
@@ -120,12 +131,12 @@ namespace Pair
 						df.name, 
 						df.position, 
 						df.arguments.Count, 
-						tokens[cur].position
+						CurToken().position
 					);
 				}
 			}
 			//Debug.LogFormat("Reading function call: {0}", exp.function.name);
-			++cur;
+			Move(1);
 			for (int i = 0; i < exp.function.arguments.Count; i++) {
 				exp.arguments.Add(ReadExpression(context));
 			}
@@ -169,36 +180,36 @@ namespace Pair
 		}
 
 		void ReadFunctionDefinition() {
-			trace.Push("read function definition {0}".i(tokens[cur]));
-			var f = functions[tokens[cur]] as DefinedFunction;
+			trace.Push("read function definition {0}".i(CurToken()));
+			var f = functions[CurToken()] as DefinedFunction;
 			if (f == null) {
-				throw new CompileError("Trying to define function: '{0}'".i(tokens[cur].text), tokens[cur].position, trace);
+				throw new CompileError("Trying to define function: '{0}'".i(CurToken().text), CurToken().position, trace);
 			}
 			if (f.body != null) {
 				//Debug.LogFormat("Functions: {0}", functions.ExtToString());
-				throw new CompileError("Function already exists: '{0} ({1})'".i(f.name, f.position), tokens[cur].position, trace);
+				throw new CompileError("Function already exists: '{0} ({1})'".i(f.name, f.position), CurToken().position, trace);
 			}
-			f.name = tokens[cur];
-			f.position = tokens[cur].position;
+			f.name = CurToken();
+			f.position = CurToken().position;
 
 			f.arguments = new List<Argument>();
 			//Debug.LogFormat("Defining function: {0}", f.name);
-			++cur;
-			while (tokens[cur] != IS) {
-				if (f.arguments.Any(a => a.name == tokens[cur])) {
+			Move(1);
+			while (CurToken() != IS) {
+				if (f.arguments.Any(a => a.name == CurToken())) {
 					throw new CompileError(
 						"Function {0} takes same argument twice: {1}".i(
 							"{0} ({1})".i(f.name, f.position),
-							tokens[cur].text
+							CurToken().text
 						),
-						tokens[cur].position,
+						CurToken().position,
 						trace
 					);
 				}
-				f.arguments.Add(new Argument(f, tokens[cur], f.arguments.Count()));
-				++cur;
+				f.arguments.Add(new Argument(f, CurToken(), f.arguments.Count()));
+				Move(1);
 			}
-			++cur;// skip "is"	
+			Move(1);// skip "is"	
 			f.body = new IncompleteExpression();
 			f.body = ReadExpression(f.Context());
 			//Debug.LogFormat("{0} body end", f.name);
@@ -210,29 +221,29 @@ namespace Pair
 			if (list == null) {
 				list = asserts;
 			}
-			++cur;// skip "assert"	
+			Move(1);// skip "assert"	
 			list.Add(ReadExpression());
 		}
 
 		void ReadOutput() {
-			++cur;// skip "output"	
+			Move(1);// skip "output"	
 			outputs.Add(ReadExpression());
 		}
 
 		void ReadUse() {
-			cur += 2;// skip "use" and filename	
+			Move(2);// skip "use" and filename	
 		}
 
 		private void ReadProgram() {
 			cur = 0;
 			while (cur < tokens.Count) {
-				if (tokens[cur] == ASSERT) {
+				if (CurToken() == ASSERT) {
 					ReadAssert();
-				} else if (tokens[cur] == EXPLAIN) {
+				} else if (CurToken() == EXPLAIN) {
 					ReadAssert(explain);
-				} else if (tokens[cur] == OUTPUT) {
+				} else if (CurToken() == OUTPUT) {
 					ReadOutput();
-				} else if (tokens[cur] == USE) {
+				} else if (CurToken() == USE) {
 					ReadUse();
 				} else {
 					ReadFunctionDefinition();
@@ -331,7 +342,7 @@ namespace Pair
 			var code = File.ReadAllText(file);
 			//Debug.LogFormat("Compiling program:\n{0}", program);
 			var newTokens = SplitToTokens(file, code);
-			for (int i = 0; i < newTokens.Count; i++) {
+			for (int i = 0; i < newTokens.Count-1; i++) {
 				if (newTokens[i] == USE) {
 					var fileToken = newTokens[i + 1];
 					var fileName = GetFileName(file, fileToken);

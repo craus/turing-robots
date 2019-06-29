@@ -148,9 +148,6 @@ gcd x y is
 	if not y x
 	gcd y mod x y
 
-listOfZeroes len is
-	both len
-	pair 0 listOfZeroes dec len
 
 inf is pair true inf
 
@@ -186,3 +183,13 @@ d4 a b c d is sum mult d3 a b c 10 d
 d5 a b c d e is sum mult d4 a b c d 10 e
 d6 a b c d e f is sum mult d5 a b c d e 10 f
 
+positionalNumberBase list base result is
+	if not list then result
+	else positionalNumberBase 
+		tail list
+		base
+		sum mult result base head list 
+
+positional list base is positionalNumberBase list base 0
+
+num list is positional list 10
