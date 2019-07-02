@@ -18,7 +18,7 @@ namespace Pair
 			return x;
 		}
 
-		public override Expression Substitute(IArgumentable argumentable, bool explain, List<Expression> argumentValues) {
+		public override Expression Substitute<T>(IArgumentable argumentable, bool explain, List<T> argumentValues) {
 			return x;
 		}
 

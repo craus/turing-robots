@@ -19,10 +19,10 @@ namespace Pair
 			List<Calculatable> argumentValues
 		);
 
-		public abstract Expression Substitute(
+		public abstract Expression Substitute<T>(
 			IArgumentable argumentable,
-			bool explain, 
-			List<Expression> argumentValues
-		);
+			bool explain,
+			List<T> argumentValues
+		) where T : Expression;
 	}
 }

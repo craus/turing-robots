@@ -8,7 +8,11 @@ namespace Pair
 			throw new System.NotImplementedException();
 		}
 
-		public override Expression Substitute(IArgumentable argumentable, bool explain, List<Expression> argumentValues) {
+		public override Expression Substitute<T>(
+			IArgumentable argumentable, 
+			bool explain, 
+			List<T> argumentValues
+		) {
 			throw new System.NotImplementedException();
 		}
 	}

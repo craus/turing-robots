@@ -27,10 +27,10 @@ namespace Pair
 			return new Calculatable(function, arguments.Select(expr => expr.Evaluate(argumentable, explain, argumentValues)).ToList());
 		}
 
-		public override Expression Substitute(
+		public override Expression Substitute<T>(
 			IArgumentable argumentable,
 			bool explain,
-			List<Expression> argumentValues
+			List<T> argumentValues
 		) {
 			if (explain) {
 				//Debug.Log(this);

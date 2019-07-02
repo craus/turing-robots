@@ -28,10 +28,10 @@ namespace Pair
 			throw new Exception("Cannot evaluate argument");
 		}
 
-		public override Expression Substitute(
+		public override Expression Substitute<T>(
 			IArgumentable argumentable,
 			bool explain,
-			List<Expression> argumentValues
+			List<T> argumentValues
 		) {
 			if (argumentable == owner) {
 				return argumentValues[index];

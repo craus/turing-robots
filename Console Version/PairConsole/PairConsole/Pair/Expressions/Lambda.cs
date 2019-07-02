@@ -34,15 +34,15 @@ namespace Pair
 			var f = new DefinedFunction();
 			f.arguments = arguments;
 			f.name = "<lambda>";
-			f.body = body.Substitute(argumentable, explain, argumentValues.Cast<Expression>().ToList());
+			f.body = body.Substitute(argumentable, explain, argumentValues);
 			f.parent = parent;
 			return new Calculatable(new FunctionObject(f));
 		}
 
-		public override Expression Substitute(
+		public override Expression Substitute<T>(
 			IArgumentable argumentable,
 			bool explain,
-			List<Expression> argumentValues
+			List<T> argumentValues
 		) {
 			return new Lambda(parent, arguments, body.Substitute(
 				argumentable,
