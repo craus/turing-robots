@@ -1,0 +1,8 @@
+use std
+
+main is
+	for d4 1 0 0 0 function next to
+		write list '0' list \s nil next
+	function to
+	writeln nil
+	end

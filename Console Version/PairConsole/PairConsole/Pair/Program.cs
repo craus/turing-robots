@@ -85,7 +85,7 @@ namespace Pair
 		}
 
 
-		private Expression ReadExpression(Map<string, Expression> context = null) {
+		Expression ReadExpression(Map<string, Expression> context = null) {
 			if (context == null) {
 				context = new Map<string, Expression>();
 			}
@@ -127,10 +127,10 @@ namespace Pair
 			if (df != null) {
 				if (df.body == null) {
 					Debug.LogWarning(1,
-						"{3} Function definition deduced: {0} [{2} args] ({1})", 
-						df.name, 
-						df.position, 
-						df.arguments.Count, 
+						"{3} Function definition deduced: {0} [{2} args] ({1})",
+						df.name,
+						df.position,
+						df.arguments.Count,
 						CurToken().position
 					);
 				}
@@ -360,10 +360,33 @@ namespace Pair
 			tokens.AddRange(newTokens);
 		}
 
+		void CalculateCallsGraph() {
+			functions.Values.ForEach(f => {
+				var df = f as DefinedFunction;
+				if (df != null) {
+					df.calls = df.body.Calls();
+					df.calls.ForEach(called => {
+						called.isCalledBy.Add(df);
+					});
+				}
+			});
+		}
+
+		void FindRecursiveFunctions() {
+			var order = new List<DefinedFunction>();
+		}
+
+		void Optimize() {
+			CalculateCallsGraph();
+			FindRecursiveFunctions();
+			functions.ToList().ForEach(f => f.Value.Optimize());
+		}
+
 		void Compile() {
 			CreateBuiltinFunctions();
 			FindFunctionDefinitions();
 			ReadProgram();
+			//Optimize();
 			//Debug.LogFormat("Functions: {0}", functions.Values.ExtToString());
 			//Debug.LogFormat("Assertions: {0}", asserts.Count);
 			asserts.ForEach(a => {

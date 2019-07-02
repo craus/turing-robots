@@ -1,0 +1,8 @@
+use std 
+
+main is
+	readInt function a to
+	readInt function b to
+	write itoa dec b function to
+	write pair \s nil function to
+	writeln itoa dec a end

@@ -70,6 +70,32 @@ namespace Pair
 			return true;
 		}
 
+		public override IEnumerable<DefinedFunction> Calls() {
+			var argsCalls = arguments.SelectMany(a => a.Calls());
+			var df = function as DefinedFunction;
+			if (df == null) {
+				return argsCalls;
+			} else {
+				return df.Yield().Concat(argsCalls);
+			}
+		}
+
+		public override Expression Optimize() {
+			for (int i = 0; i < arguments.Count; i++) {
+				arguments[i] = arguments[i].Optimize();
+			}
+			var df = function as DefinedFunction;
+			if (df == null) {
+				return this;
+			}
+			if (df.Recursive()) {
+				return this;
+			}
+			df.Optimize();
+			var result = df.body.Substitute(df, false, arguments.ToArray());
+			return result;
+		}
+
 		public override string ToString() {
 			return "{0}{1}".i(function.name, arguments.Count > 0 ? arguments.ExtToString(delimiter: " ", format: " {0}") : "");
 		}

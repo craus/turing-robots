@@ -56,6 +56,8 @@ shorten x is
 	then nil
 	else x
 
+shortenB x is if first x x if second x x nil
+
 normalize x is
 	both x
 	shorten pair head x normalize tail x

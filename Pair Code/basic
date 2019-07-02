@@ -1,6 +1,7 @@
 0 is nil
 false is nil
 
+exactly x is x
 then x is x
 else x is x
 return x is x

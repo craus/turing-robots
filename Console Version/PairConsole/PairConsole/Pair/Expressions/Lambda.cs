@@ -51,6 +51,15 @@ namespace Pair
 			));
 		}
 
+		public override IEnumerable<DefinedFunction> Calls() {
+			return body.Calls();
+		}
+
+		public override Expression Optimize() {
+			body = body.Optimize();
+			return this;
+		}
+
 		public override string ToString() {
 			return "function{0} to {1}".i(
 				arguments.Count > 0 ? arguments.ExtToString(delimiter: " ", format: " {0}") : "",

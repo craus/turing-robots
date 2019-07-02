@@ -1,0 +1,9 @@
+use std
+
+main is 
+	readInt function n to
+	writeln 
+		if greaterOrEqual n 7 
+		then list 'Y' list 'E' list 'S' nil
+		else list 'N' list 'O' nil
+	end

@@ -1,0 +1,12 @@
+use std 
+
+main is
+	readInt function a1 to
+	readInt function b1 to
+	readInt function a2 to
+	readInt function b2 to
+	readInt function a3 to
+	readInt function b3 to
+	write itoa subtract a1 a3 function to
+	write pair \s nil function to
+	writeln itoa subtract b1 b3 end

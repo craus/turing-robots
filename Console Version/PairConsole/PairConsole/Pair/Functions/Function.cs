@@ -12,7 +12,6 @@ namespace Pair
 		public static Stack<string> stack = new Stack<string>();
 		//public Dictionary< hash;
 
-		public static string selected = "itoa";
 		public static Map<Function, System.Diagnostics.Stopwatch> totalTime = new Map<Function, System.Diagnostics.Stopwatch>(() => new System.Diagnostics.Stopwatch());
 		public static Map<Function, System.Diagnostics.Stopwatch> selfTime = new Map<Function, System.Diagnostics.Stopwatch>(() => new System.Diagnostics.Stopwatch());
 		public static System.Diagnostics.Stopwatch current = null;
@@ -55,6 +54,13 @@ namespace Pair
 				current = outer;
 			}
 			return result;
+		}
+
+		public virtual bool Recursive() {
+			return false;
+		}
+
+		public virtual void Optimize() {
 		}
 
 		public override string ToString() {

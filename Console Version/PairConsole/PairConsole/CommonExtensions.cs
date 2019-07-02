@@ -12,5 +12,19 @@ public static class CommonExtensions
 	public static string i(this string s, params object[] args) {
 		return string.Format(s, args);
 	}
+
+	public static IEnumerable<T> Yield<T>(this T item) {
+		yield return item;
+	}
+
+	public static IEnumerable<T> Empty<T, T1>(this T1 anyObject) {
+		yield break;
+	}
+
+	public static void ForEach<T>(this IEnumerable<T> source, Action<T> action) {
+		foreach (T element in source) {
+			action(element);
+		}
+	}
 }
 

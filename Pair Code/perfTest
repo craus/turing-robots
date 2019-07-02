@@ -9,10 +9,10 @@ main is
 			write itoa j function to
 			write pair \s nil function to
 			give fastrnd s function s to
-			writeln itoa s function to
+			writeln itoa 2 function to
 			call1 next s
 		function s to
 		call1 next s
 	function s to
-	writeln itoa s 
+	writeln debug last s 
 	end

@@ -1,0 +1,17 @@
+use std 
+
+isSquare x is
+	eq 0 subtract x sqr sqrt x
+
+isTriangle x is
+	isSquare sum 1 mult 8 x
+
+main is
+	readInt function n to
+	fori 1 n function i next to
+		readInt function x to
+		write pair 
+			if isTriangle dec x then '1' else '0'
+			pair \s nil 
+			next
+	function to writeln nil end

@@ -1,0 +1,14 @@
+use std
+
+yes is list 'y' list 'e' list 's' nil
+no is list 'n' list 'o' nil
+
+answer s1 s2 is 
+	either 
+		eq mod ord last s1 2 0
+		eq mod ord last s2 2 1
+
+main is 
+	readln function s1 to
+	readln function s2 to
+	writeln if answer s1 s2 yes no end

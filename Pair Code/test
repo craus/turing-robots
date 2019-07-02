@@ -1,4 +1,10 @@
 use std
 
+pairR x y is pair y x
+
+f a b is pair a pairR b 2
+
+# f a b is pair a pair 2 b
+
 main is
 	writeln debug toPositional d2 3 7 5 end

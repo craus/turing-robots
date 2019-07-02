@@ -2,6 +2,8 @@ use bool
 use calls
 
 list head tail is pair head tail
+headB list is first list
+tailB list is second list
 head list is first list
 tail list is second list
 isEmpty list is not list

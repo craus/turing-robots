@@ -15,5 +15,13 @@ namespace Pair
 			bool explain = false, 
 			params Expression[] argumentValues
 		);
+
+		public virtual IEnumerable<DefinedFunction> Calls() {
+			yield break;
+		}
+
+		public virtual Expression Optimize() {
+			return this;
+		}
 	}
 }

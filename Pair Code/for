@@ -1,7 +1,7 @@
 use std
 
 for n do callback is
-	if not n callback
+	if not n call0 callback
 	call1 do function to
 	for dec n do callback
 
